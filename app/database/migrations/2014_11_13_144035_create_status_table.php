@@ -15,7 +15,7 @@ class CreateStatusTable extends Migration {
 		Schema::create('status', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->enum('status', ['received','processing','out for delivery','delivered','cancelled']);
+			$table->enum('status', ['received','processing','out for delivery','delivered','cancelled','open']);
 			$table->integer('order_id')->unsigned();
 			$table->integer('user_id')->unsigned();
 			$table->string('note');

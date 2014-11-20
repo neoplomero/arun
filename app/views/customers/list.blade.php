@@ -7,6 +7,15 @@
   
   <h2>Customers List</h2>
   <p>
+
+    
+    {{ Form::open(['route' => 'customerSearch', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
+      <div class="form-group">
+        {{ Field::text('name','',array('placeholder' => 'name')) }}
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
   <a href="{{ route('customers/register') }}" class="btn btn-success pull-right">Add New</a>
   </p>
   <br></br>

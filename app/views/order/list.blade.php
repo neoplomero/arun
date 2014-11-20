@@ -7,9 +7,7 @@
   
   <h2>Customers List</h2>
   <p>
-  <a href="{{ route('customers/register') }}" class="btn btn-success pull-right">Add New</a>
-  </p>
-  <br></br>
+
   <table class="table table-striped table-bordered">
     <thead>
     <tr>

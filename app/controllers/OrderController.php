@@ -78,7 +78,7 @@ class OrderController extends BaseController
 		$statusManager = new StatusManager($status,$statusData);
 		$statusManager->save();
 
-		return Redirect::back();
+		return Redirect::route('order', array('id' => $customer_id));
 	}
 
 	public function orderDetail($id){
@@ -181,9 +181,7 @@ class OrderController extends BaseController
 		$manager = new StatusManager($status, $statusData);
 		$manager->save();
 
-
-
-		return Redirect::back();
+		return Redirect::route('orders/list');
 	}
 
 	public function orderList()
