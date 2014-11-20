@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'arunbakery',
 			'username'  => 'root',
-			'password'  => '12345',
+			'password'  => 'pass',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
