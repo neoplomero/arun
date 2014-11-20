@@ -37,12 +37,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name nueva rama</a>
+          <a class="navbar-brand" href="#">Arun Bakery</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 
           @if (Auth::check())
           <ul class="nav navbar-nav navbar-right">
+
+            <li><a href="{{ route('customers') }}">Customers</a></li>
+            <li><a href="{{ route('orders/list') }}">Orders</a></li>
+            <li><a href="{{ route('users') }}">Users</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->full_name }} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
