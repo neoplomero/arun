@@ -23,12 +23,16 @@ Route::put('users/account', ['as' =>  'users/update', 'uses' => 'UsersController
 
 
 Route::get('customers', ['as' => 'customers', 'uses' => 'CustomersController@customersList']);
+Route::post('customers', ['as' => 'customerSearch', 'uses' => 'CustomersController@search']);
+
+
 Route::get('customers/view/{id}', ['as' => 'customers/view', 'uses' =>'CustomersController@view']);
 Route::get('customers/register/', ['as' => 'customers/register', 'uses' =>'CustomersController@register']);
 Route::post('customers/register/', ['as' => 'customers/create', 'uses' =>'CustomersController@create']);
 
 Route::get('customers/account/{id}', ['as' => 'customers/account', 'uses' =>'CustomersController@account']);
 Route::put('customers/account', ['as' =>  'customers/update', 'uses' => 'CustomersController@update']);
+
 
 
 Route::get('products', ['as' => 'products', 'uses' => 'ProductsController@productsList']);

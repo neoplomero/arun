@@ -18,7 +18,7 @@ class CustomerRepo extends BaseRepo {
 
 	public function getList()
 	{
-		return Customer::paginate(12);
+		return Customer::orderBy('full_name','ASC')->paginate(12);
 		
 	}
 	
@@ -27,6 +27,14 @@ class CustomerRepo extends BaseRepo {
 		$customer = new Customer();
 		
 		return $customer;
+	}
+	public  function search($field, $value)
+	{
+        //return $query->where($field, 'LIKE', "%$value%");
+        //$result = Customer::like($field, $value)->get()->paginate(12);
+        $result = Customer::where($field, 'LIKE', "%$value%")->orderBy('full_name', 'ASC')->paginate(12);
+
+        return $result;
 	}
 
 }

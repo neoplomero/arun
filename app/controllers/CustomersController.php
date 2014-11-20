@@ -56,4 +56,12 @@ class CustomersController extends BaseController{
 		return Redirect::route('customers/view', array('id' => $id));
 
 	}
+	public function search()
+	{
+		$search = Input::get('name');
+		//dd($search);
+		$customerList = $this->customerRepo->search('full_name', $search);
+		//$customerList = $this->customerRepo->like('full_name', $search);
+		return View::make('customers/list', compact('customerList'));	
+	}
 }
