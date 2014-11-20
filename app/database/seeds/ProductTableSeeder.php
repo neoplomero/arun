@@ -2,8 +2,9 @@
 
 // Composer: "fzaninotto/faker": "v1.3.0"
 use Faker\Factory as Faker;
+use Bakery\Entities\Product;
 
-class ProductsTableSeeder extends Seeder {
+class ProductTableSeeder extends Seeder {
 
 	public function run()
 	{
@@ -11,7 +12,7 @@ class ProductsTableSeeder extends Seeder {
 
 		foreach(range(1, 10) as $index)
 		{
-			Products::create([
+			Product::create([
 				'name' => '',
 				'description' => $faker->text,
 				'price' => $faker->randomFloat()

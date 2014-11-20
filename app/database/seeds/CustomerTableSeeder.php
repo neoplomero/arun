@@ -2,8 +2,9 @@
 
 // Composer: "fzaninotto/faker": "v1.3.0"
 use Faker\Factory as Faker;
+use Bakery\Entities\Customer;
 
-class CustomersTableSeeder extends Seeder {
+class CustomerTableSeeder extends Seeder {
 
 	public function run()
 	{
@@ -13,7 +14,8 @@ class CustomersTableSeeder extends Seeder {
 		{
 			$fullName = $faker->name;
 
-				Customers::create([
+				Customer::create([
+					
 					'full_name' => $fullName,
 					'email' => $faker->email,
 					'invoice_address' => $faker->address,
@@ -21,10 +23,7 @@ class CustomersTableSeeder extends Seeder {
 					'register_number' => '',
 					'phone_number' => $faker->phoneNumber
 
-					]);
-
-
-			
+					]);			
 		}
 	}
 
