@@ -5,12 +5,9 @@
 */
 
 
-class AuthController extends BaseController
-{
+class AuthController extends BaseController{
 
-	public function login()
-	{
-
+	public function login()	{
 		$data = (Input::only('email', 'password', 'remember'));
 
 		$credentials = ['email' => $data['email'], 'password' => $data['password']];
@@ -23,8 +20,7 @@ class AuthController extends BaseController
 
 	}
 
-	public function logout()
-	{
+	public function logout(){
 
 		Auth::logout();
 		return Redirect::route('home');  

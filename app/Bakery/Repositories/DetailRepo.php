@@ -1,8 +1,5 @@
-<?php
+<?php    namespace Bakery\Repositories;
 
-
-
-namespace Bakery\Repositories;
 use Bakery\Entities\Detail;
 use Bakery\Entities\Product;
 

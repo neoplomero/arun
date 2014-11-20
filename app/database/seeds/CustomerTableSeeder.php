@@ -16,12 +16,12 @@ class CustomerTableSeeder extends Seeder {
 
 				Customer::create([
 					
-					'full_name' => $fullName,
-					'email' => $faker->email,
-					'invoice_address' => $faker->address,
-					'delivery_address' => $faker->address,
-					'register_number' => '',
-					'phone_number' => $faker->phoneNumber
+					'full_name' 		=> $fullName,
+					'email' 			=> $faker->email,
+					'invoice_address' 	=> $faker->address,
+					'delivery_address' 	=> $faker->address,
+					'register_number' 	=> '',
+					'phone_number' 		=> $faker->phoneNumber
 
 					]);			
 		}

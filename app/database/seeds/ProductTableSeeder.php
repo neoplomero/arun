@@ -13,9 +13,9 @@ class ProductTableSeeder extends Seeder {
 		foreach(range(1, 10) as $index)
 		{
 			Product::create([
-				'name' => '',
+				'name'        => '',
 				'description' => $faker->text,
-				'price' => $faker->randomFloat()
+				'price'       => $faker->randomFloat()
 
 			]);
 		}
