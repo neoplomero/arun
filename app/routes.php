@@ -76,7 +76,7 @@ Route::get('orders/list', [ 'as' => 'orders/list', 'uses' => 'OrderController@or
 
 Route::get('orders/view/{id}', [ 'as' => 'orders/view', 'uses' => 'OrderController@view']);
 
-
+Route::get('delivery', ['as' => 'delivery', 'uses' => 'DeliveryController@orders']);
 
 
 

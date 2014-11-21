@@ -4,8 +4,9 @@
 
 namespace Bakery\Repositories;
 
-
+use Illuminate\Database\Query\Expression as raw;
 use Bakery\Entities\Order;
+use Bakery\Entities\Status;
 
 class OrderRepo extends BaseRepo {
 
@@ -34,10 +35,18 @@ class OrderRepo extends BaseRepo {
 		$order = Order::orderBy('id', 'DESC')->first();
 		return $order;
 	}
-	public function customer(){
-		return $this->belongsTo('Bakery\Entities\Customer');
-	}
 
+	public function status($status){
+		
+		$orders = Order::with('status','customer')
+		->join('status','orders.id', '=' ,'status.order_id')
+		->where('status.id','=',
+			new raw('(select `id` from `status` 
+				where `order_id` = `orders`.`id` order by `id` desc limit 1)'))
+		->where('status.status', '=' , $status)
+		->paginate(12);
+		return $orders;
+	}
 }
 
 ?>

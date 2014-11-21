@@ -8,6 +8,9 @@ class Status extends \Eloquent {
 	protected $fillable = array('status', 'order_id', 'user_id','note');
 
 
-
+	public function order()
+	{
+		return $this->belongsTo('Bakery\Entities\Order');
+	}
 	
 }
