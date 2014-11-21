@@ -6,9 +6,9 @@ class StatusManager extends BaseManager{
 	public function getRules()
 	{
 		$rules = [
-			'status' => 'required',
+			'status' 	=> 'required',
 			'order_id'	=> 	'required',
-			'user_id' => 'required',
+			'user_id' 	=> 'required',
 			
 		];
 		

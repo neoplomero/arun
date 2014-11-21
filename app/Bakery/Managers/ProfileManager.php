@@ -6,11 +6,11 @@ class ProfileManager extends BaseManager{
 	public function getRules()
 	{
 		$rules = [
-			'website' => 'required|url',
-			'description' => 'required|max:100',
-			'job_type' => 'required|in:full,partial,freelance',
-			'category_id' => 'required|exists:categories,id',
-			'available' => 'in:1,0'
+			'website' 		=> 'required|url',
+			'description' 	=> 'required|max:100',
+			'job_type' 		=> 'required|in:full,partial,freelance',
+			'category_id' 	=> 'required|exists:categories,id',
+			'available' 	=> 'in:1,0'
 		];
 		
 		return $rules;

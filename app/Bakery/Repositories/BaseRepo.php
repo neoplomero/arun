@@ -1,8 +1,7 @@
-<?php
-
-namespace Bakery\Repositories;
+<?php    namespace Bakery\Repositories;
 
 //es abstracta porque solo se usa a travez de su extension
+
 abstract class BaseRepo {
 
 	protected $model;

@@ -1,8 +1,6 @@
-<?php
+<?php namespace Bakery\Repositories;
 
 
-
-namespace Bakery\Repositories;
 use Bakery\Entities\Customer;
 
 

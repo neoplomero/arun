@@ -6,14 +6,14 @@ class AccountManager extends BaseManager{
 	public function getRules()
 	{
 		$rules = [
-			'full_name' => 'required',
-			'email'	=> 	'required|email|unique:users,email,'.$this->entity->id,
-			'password' => 'confirmed',
+			'full_name' 			=> 'required',
+			'email'					=> 'required|email|unique:users,email,'.$this->entity->id,
+			'password' 				=> 'confirmed',
 			'password_confirmation' => '',
-			'address' => 'required',
-			'phone_number' => 'required',
-			'register_number' => 'required',
-			'bank_account' => 'required'
+			'address' 				=> 'required',
+			'phone_number' 			=> 'required',
+			'register_number' 		=> 'required',
+			'bank_account' 			=> 'required'
 		];
 		
 		return $rules;
