@@ -2,7 +2,6 @@
 namespace Bakery\Repositories;
 
 use Illuminate\Database\Query\Expression as raw;
-namespace Bakery\Repositories;
 
 use Bakery\Entities\Order;
 use Bakery\Entities\Status;
