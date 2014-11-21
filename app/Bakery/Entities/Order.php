@@ -24,4 +24,9 @@ class Order extends \Eloquent {
 	{
 		return $this->belongsTo('Bakery\Entities\Customer');
 	}	
+
+	public function user()
+	{
+		return $this->belongsTo('Bakery\Entities\User');
+	}		
 }

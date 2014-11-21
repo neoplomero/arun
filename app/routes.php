@@ -80,3 +80,14 @@ Route::get('delivery', ['as' => 'delivery', 'uses' => 'DeliveryController@orders
 
 
 
+Route::get('factory/received', ['as' => 'factory/received', 'uses' => 'FactoryController@receivedOrders']);
+Route::post('factory/received/search', ['as' => 'factorySearch', 'uses' => 'FactoryController@receivedSearch']);
+
+Route::get('factory/processing', ['as' => 'factoryOrders', 'uses' => 'FactoryController@processingOrders']);
+Route::post('factory/received/search', ['as' => 'processingSearch', 'uses' => 'FactoryController@processingSearch']);
+
+
+Route::get('factory/process/{id}', ['as' => 'factoryProcess', 'uses' => 'FactoryController@process']);
+Route::get('factory/process/{id}', ['as' => 'factorySend', 'uses' => 'FactoryController@send']);
+
+Route::get('delivery/{id}', ['as' => 'deliverySend', 'uses' => 'DeliveryController@send']);

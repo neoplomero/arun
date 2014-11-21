@@ -14,7 +14,7 @@
         {{ Field::text('name','',array('placeholder' => 'name')) }}
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    {{ Form::close() }}
 
   <a href="{{ route('customers/register') }}" class="btn btn-success pull-right">Add New</a>
   </p>

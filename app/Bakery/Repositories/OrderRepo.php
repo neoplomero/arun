@@ -15,7 +15,12 @@ class OrderRepo extends BaseRepo {
 
 	public function getList()
 	{
-		return Order::orderBy('id','DESC')->paginate(12);
+		return Order::orderBy('orders.id','DESC')->with('status','customer','user')
+		->join('status','orders.id', '=' ,'status.order_id')
+		->where('status.id','=',
+			new raw('(select `id` from `status` 
+				where `order_id` = `orders`.`id` order by `id` desc limit 1)'))
+		->paginate(12);
 	}
 	
 	public function newOrder()
@@ -40,8 +45,24 @@ class OrderRepo extends BaseRepo {
 		->where('status.id','=',
 			new raw('(select `id` from `status` 
 				where `order_id` = `orders`.`id` order by `id` desc limit 1)'))
-		->where('status.status', '=' , $status)
-		->paginate(12);
+		->where('status.status', '=' , $status)->paginate(12);
+		return $orders;
+	}	
+	public function statusByFilter($status, $field, $operator, $search){
+		
+		$orders = Order::with('status','customer')
+		->join('status','orders.id', '=' ,'status.order_id')
+		->where('status.id','=',
+			new raw('(select `id` from `status` 
+				where `order_id` = `orders`.`id` order by `id` desc limit 1)'))
+		->where('status.status', '=' , $status);
+
+		if( $search && $operator && $search)
+		{
+			$orders = $orders->where($field, $operator , $search );
+		}
+
+		$orders = $orders->paginate(12);
 		return $orders;
 	}
 }
