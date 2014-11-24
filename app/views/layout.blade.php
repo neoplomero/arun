@@ -47,6 +47,15 @@
             <li><a href="{{ route('customers') }}">Customers</a></li>
             <li><a href="{{ route('orders/list') }}">Orders</a></li>
             <li><a href="{{ route('users') }}">Users</a></li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Factory <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ route('factory/received') }}">Received orders</a></li>
+                <li><a href="{{ route('factoryOrders') }}">Processing orders</a></li>
+              </ul>
+            </li>
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->full_name }} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
