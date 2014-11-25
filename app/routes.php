@@ -88,7 +88,7 @@ Route::post('factory/received/search', ['as' => 'processingSearch', 'uses' => 'F
 
 
 Route::get('factory/process/{id}', ['as' => 'factoryProcess', 'uses' => 'FactoryController@process']);
-Route::get('factory/process/{id}', ['as' => 'factorySend', 'uses' => 'FactoryController@send']);
+Route::get('factory/send/{id}', ['as' => 'factorySend', 'uses' => 'FactoryController@send']);
 
 Route::get('delivery/{id}', ['as' => 'deliverySend', 'uses' => 'DeliveryController@send']);
 
