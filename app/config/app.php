@@ -126,7 +126,10 @@ return array(
 
 		// Custom
 		'Bakery\Components\FieldServiceProvider',
-		'Bakery\Components\FormatServiceProvider'
+		'Bakery\Components\FormatServiceProvider',
+
+		//pdf
+		'Thujohn\Pdf\PdfServiceProvider'
 
 	),
 
@@ -197,9 +200,10 @@ return array(
 
 		//custom
 		'Field' => 'Bakery\Components\Field',
-		'Format' => 'Bakery\Components\Format'
+		'Format' => 'Bakery\Components\Format',
 
-
+		//pdf
+		'PDF' => 'Thujohn\Pdf\PdfFacade'
 
 	),
 

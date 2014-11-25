@@ -91,3 +91,6 @@ Route::get('factory/process/{id}', ['as' => 'factoryProcess', 'uses' => 'Factory
 Route::get('factory/process/{id}', ['as' => 'factorySend', 'uses' => 'FactoryController@send']);
 
 Route::get('delivery/{id}', ['as' => 'deliverySend', 'uses' => 'DeliveryController@send']);
+
+
+Route::get('pdf', ['as' => 'pdf', 'uses' => 'AdminController@pdf']);
