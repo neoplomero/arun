@@ -44,6 +44,7 @@
           @if (Auth::check())
           <ul class="nav navbar-nav navbar-right">
 
+            <li><a href="{{ route('delivery') }}">Delivery</a></li>
             <li><a href="{{ route('customers') }}">Customers</a></li>
             <li><a href="{{ route('orders/list') }}">Orders</a></li>
             <li><a href="{{ route('users') }}">Users</a></li>

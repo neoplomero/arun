@@ -20,11 +20,20 @@ class FactoryController extends \BaseController {
 	{
 
 		//$date = date("Y-m-d", strtotime("tomorrow"));
-		//$list = $this->orderRepo->statusByFilter('received', 'delivery_date', '=', $date);
-
+		$date = date("Y-m-d");
 		$status = 'processing';
-		$list = $this->orderRepo->status($status);
+		$list = $this->orderRepo->statusByFilter($status, 'delivery_date', '=', $date);
 
+		
+		//$list = $this->orderRepo->status($status);
+
+		return View::make('factory/list', compact('list','status'));
+	}
+
+	public function processingSearch(){
+		$date = Input::get('delivery_date');
+		$status = 'processing';
+		$list = $this->orderRepo->statusByFilter($status, 'delivery_date', '=', $date);
 		return View::make('factory/list', compact('list','status'));
 	}
 
