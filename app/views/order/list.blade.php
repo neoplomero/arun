@@ -27,7 +27,7 @@
         <td>{{ $order->user->full_name }}</td>
         <td>{{ $order->delivery_date }}</td>
         <td>{{ $order->status }}</td>
-        <td width="100">
+        <td width="130">
           <div class="btn-group" role="group">
 	          <a href="{{ route('orders/view', [$order->order_id])}}" class="btn btn-xs btn-primary">
 	          see
@@ -35,6 +35,9 @@
 	          <a href="{{ route('detail', [$order->order_id])}}" class="btn btn-xs btn-warning">
 	          edit
 	          </a>
+            <a href="{{ route('invoice', [$order->order_id])}}" class="btn btn-xs btn-info">
+            print
+            </a>
           </div>
         </td>
       </tr>

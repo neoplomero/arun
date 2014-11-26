@@ -17,7 +17,9 @@ class AdminController extends \BaseController {
 		$data = 'hola mundo';
 		
 		$view = View::make('pdf/invoice', compact('data'))->render();
-		return PDF::load($view, 'A4', 'portrait')->show();
+		$response = PDF::load($view, 'A4', 'portrait')->show();
+
+		return $response;
 	}
 
 

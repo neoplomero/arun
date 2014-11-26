@@ -173,7 +173,7 @@ class OrderController extends BaseController
 	{
 		$order = $this->orderRepo->find($id);
 		$statusData = array();
-		$statusData['status'] = 'received';
+		$statusData['status'] = 'processing';
 		$statusData['user_id'] = Auth::user()->id;
 		$statusData['order_id'] = $order->id;;
 
@@ -196,6 +196,17 @@ class OrderController extends BaseController
 		$bakery = $this->bakeryRepo->find(1);
 		$order = $this->orderRepo->find($id);
 		return View::make('order/view', compact('order', 'bakery'));
+	}
+
+	public function pdf($id)
+	{
+		
+		$data = $this->orderRepo->find($id);
+		$bakery = $this->bakeryRepo->find(1);
+		$view = View::make('pdf/single_invoice', compact('data','bakery'))->render();
+		$response = PDF::load($view, 'A4', 'portrait')->show();
+
+		return $response;
 	}
 }
 

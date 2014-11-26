@@ -61,6 +61,9 @@ Route::get('order/{id}', [ 'as' => 'order', 'uses' => 'OrderController@check']);
 
 Route::post('order', [ 'as' => 'order/save', 'uses' => 'OrderController@save']);
 
+Route::get('invoice/{id}', [ 'as' => 'invoice', 'uses' => 'OrderController@pdf']);
+
+
 Route::get('generate/{id}', [ 'as' => 'generate', 'uses' => 'OrderController@generate']);
 Route::get('detail/{id}', [ 'as' => 'detail', 'uses' => 'OrderController@orderDetail']);
 
@@ -80,17 +83,14 @@ Route::get('delivery', ['as' => 'delivery', 'uses' => 'DeliveryController@orders
 
 
 
-Route::get('factory/received', ['as' => 'factory/received', 'uses' => 'FactoryController@receivedOrders']);
-Route::post('factory/received/search', ['as' => 'factorySearch', 'uses' => 'FactoryController@receivedSearch']);
-
 Route::get('factory/processing', ['as' => 'factoryOrders', 'uses' => 'FactoryController@processingOrders']);
 Route::post('factory/received/search', ['as' => 'processingSearch', 'uses' => 'FactoryController@processingSearch']);
 
-
-Route::get('factory/process/{id}', ['as' => 'factoryProcess', 'uses' => 'FactoryController@process']);
 Route::get('factory/send/{id}', ['as' => 'factorySend', 'uses' => 'FactoryController@send']);
 
 Route::get('delivery/{id}', ['as' => 'deliverySend', 'uses' => 'DeliveryController@send']);
 
 
 Route::get('pdf', ['as' => 'pdf', 'uses' => 'AdminController@pdf']);
+
+Route::get('factory/production', ['as' => 'factory/production', 'uses' => 'FactoryController@productionOrders']);

@@ -13,6 +13,14 @@ class OrderRepo extends BaseRepo {
 		return new Order;
 	}
 
+	public function byDeliveryDate($date)
+	{
+		return Order::where('delivery_date', '=', $date)
+				->orderBy('id', 'DESC')
+				->with('detail')
+				->get();
+	}
+
 	public function getList()
 	{
 		return Order::orderBy('orders.id','DESC')->with('status','customer','user')

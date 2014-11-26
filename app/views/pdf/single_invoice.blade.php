@@ -10,7 +10,7 @@
           	<h2>Invoice </h2>
           </td>
           <td colspan="2" style="text-align:right;">
-          	<h2>Order # 2342342</h2>
+          	<h2>Order # {{ Format::code($data->id) }}</h2>
           </td>
         </tr>
         <tr >
@@ -24,44 +24,44 @@
           	<strong>Billed To: </strong>
           </td>
           <td colspan="2" style="text-align:right;">
-          	<strong>Bakery</strong>
+          	<strong>{{ $bakery->name }}</strong>
           </td>
         </tr>
         <tr >
           <td colspan="2" style="text-align:left;">
-			customer
+			{{ $data->customer->full_name }}
           </td>
           <td colspan="2" style="text-align:right;">
-          	bakery address
+          	{{ $bakery->address }}
           </td>
         </tr>
         <tr >
           <td colspan="2" style="text-align:left;">
-          	Customer address
+          	{{ $data->customer->invoice_address }}
           </td>
           <td colspan="2" style="text-align:right;">
-          	bakery phone
+          	{{ $bakery->phone_number }}
           </td>
         </tr>
         <tr >
           <td colspan="2" style="text-align:left;">
-          	customer email
+          	{{ $data->customer->email }}
           </td>
           <td colspan="2" style="text-align:right;">
-			bakery email
+			{{ $bakery->email }}
           </td>
         </tr>
         <tr >
           <td colspan="2" style="text-align:left;">
-          	customer phone 
+          	{{ $data->customer->phone_number }}
           </td>
           <td colspan="2" style="text-align:right;">
-          	bakery register
+          	{{ $bakery->register_number }}
           </td>
         </tr>
         <tr >
           <td colspan="2" style="text-align:left;">
-          	customer register
+          	{{$data->customer->register_number }}
           </td>
           <td colspan="2" style="text-align:right;"></td>
         </tr>
@@ -79,27 +79,22 @@
         </tr>
         <tr >
           <td colspan="2" style="text-align:left;">
-          	order address
+          	{{ $data->delivery_address }}
           </td>
           <td colspan="2" style="text-align:right;">
-          	date
+          	{{ $data->created_at }}
           </td>
         </tr>
+
         <tr >
           <td colspan="2" style="text-align:left;">
-          	order address
-          </td>
-          <td colspan="2" style="text-align:right;"></td>
-        </tr>
-        <tr >
-          <td colspan="2" style="text-align:left;">
-          	Status : <strong>status</strong>
+          	Status : <strong>{{ $data->status->last()->status }}</strong>
           </td>
           <td colspan="2" style="text-align:right;"></td>
         </tr>                                
         <tr>
         	<td colspan="2" style="text-align:left;">
-				Delivery date: date
+				Delivery date: {{ $data->delivery_date }}
         	</td>
         	<td colspan="2" style="text-align:right;"></td>
         </tr>
@@ -131,50 +126,33 @@
     		</td>
     	</tr>
 		<tr><td colspan="4" class="bb"></td></tr>
+
+
+	@foreach($data->detail as $detail)
     	<tr>
     		<td style="text-align:left; width:35%; ">
-    			empanada
+    			{{ $detail->product->name }}
     		</td>
     		<td style="width:20%;">
-    				<center> 20000,00 </center>
+    				<center> {{ $detail->single_price }} </center>
     		</td>
     		<td style="width:20%;">
-    				<center>5</center>
+    				<center>{{ $detail->quantity }}</center>
     		</td>
     		<td style="text-align:right; width:25%;">
-    			100000,00
+    			{{ $detail->total_price }}
     		</td>
     	</tr>
 		<tr><td colspan="4" class="bb"></td></tr>
-    	<tr>
-    		<td style="text-align:left; width:35%; ">
-    			empanada
-    		</td>
-    		<td style="width:20%;">
-    				<center> 20000,00 </center>
-    		</td>
-    		<td style="width:20%;">
-    				<center>5</center>
-    		</td>
-    		<td style="text-align:right; width:25%;">
-    			100000,00
-    		</td>
-    	</tr>
-    	<tr><td colspan="4" class="bb"></td></tr>
-    	<tr>
-    		<td style="text-align:left; width:35%; ">
-    			empanada
-    		</td>
-    		<td style="width:20%;">
-    				<center> 20000,00 </center>
-    		</td>
-    		<td style="width:20%;">
-    				<center>5</center>
-    		</td>
-    		<td style="text-align:right; width:25%;">
-    			100000,00
-    		</td>
-    	</tr>
+	@endforeach
+		<tr>
+			<td colspan="2"></td>
+			<td style="text-align:center;">
+				<strong>Total</strong>
+			</td>
+			<td style="text-align:right;">{{ $data->amount }}</td>
+		</tr>
+
     </table>
 
 	<hr>

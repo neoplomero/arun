@@ -51,7 +51,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Factory <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ route('factory/received') }}">Received orders</a></li>
+                <li><a href="{{ route('factory/production') }}">Production orders</a></li>
                 <li><a href="{{ route('factoryOrders') }}">Processing orders</a></li>
               </ul>
             </li>

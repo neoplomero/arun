@@ -8,7 +8,7 @@
   <h2>{{ $status }} orders List</h2>
   <p>
 
-    {{ Form::open(['route' => 'factorySearch', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
+    @{{ Form::open(['route' => 'factorySearch', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
       <div class="form-group">
         {{ Field::date('delivery_date','',array('placeholder' => 'delivery date')) }}
       </div>

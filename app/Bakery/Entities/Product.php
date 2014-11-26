@@ -7,8 +7,8 @@ class Product extends \Eloquent {
 
 	protected $fillable = array('name', 'description','price');
 
-	public function details()
+	public function detail()
 	{
-		return $this->hasMany('Bakery\Entities\Details');
+		return $this->belongsTo('Bakery\Entities\Detail');
 	}
 }
