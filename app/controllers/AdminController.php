@@ -22,6 +22,5 @@ class AdminController extends \BaseController {
 		return $response;
 	}
 
-
-
+	
 }

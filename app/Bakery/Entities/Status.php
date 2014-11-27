@@ -12,5 +12,8 @@ class Status extends \Eloquent {
 	{
 		return $this->belongsTo('Bakery\Entities\Order');
 	}
-	
+	public function user()
+	{
+		return $this->belongsTo('Bakery\Entities\User');
+	}
 }

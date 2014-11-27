@@ -13,7 +13,7 @@
     <tr>
       <th>Order</th>
       <th>Customer</th>
-      <th>Created by</th>
+      <th>Updated by</th>
       <th>Delivery date</th>
       <th>Status</th>
       <th>Payment</th>

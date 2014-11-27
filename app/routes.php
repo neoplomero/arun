@@ -64,6 +64,9 @@ Route::post('order', [ 'as' => 'order/save', 'uses' => 'OrderController@save']);
 Route::get('paid/{id}', [ 'as' => 'order/paid', 'uses' => 'OrderController@paid']);
 Route::get('restore/{id}', [ 'as' => 'order/restore', 'uses' => 'OrderController@restore']);
 
+Route::get('report/orders/{id}', [ 'as' => 'report/orders', 'uses' => 'ReportController@ordersByCustomer']);
+Route::post('report/orders', [ 'as' => 'report/orders/filter', 'uses' => 'ReportController@ordersByCustomerFilter']);
+
 Route::get('invoice/{id}', [ 'as' => 'invoice', 'uses' => 'OrderController@pdf']);
 
 

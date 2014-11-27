@@ -36,6 +36,8 @@
 			<a href="{{ route('customers') }}" class="btn btn-primary"> Go Back</a>
 
 			<a href="{{ route('order', [$customer->id] ) }}" class="btn btn-success"> Generate order</a>
+
+			<a href="{{ route('report/orders', [$customer->id] ) }}" class="btn btn-success"> History</a>
 		</div>
 
 	  </div>

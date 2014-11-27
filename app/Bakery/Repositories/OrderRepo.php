@@ -43,6 +43,29 @@ class OrderRepo extends BaseRepo {
 		return $order;
 	}
 
+	public function orderByFilter($field, $operator, $search){
+		$orders = Order::where($field, $operator, $search)
+		->with('customer','user','detail')
+		->get();
+		return $orders;
+	}
+	public function lastMonthOrders($id){
+		$orders = Order::where('customer_id', '=', $id)
+		->where((new raw('MONTH(created_at)')), '=', date('n'))
+		->with('customer','user','detail')
+		->get();
+		return $orders;
+	
+	}
+
+	public function orderByCustomerDate($id, $from, $to){
+		$orders = Order::whereBetween('created_at', array($from, $to))
+		->where('customer_id', '=', $id)
+		->with('customer','user','detail')
+		->get();
+		return $orders;
+	}
+
 	public function customer(){
 		return $this->belongsTo('Bakery\Entities\Customer');
 	}

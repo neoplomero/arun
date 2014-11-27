@@ -19,8 +19,8 @@ class FactoryController extends \BaseController {
 	public function processingOrders()
 	{
 
-		//$date = date("Y-m-d", strtotime("tomorrow"));
-		$date = date("Y-m-d");
+		$date = date("Y-m-d", strtotime("tomorrow"));
+		//$date = date("Y-m-d");
 		$status = 'processing';
 		$list = $this->orderRepo->statusByFilter($status, 'delivery_date', '=', $date);
 
@@ -41,8 +41,8 @@ class FactoryController extends \BaseController {
 	{
 
 		$status = 'processing';
-		//$date = date("Y-m-d", strtotime("tomorrow"));
-		$date = date("Y-m-d");
+		$date = date("Y-m-d", strtotime("tomorrow"));
+	//	$date = date("Y-m-d");
 		$orders = $this->orderRepo->byDeliveryDate($date);
 		$list = array();
 		foreach ($orders as $order) {
