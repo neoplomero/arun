@@ -36,10 +36,10 @@ class UsersController extends BaseController{
 	public function register()
 	{
 
-		$types = ['admin',
-					'delivery',
-					'manufacturer',
-					'seller'];
+		$types = ['admin' => 'admin',
+					'delivery' => 'delivery',
+					'manufacturer' => 'manufacturer',
+					'seller'  => 'seller'];
 
 		return View::make('users/register', compact('types'));
 	}
@@ -62,10 +62,10 @@ class UsersController extends BaseController{
 	{
 		$user = $this->userRepo->find($id);
 		$this->notFoundUnless($user);
-		$types = ['admin',
-					'delivery',
-					'manufacturer',
-					'seller'];
+		$types = ['admin' => 'admin',
+					'delivery' => 'delivery',
+					'manufacturer' => 'manufacturer',
+					'seller'  => 'seller'];
 
 		return View::make('users/update', compact('user', 'types'));
 	}

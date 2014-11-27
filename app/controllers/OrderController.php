@@ -208,6 +208,19 @@ class OrderController extends BaseController
 
 		return $response;
 	}
+	public function paid($id){
+		$order = $this->orderRepo->find($id);
+		$order->payment = 'paid';
+		$order->save();
+		return Redirect::back();
+	}
+	
+	public function restore($id){
+		$order = $this->orderRepo->find($id);
+		$order->payment = 'pending payment';
+		$order->save();
+		return Redirect::back();
+	}	
 }
 
 ?>

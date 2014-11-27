@@ -61,6 +61,9 @@ Route::get('order/{id}', [ 'as' => 'order', 'uses' => 'OrderController@check']);
 
 Route::post('order', [ 'as' => 'order/save', 'uses' => 'OrderController@save']);
 
+Route::get('paid/{id}', [ 'as' => 'order/paid', 'uses' => 'OrderController@paid']);
+Route::get('restore/{id}', [ 'as' => 'order/restore', 'uses' => 'OrderController@restore']);
+
 Route::get('invoice/{id}', [ 'as' => 'invoice', 'uses' => 'OrderController@pdf']);
 
 

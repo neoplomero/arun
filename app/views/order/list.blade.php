@@ -16,6 +16,7 @@
       <th>Created by</th>
       <th>Delivery date</th>
       <th>Status</th>
+      <th>Payment</th>
       <th>Actions</th>
     </tr>
     </thead>
@@ -27,6 +28,20 @@
         <td>{{ $order->user->full_name }}</td>
         <td>{{ $order->delivery_date }}</td>
         <td>{{ $order->status }}</td>
+        <td>
+
+          @if($order->payment == 'pending payment')
+          <a href="{{ route('order/paid', [$order->order_id])}}" class="btn btn-xs btn-danger">
+            set as paid
+          </a>
+          @else
+          <a href="{{ route('order/restore', [$order->order_id])}}" class="btn btn-xs btn-success">
+            return payment
+          </a>
+          @endif
+
+        </td>
+
         <td width="130">
           <div class="btn-group" role="group">
 	          <a href="{{ route('orders/view', [$order->order_id])}}" class="btn btn-xs btn-primary">

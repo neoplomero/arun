@@ -17,7 +17,7 @@
     					{{ $order->customer->delivery_address }}<br>
                         {{ $order->customer->email }}<br>
                         {{ $order->customer->phone_number }}<br>
-                        Reg : {{ $order->customer->phone_number }}<br>
+                        Reg : {{ $order->customer->register_number }}<br>
     				</address>
     			</div>
     			<div class="col-xs-6 text-right">
@@ -33,7 +33,7 @@
     		<div class="row">
     			<div class="col-xs-6">
     				<address>
-    					<strong>Shipped To::</strong><br>
+    					<strong>Shipped To:</strong><br>
                         {{ $order->delivery_address }}<br>
                         Status:     <strong>{{ $order->status->get(count($order->status) - 1 )->status }}</strong><br>
                         Delivery date: {{ $order->delivery_date }}<br>
