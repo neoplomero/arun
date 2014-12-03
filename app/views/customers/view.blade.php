@@ -14,7 +14,8 @@
 		  {{ $customer->full_name }}<br>
 		  <abbr title="Phone">P:</abbr> {{ $customer->phone_number }}<br>
 		  <a href="mailto:{{ $customer->email }}">{{ $customer->email }}</a><br>
-		  <abbr title="Register">Register Number:</abbr> {{ $customer->register_number }}
+		  <abbr title="Register">Register Number:</abbr> {{ $customer->register_number }}<br>
+		  <strong>Payment period:</strong> {{ $customer->payment_period }}
 		</address>
 
 		<address>

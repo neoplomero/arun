@@ -19,22 +19,14 @@ class FactoryController extends \BaseController {
 	public function processingOrders()
 	{
 
-		$date = date("Y-m-d", strtotime("tomorrow"));
-		//$date = date("Y-m-d");
-		$status = 'processing';
-		$list = $this->orderRepo->statusByFilter($status, 'delivery_date', '=', $date);
-
-		
-		//$list = $this->orderRepo->status($status);
-
+		$list = $this->orderRepo->orStatus('out for delivery', 'processing');
 		return View::make('factory/list', compact('list','status'));
 	}
 
 	public function processingSearch(){
 		$date = Input::get('delivery_date');
-		$status = 'processing';
-		$list = $this->orderRepo->statusByFilter($status, 'delivery_date', '=', $date);
-		return View::make('factory/list', compact('list','status'));
+		$list = $this->orderRepo->orStatusByFilter('out for delivery', 'processing', 'delivery_date', '=', $date);
+		return View::make('factory/list', compact('list'));
 	}
 
 	public function productionOrders()
@@ -42,7 +34,6 @@ class FactoryController extends \BaseController {
 
 		$status = 'processing';
 		$date = date("Y-m-d", strtotime("tomorrow"));
-	//	$date = date("Y-m-d");
 		$orders = $this->orderRepo->byDeliveryDate($date);
 		$list = array();
 		foreach ($orders as $order) {
@@ -63,7 +54,6 @@ class FactoryController extends \BaseController {
 		    array_push($orders, $product);
 		    next($list);
 		}
-		//dd($orders);
 		return View::make('factory/production', compact('orders'));
 
 	}
@@ -76,9 +66,17 @@ class FactoryController extends \BaseController {
 		$status->status = 'out for delivery';
 		$status->user_id = Auth::user()->id;
 		$status->save();
-
 		return Redirect::back();
 	}
+	public function back($id)
+	{
+		$status = $this->statusRepo->newStatus();
+		$status->order_id = $id;
+		$status->status = 'processing';
+		$status->user_id = Auth::user()->id;
+		$status->save();
+		return Redirect::back();
+	}	
 	/**
 	 * Show the form for creating a new resource.
 	 *

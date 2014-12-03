@@ -29,6 +29,8 @@
 
 				{{ Field::text('delivery_address') }}
 
+				{{ Field::select('payment_period', $period) }}
+
 				</fieldset>
 
 				<div class="">

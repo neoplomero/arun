@@ -5,7 +5,7 @@
 <div class="container">
 
   
-  <h2>{{ $status }} orders List</h2>
+  <h2>Processing orders List</h2>
   <p>
 
     {{ Form::open(['route' => 'factorySearch', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
@@ -38,12 +38,12 @@
 	          see
 	          </a>
 
-	          @if ($status == 'received')
-            <a href="{{ route('factoryProcess', [$order->order_id])}}" class="btn btn-xs btn-success">
-	          proccess
+	          @if ($order->status == 'out for delivery')
+            <a href="{{ route('factoryBack', [$order->order_id])}}" class="btn btn-xs btn-success">
+	          processing
 	          </a>
-            @elseif ($status == 'processing') 
-            <a href="{{ route('factorySend', [$order->order_id])}}" class="btn btn-xs btn-success">
+            @elseif ($order->status == 'processing') 
+            <a href="{{ route('factorySend', [$order->order_id])}}" class="btn btn-xs btn-danger">
             send
             </a>
             @endif

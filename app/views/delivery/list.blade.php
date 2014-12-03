@@ -25,14 +25,22 @@
         <td>{{ $order->customer->full_name }}</td>
         <td>{{ $order->delivery_date }}</td>
         <td>{{ $order->status }}</td>
-        <td width="130">
+        <td width="150">
           <div class="btn-group" role="group">
 	          <a href="{{ route('orders/view', [$order->order_id])}}" class="btn btn-xs btn-primary">
 	          see
 	          </a>
-	          <a href="{{ route('deliverySend', [$order->order_id])}}" class="btn btn-xs btn-success">
+            @if( $order->status == 'out for delivery' )
+	          <a href="{{ route('deliverySend', [$order->order_id])}}" class="btn btn-xs btn-danger">
 	          delivered
 	          </a>
+            @else
+            <a href="{{ route('deliveryBack', [$order->order_id])}}" class="btn btn-xs btn-success">
+            out for delivery
+            </a>
+            @endif
+
+
           </div>
         </td>
       </tr>

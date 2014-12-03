@@ -11,7 +11,8 @@ class CustomerManager extends BaseManager{
 			'invoice_address' 	=> 'required',
 			'delivery_address' 	=> 'required',
 			'phone_number' 		=> 'required',
-			'register_number' 	=> 'required'
+			'register_number' 	=> 'required',
+			'payment_period' => 'required'
 		];
 		
 		return $rules;

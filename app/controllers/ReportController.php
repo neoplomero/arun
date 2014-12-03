@@ -24,6 +24,8 @@ class ReportController extends \BaseController {
 		}
 		return View::make('report/orders', compact('orders', 'total', 'customer'));
 	}
+
+
 	public function ordersByCustomerFilter()
 	{
 		$id = Input::get('customer_id');
@@ -43,6 +45,30 @@ class ReportController extends \BaseController {
 		}
 		return View::make('report/orders', compact('orders', 'total', 'customer'));
 	}
+
+	public function sales()
+	{
+		return View::make('report/sales');	
+	}
+	public function searchSales()
+	{
+		$from = Input::get('from');
+		$to = Input::get('to');
+		$orders = $this->orderRepo->ordersByRangeDate($from, $to);
+		$labels = array();
+		$data = array();
+		foreach($orders as $order){
+			$amount = $order->amount;
+			$date = date("M. d", strtotime($order->created_at));
+			array_push($labels, '"'.$date.'"');
+			array_push($data, '"'.$amount.'"');
+		}
+		$data = implode(',', $data);
+		$labels = implode(',', $labels);
+
+		return View::make('report/sales', compact('labels', 'data'));
+	}
+
 
 
 }

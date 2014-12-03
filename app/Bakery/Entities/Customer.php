@@ -6,5 +6,5 @@ class Customer extends \Eloquent {
 
 	protected $hidden = array('id');
 
-	protected $fillable = array('full_name', 'email', 'delivery_address','invoice_address', 'phone_number','register_number');
+	protected $fillable = array('full_name', 'email', 'delivery_address','invoice_address', 'phone_number','register_number','payment_period');
 }

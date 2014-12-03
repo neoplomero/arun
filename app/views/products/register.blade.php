@@ -28,7 +28,7 @@
 				<div class="">
 					<input type="submit" value="Register" class="btn btn-success">
 
-					<a href="@{{ route('users') }}" class="btn btn-primary"> Go Back </a>
+					<a href="{{ route('products') }}" class="btn btn-primary"> Go Back </a>
 				</div>
 
 				{{ Form::close() }}

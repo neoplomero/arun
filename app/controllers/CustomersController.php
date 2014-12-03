@@ -26,7 +26,8 @@ class CustomersController extends BaseController{
 	}
 	public function register(){
 
-		return View::make('customers/register');
+		$period = array('30 days' => '30 days', '60 days' => '60 days');
+		return View::make('customers/register', compact('period'));
 	}
 
 	public function create()
@@ -44,11 +45,13 @@ class CustomersController extends BaseController{
 	{
 		$customer = $this->customerRepo->find($id);
 		$this->notFoundUnless($customer);
-		return View::make('customers/update', compact('customer'));
+		$period = array('30 days' => '30 days', '60 days' => '60 days');
+		return View::make('customers/update', compact('customer', 'period'));
 	}
 	public function update()
 	{
 		$id = Input::get('id');
+		//dd(Input::get('payment_period'));
 		$customer = $this->customerRepo->find($id);
 		$this->notFoundUnless($customer);
 		$manager = new CustomerManager($customer, Input::all());

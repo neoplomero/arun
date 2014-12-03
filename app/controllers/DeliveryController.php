@@ -17,17 +17,28 @@ class DeliveryController extends \BaseController {
 
 	public function orders()
 	{
-		$status = 'out for delivery';
-		$list = $this->orderRepo->status($status);
-		
+		$list = $this->orderRepo->orStatus('out for delivery','delivered');
 		return View::make('delivery/list', compact('list'));
 	}
 
 	public function send($id)
 	{
+
 		$status = $this->statusRepo->newStatus();
 		$status->order_id = $id;
 		$status->status = 'delivered';
+		$status->user_id = Auth::user()->id;
+		$status->save();
+
+		return Redirect::back();
+	}
+
+	public function back($id)
+	{
+		
+		$status = $this->statusRepo->newStatus();
+		$status->order_id = $id;
+		$status->status = 'out for delivery';
 		$status->user_id = Auth::user()->id;
 		$status->save();
 

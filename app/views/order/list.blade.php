@@ -8,6 +8,18 @@
   <h2>Orders List</h2>
   <p>
 
+    
+    {{ Form::open(['route' => 'orders/search', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
+      <div class="form-group">
+        {{ Field::text('customer','',array('placeholder' => 'name')) }}
+        {{ Field::date('delivery_date','',array('placeholder' => 'date')) }}
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <a href="{{ route('orders/list') }}" class="btn btn-success">View all</a>
+    {{ Form::close() }}
+
+  </p>
+
   <table class="table table-striped table-bordered">
     <thead>
     <tr>

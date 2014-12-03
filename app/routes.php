@@ -66,6 +66,9 @@ Route::get('restore/{id}', [ 'as' => 'order/restore', 'uses' => 'OrderController
 
 Route::get('report/orders/{id}', [ 'as' => 'report/orders', 'uses' => 'ReportController@ordersByCustomer']);
 Route::post('report/orders', [ 'as' => 'report/orders/filter', 'uses' => 'ReportController@ordersByCustomerFilter']);
+Route::get('report/sales', [ 'as' => 'report/sales', 'uses' => 'ReportController@sales']);
+
+Route::post('report/sales', [ 'as' => 'report/searchSales', 'uses' => 'ReportController@searchSales']);
 
 Route::get('invoice/{id}', [ 'as' => 'invoice', 'uses' => 'OrderController@pdf']);
 
@@ -82,6 +85,10 @@ Route::put('updateDetail', [ 'as' => 'updateDetail', 'uses' => 'OrderController@
 Route::get('send/{id}', [ 'as' => 'send', 'uses' => 'OrderController@send']);
 
 Route::get('orders/list', [ 'as' => 'orders/list', 'uses' => 'OrderController@orderList']);
+Route::post('orders/list', [ 'as' => 'orders/search', 'uses' => 'OrderController@orderListFilter']);
+
+Route::get('orders/print', [ 'as' => 'orders/print', 'uses' => 'OrderController@printSearch']);
+Route::post('orders/aspdf', [ 'as' => 'orders/aspdf', 'uses' => 'OrderController@getPdf']);
 
 Route::get('orders/view/{id}', [ 'as' => 'orders/view', 'uses' => 'OrderController@view']);
 
@@ -93,8 +100,10 @@ Route::get('factory/processing', ['as' => 'factoryOrders', 'uses' => 'FactoryCon
 Route::post('factory/received/search', ['as' => 'factorySearch', 'uses' => 'FactoryController@processingSearch']);
 
 Route::get('factory/send/{id}', ['as' => 'factorySend', 'uses' => 'FactoryController@send']);
+Route::get('factory/back/{id}', ['as' => 'factoryBack', 'uses' => 'FactoryController@back']);
 
-Route::get('delivery/{id}', ['as' => 'deliverySend', 'uses' => 'DeliveryController@send']);
+Route::get('deliverySend/{id}', ['as' => 'deliverySend', 'uses' => 'DeliveryController@send']);
+Route::get('deliveryBack/{id}', ['as' => 'deliveryBack', 'uses' => 'DeliveryController@back']);
 
 
 Route::get('pdf', ['as' => 'pdf', 'uses' => 'AdminController@pdf']);

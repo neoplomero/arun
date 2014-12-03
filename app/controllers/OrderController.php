@@ -41,7 +41,6 @@ class OrderController extends BaseController
 
 	public function generate($id)
 	{
-		//$this->check();
 		$bakery = $this->bakeryRepo->find(1);
 		$customer = $this->customerRepo->find($id);
 		$user = Auth::user();
@@ -86,8 +85,8 @@ class OrderController extends BaseController
 		$bakery = $this->bakeryRepo->find(1);
 		$user = Auth::user();
 		$status = $this->statusRepo->getLastByUserId($user->id);
-		$order_id = $status->order_id;
-		$order = $this->orderRepo->find($order_id);
+		//$order_id = $status->order_id;
+		$order = $this->orderRepo->find($id);
 
 		$products = $this->productRepo->getAll();
 		$products = $products->lists('name', 'id');
@@ -171,11 +170,12 @@ class OrderController extends BaseController
 	}
 	public function send($id)
 	{
+
 		$order = $this->orderRepo->find($id);
 		$statusData = array();
 		$statusData['status'] = 'processing';
 		$statusData['user_id'] = Auth::user()->id;
-		$statusData['order_id'] = $order->id;;
+		$statusData['order_id'] = $order->id;
 
 		$status = $this->statusRepo->newStatus();
 		$manager = new StatusManager($status, $statusData);
@@ -187,9 +187,36 @@ class OrderController extends BaseController
 	public function orderList()
 	{
 		$list = $this->orderRepo->getList();
-		
 		return View::make('order/list', compact('list'));
 	}
+
+	public function orderListFilter()
+	{
+		if(Input::get('delivery_date'))
+		{
+			$list = $this->orderRepo->getListByFilter('delivery_date', '=', Input::get('delivery_date'));
+		}
+		if(Input::get('customer'))
+		{
+			$list = $this->orderRepo->getListByFilter('full_name', 'LIKE', '%'.Input::get('customer').'%');
+		}	
+		return View::make('order/list', compact('list'));
+	}	
+
+
+	public function printSearch()
+	{
+		return View::make('order/search');
+	}
+	public function getPdf()
+	{
+		$bakery = $this->bakeryRepo->find(1);
+		$orders = $this->orderRepo->getPdfByFilter('delivery_date', '=', Input::get('delivery_date'));
+		$view =  View::make('pdf/multiple_invoice', compact('orders','bakery'))->render();
+		$response = PDF::load($view, 'A4', 'portrait')->show();
+	}
+
+
 
 	public function view($id)
 	{
