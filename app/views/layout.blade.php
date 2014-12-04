@@ -44,13 +44,29 @@
 
           @if (Auth::check())
           <ul class="nav navbar-nav navbar-right">
-
+            @if(Auth::user()->user_type == 'delivery' OR Auth::user()->user_type == 'admin' )
             <li><a href="{{ route('delivery') }}">Delivery</a></li>
+            @endif
+
+            @if(Auth::user()->user_type == 'seller' OR Auth::user()->user_type == 'admin' )
             <li><a href="{{ route('customers') }}">Customers</a></li>
             <li><a href="{{ route('orders/list') }}">Orders</a></li>
-            <li><a href="{{ route('users') }}">Users</a></li>
-            <li><a href="{{ route('products') }}">Products</a></li>
+            @endif
 
+            @if(Auth::user()->user_type == 'admin')
+            <li><a href="{{ route('products') }}">Products</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Report<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ route('report/sales') }}">Sales</a></li>
+                <li><a href="{{ route('orders/print') }}">Print orders</a></li>
+              </ul>
+            </li>
+            <li><a href="{{ route('users') }}">Users</a></li>
+            @endif
+
+    
+            @if(Auth::user()->user_type == 'manufacturer' OR Auth::user()->user_type == 'admin' )
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Factory <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -58,6 +74,8 @@
                 <li><a href="{{ route('factoryOrders') }}">Processing orders</a></li>
               </ul>
             </li>
+            @endif
+            
 
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->full_name }} <span class="caret"></span></a>

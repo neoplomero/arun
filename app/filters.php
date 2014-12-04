@@ -95,3 +95,21 @@ Route::filter('is_admin', function()
 {
 	if (! is_admin()) return Redirect::to('/');
 });
+
+Route::filter('is_delivery', function()
+{
+	$usertype = Auth::user()->user_type;
+	if ($usertype != 'delivery' AND $usertype != 'admin' ) return Redirect::to('/');
+});
+
+Route::filter('is_manufacturer', function()
+{
+	$usertype = Auth::user()->user_type;
+	if ($usertype != 'manufacturer' AND $usertype != 'admin') return Redirect::to('/');
+});
+
+Route::filter('is_seller', function()
+{
+	$usertype = Auth::user()->user_type;
+	if ($usertype != 'seller' AND $usertype != 'admin') return Redirect::to('/');
+});

@@ -79,7 +79,7 @@ class FieldBuilder {
 		switch($type)
 		{
 			case 'select':
-				$options = array('' => 'Seleccione') + $options;
+				$options = array('' => '--Select--') + $options;
 				//return \Form::select($name, $options, $value, $attributes);
 				return $this->form->select($name, $options, $value, $attributes);
 			case 'password':

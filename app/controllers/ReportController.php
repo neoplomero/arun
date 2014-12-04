@@ -2,16 +2,20 @@
 
 use Bakery\Repositories\OrderRepo;
 use Bakery\Repositories\CustomerRepo;
+use Bakery\Repositories\BakeryRepo;
 
 class ReportController extends \BaseController {
 
 	public $orderRepo;
 	public $customerRepo;
+	public $bakeryRepo;
 	public function __construct(OrderRepo $orderRepo, 
-								CustomerRepo $customerRepo  )
+								CustomerRepo $customerRepo,
+								BakeryRepo $bakeryRepo  )
 	{
 		$this->orderRepo = $orderRepo;
 		$this->customerRepo = $customerRepo;
+		$this->bakeryRepo = $bakeryRepo;
 	}
 
 	public function ordersByCustomer($id)
@@ -32,19 +36,28 @@ class ReportController extends \BaseController {
 		$customer = $this->customerRepo->find($id);
 		$from = Input::get('from');
 		$to = Input::get('to');
-
+		$bakery = $this->bakeryRepo->find(1);
 		if( ! isset($to))
 		{
 			$to = date("Y-m-d");
 		}
 		$orders = $this->orderRepo->orderByCustomerDate($id, $from, $to);
-
 		$total = 0;
 		foreach($orders as $item){
 			$total = $total + $item->amount;
 		}
-		return View::make('report/orders', compact('orders', 'total', 'customer'));
+		if(Input::get('type') =='plain view' ){
+			return View::make('report/orders', compact('orders', 'total', 'customer'));	
+		}else{
+			$view = View::make('pdf/invoice_list', compact('orders', 'total', 'customer','bakery','from','to'))->render();		
+			$response = PDF::load($view, 'A4', 'portrait')->show();
+		}
+
+		
 	}
+
+
+
 
 	public function sales()
 	{

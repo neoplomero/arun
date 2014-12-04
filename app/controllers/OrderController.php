@@ -85,7 +85,6 @@ class OrderController extends BaseController
 		$bakery = $this->bakeryRepo->find(1);
 		$user = Auth::user();
 		$status = $this->statusRepo->getLastByUserId($user->id);
-		//$order_id = $status->order_id;
 		$order = $this->orderRepo->find($id);
 
 		$products = $this->productRepo->getAll();
@@ -213,7 +212,8 @@ class OrderController extends BaseController
 		$bakery = $this->bakeryRepo->find(1);
 		$orders = $this->orderRepo->getPdfByFilter('delivery_date', '=', Input::get('delivery_date'));
 		$view =  View::make('pdf/multiple_invoice', compact('orders','bakery'))->render();
-		$response = PDF::load($view, 'A4', 'portrait')->show();
+		$response = PDF::load($view, 'A4', 'portrait')->show();			
+
 	}
 
 
