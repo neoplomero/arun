@@ -3,6 +3,11 @@
 	text-align: center;
 	margin: 15% auto;
 }
+.login-container
+{
+	margin-bottom: 10%;
+	margin-top: 5%;
+}
 .center-block {
   display: block;
   margin-left: auto;
@@ -32,4 +37,18 @@
 
 .table > tbody > tr > .thick-line {
     border-top: 2px solid;
+}
+
+@media screen and (max-width : 640px){
+	footer{
+		text-align: center;
+	}
+	footer .pull-left, footer .pull-right
+	{
+		float: none !important;
+	}
+	.home
+	{
+		margin: 35% auto;
+	}
 }

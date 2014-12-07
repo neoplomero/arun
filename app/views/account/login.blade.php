@@ -4,7 +4,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3 ">
+		<div class="col-md-6 col-md-offset-3 login-container">
 
 			<div class="panel panel-default">
 			<div class="panel-body">
@@ -18,7 +18,7 @@
 					<legend> Login  </legend>
 
 					<fieldset>
-					
+
 					{{ Field::email('email') }}
 
 					{{ Field::password('password') }}
