@@ -1,6 +1,11 @@
 @extends('layout')
 
 @section('content')
-<h2>wellcome home</h2>
+<div class="container home">
+
+		<h1>Arun Bakery</h1>
+		<h3>Please <a href="{{ route('login') }}">log in</a></h3>
+
+</div>
 
 @endsection
