@@ -43,14 +43,6 @@
 
           @if (Auth::check())
           <ul class="nav navbar-nav navbar-right">
-            @if(Auth::user()->user_type == 'delivery' OR Auth::user()->user_type == 'admin' )
-            <li><a href="{{ route('delivery') }}">Delivery</a></li>
-            @endif
-
-            @if(Auth::user()->user_type == 'seller' OR Auth::user()->user_type == 'admin' )
-            <li><a href="{{ route('customers') }}">Customers</a></li>
-            <li><a href="{{ route('orders/list') }}">Orders</a></li>
-            @endif
 
             @if(Auth::user()->user_type == 'admin')
             <li><a href="{{ route('products') }}">Products</a></li>
@@ -64,6 +56,14 @@
             <li><a href="{{ route('users') }}">Users</a></li>
             @endif
 
+            @if(Auth::user()->user_type == 'delivery' OR Auth::user()->user_type == 'admin' )
+            <li><a href="{{ route('delivery') }}">Delivery</a></li>
+            @endif
+
+            @if(Auth::user()->user_type == 'seller' OR Auth::user()->user_type == 'admin' )
+            <li><a href="{{ route('customers') }}">Customers</a></li>
+            <li><a href="{{ route('orders/list') }}">Orders</a></li>
+            @endif
 
             @if(Auth::user()->user_type == 'manufacturer' OR Auth::user()->user_type == 'admin' )
             <li class="dropdown">
