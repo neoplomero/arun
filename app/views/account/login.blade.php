@@ -12,7 +12,7 @@
 
 					{{ Form::open(['route' => 'login', 'method' => 'POST', 'role' => 'form'])}}
 		            @if(Session::has('login_error'))
-		              <span class="label label-danger">Credenciales no validas</span>
+		              <span class="label label-danger">Please check your credentials, thanks.</span>
 		            @endif
 
 					<legend> Login  </legend>
