@@ -99,19 +99,29 @@ class ReportController extends \BaseController {
 
 	public function salesByProduct()
 	{
+		$from = Input::get('from');
+		$to = Input::get('to');
 		$product_list = $this->productRepo->getAll();
+		$orders = $this->orderRepo->ordersByRangeDate($from, $to);
 		$products = array();
 		foreach($product_list as $product){
 			$products[$product->name] = $product->name;
 		}
-
-		$labels = array();
-		$from = Input::get('from');
-		$to = Input::get('to');
+				
 		$product = Input::get('product');
-		$orders = $this->orderRepo->ordersByRangeDate($from, $to);
+		$data_list = array();
+		foreach($product_list as $product){
+			$data = $this->getData($product->name, $from, $to, $orders);
+			array_push($data_list, $data);
+		}
+		$labels = $this->getLabels($from, $to, $orders);
+	
+		return View::make('report/products', compact('products','data_list','labels'));
+	}
+
+	public function getData($product, $from, $to, $orders)
+	{
 		$data = array();
-		$data_chart = array();
 		foreach($orders as $order)
 		{
 			foreach ($order->detail as $detail) {
@@ -120,15 +130,24 @@ class ReportController extends \BaseController {
 				{
 					$cant = $cant + $detail->quantity;
 				}
-				array_push($data, "'".$cant."'");
-				array_push($labels, "'".Format::date($order->created_at)."'");
 			}
+			array_push($data, "'".$cant."'");
+		}
+		
+		$data = implode(',', $data);		
+		$color = $this->getRandomColor();
+
+		return array('data'=>$data, 'color' => $color, 'product' => $product);
+	}
+	public function getLabels($from, $to, $orders)
+	{
+		$labels = array();
+		foreach($orders as $order)
+		{
+		array_push($labels, "'".Format::date($order->created_at)."'");
 		}
 		$labels = implode(',', $labels);
-		$data = implode(',', $data);
-		//dd($labels);
-		return View::make('report/products', compact('products','data','labels'));
+		return $labels;
 	}
-
 
 }

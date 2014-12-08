@@ -25,7 +25,9 @@
 			</div>
 		</div>
 
-@if(isset($data))
+@if(isset($data_list))
+
+
 		<center>
 		<div style="width:80%">
 			<div>
@@ -42,17 +44,18 @@
 		var lineChartData = {
 			labels : [{{ $labels }}],
 			datasets : [
-				
+				@foreach($data_list as $data)
 				{
 					label: "Sales",
-					fillColor : "rgba(151,187,205,0.2)",
-					strokeColor : "rgba(151,187,205,1)",
+					fillColor : "rgba({{ $data['color'] }},0.4)",
+					strokeColor : "rgba({{ $data['color'] }},1)",
 					pointColor : "rgba(151,187,205,1)",
 					pointStrokeColor : "#fff",
 					pointHighlightFill : "#fff",
 					pointHighlightStroke : "rgba(151,187,205,1)",
-					data : [{{ $data }}]
-				}
+					data : [{{ $data['data'] }}]
+				},
+				@endforeach
 			]
 
 		}

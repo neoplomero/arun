@@ -20,4 +20,11 @@ class BaseController extends Controller {
 		if ( ! $value ) App::abort(404);
 	}
 
+	public	function getRandomColor() {
+    //$rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
+    //$color = '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
+		$color = rand(100,299).','.rand(100,299).','.rand(100,299);
+    return $color;
+	}
+
 }
