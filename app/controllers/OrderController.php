@@ -233,7 +233,11 @@ class OrderController extends BaseController
 		$view = View::make('pdf/single_invoice', compact('data','bakery'))->render();
 		$response = PDF::load($view, 'A4', 'portrait')->show();
 
-		return $response;
+		$headers = array('Content-Type' => 'application/pdf');
+
+		return Response::make(PDF::load($view, 'A4', 'portrait')->show('invoice'), 200, $headers);
+
+		//return $response;
 	}
 	public function paid($id){
 		$order = $this->orderRepo->find($id);
