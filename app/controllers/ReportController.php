@@ -120,7 +120,7 @@ class ReportController extends \BaseController {
 			array_push($data_list, $data);
 		}
 		$labels = $this->getLabels($from, $to, $orders);
-	
+		//dd($data_list);
 		return View::make('report/products', compact('type','data_list','labels','chart'));
 	}
 

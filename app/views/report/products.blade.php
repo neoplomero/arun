@@ -25,7 +25,7 @@
 			</div>
 		</div>
 
-@if(isset($data_list))
+@if(isset($chart))
 
 
 		<center>
@@ -71,11 +71,7 @@
 
 	window.onload = function(){
 		var ctx = document.getElementById("canvas").getContext("2d");
-<<<<<<< HEAD
-		window.myLine = new Chart(ctx).Bar(lineChartData, {
-=======
 		window.myLine = new Chart(ctx).{{$chart}}(lineChartData, {
->>>>>>> chart
 			responsive: true
 		});
 	}
