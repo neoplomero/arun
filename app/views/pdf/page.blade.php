@@ -1,6 +1,6 @@
 <html>
 <head>
-	{{ header('Content-type: application/pdf') }}
+	<meta http-equiv="content-type" content="application/pdf">
 	<link href="{{ asset('../bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
 	  <style type="text/css">
