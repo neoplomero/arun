@@ -54,7 +54,10 @@ class ReportController extends \BaseController {
 			return View::make('report/orders', compact('orders', 'total', 'customer'));	
 		}else{
 			$view = View::make('pdf/invoice_list', compact('orders', 'total', 'customer','bakery','from','to'))->render();		
-			$response = PDF::load($view, 'A4', 'portrait')->show();
+			//$response = PDF::load($view, 'A4', 'portrait')->show();
+
+			$headers = array('Content-Type' => 'application/pdf');
+			return Response::make(PDF::load($view, 'A4', 'portrait')->show('invoice'), 200, $headers);
 		}
 
 		
