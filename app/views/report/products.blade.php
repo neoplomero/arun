@@ -59,7 +59,7 @@
 
 	window.onload = function(){
 		var ctx = document.getElementById("canvas").getContext("2d");
-		window.myLine = new Chart(ctx).Line(lineChartData, {
+		window.myLine = new Chart(ctx).Bar(lineChartData, {
 			responsive: true
 		});
 	}
