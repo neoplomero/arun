@@ -90,11 +90,21 @@ class ReportController extends \BaseController {
 	{
 		$product_list = $this->productRepo->getAll();
 		$type = array('Bar' => 'Bar', 'Line' => 'Line');
-
 		return View::make('report/products', compact('type'));		
 	}
+	public function single_product()
+	{
+		$products = array();
+		$product_list = $this->productRepo->getAll();
+		foreach($product_list as $product)
+		{
+			$products[$product->name] = $product->name;
+		}
+		$type = array('Bar' => 'Bar', 'Line' => 'Line');
+		return View::make('report/single_product', compact('products'));		
+	}
 
-	public function salesByProduct()
+	public function sellProducts()
 	{
 		$from = Input::get('from');
 		$to = Input::get('to');
@@ -112,6 +122,25 @@ class ReportController extends \BaseController {
 		$labels = $this->getLabels($from, $to, $orders);
 	
 		return View::make('report/products', compact('type','data_list','labels','chart'));
+	}
+
+	public function salesByProduct()
+	{
+		$product_list = $this->productRepo->getAll();
+		$products = array();
+		foreach($product_list as $product){
+			$products[$product->name] = $product->name;
+		}
+
+		$labels = array();
+		$from = Input::get('from');
+		$to = Input::get('to');
+		$product = Input::get('product');
+		$orders = $this->orderRepo->ordersByRangeDate($from, $to);
+		$labels = $this->getLabels($from, $to, $orders);
+		$data = $this->getData($product, $from, $to, $orders);
+
+		return View::make('report/single_product', compact('products','data','labels'));
 	}
 
 	public function getData($product, $from, $to, $orders)
