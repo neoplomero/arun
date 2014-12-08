@@ -1,5 +1,6 @@
 <html>
 <head>
+	{{ header('Content-type: application/pdf') }}
 	<link href="{{ asset('../bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
 	  <style type="text/css">
@@ -32,6 +33,7 @@
 		  padding: 0;
 		}
 	  </style>
+	
 
 </head>
 
