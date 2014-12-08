@@ -89,24 +89,19 @@ class ReportController extends \BaseController {
 	public function products()
 	{
 		$product_list = $this->productRepo->getAll();
-		$products = array();
-		foreach($product_list as $product){
-			$products[$product->name] = $product->name;
-		}
+		$type = array('Bar' => 'Bar', 'Line' => 'Line');
 
-		return View::make('report/products', compact('products'));		
+		return View::make('report/products', compact('type'));		
 	}
 
 	public function salesByProduct()
 	{
 		$from = Input::get('from');
 		$to = Input::get('to');
+		$chart = Input::get('chart');
 		$product_list = $this->productRepo->getAll();
 		$orders = $this->orderRepo->ordersByRangeDate($from, $to);
-		$products = array();
-		foreach($product_list as $product){
-			$products[$product->name] = $product->name;
-		}
+		$type = array('Bar' => 'Bar', 'Line' => 'Line');
 				
 		$product = Input::get('product');
 		$data_list = array();
@@ -116,7 +111,7 @@ class ReportController extends \BaseController {
 		}
 		$labels = $this->getLabels($from, $to, $orders);
 	
-		return View::make('report/products', compact('products','data_list','labels'));
+		return View::make('report/products', compact('type','data_list','labels','chart'));
 	}
 
 	public function getData($product, $from, $to, $orders)

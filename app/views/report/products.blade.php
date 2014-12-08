@@ -18,7 +18,7 @@
 			      </div>
 
 			      <div class="form-group">
-					{{ Field::select('product', $products) }}
+					{{ Field::select('chart', $type) }}
 			      </div>
 			      <button type="submit" class="btn btn-primary">Generate chart</button>
 			    {{ Form::close() }}
@@ -31,12 +31,20 @@
 		<center>
 		<div style="width:80%">
 			<div>
-				<canvas id="canvas" height="250" width="600"></canvas>
+				<canvas id="canvas" height="350" width="600"></canvas>
 			</div>
 		</div>
 		</center>
 
-	
+		<div class="container" style="width:80%">
+		@foreach($data_list as $data)
+			
+			<p style="padding:15px; background-color:rgba({{ $data['color']}}, 1)">
+			<strong>{{ $data['product'] }}</strong>
+			</p>
+		
+		@endforeach
+		</div>
 	
 	<script>
 
@@ -46,7 +54,7 @@
 			datasets : [
 				@foreach($data_list as $data)
 				{
-					label: "Sales",
+					label: "{{ $data['product'] }}",
 					fillColor : "rgba({{ $data['color'] }},0.4)",
 					strokeColor : "rgba({{ $data['color'] }},1)",
 					pointColor : "rgba(151,187,205,1)",
@@ -56,13 +64,15 @@
 					data : [{{ $data['data'] }}]
 				},
 				@endforeach
+				
+				{}
 			]
 
 		}
 
 	window.onload = function(){
 		var ctx = document.getElementById("canvas").getContext("2d");
-		window.myLine = new Chart(ctx).Line(lineChartData, {
+		window.myLine = new Chart(ctx).{{$chart}}(lineChartData, {
 			responsive: true
 		});
 	}
