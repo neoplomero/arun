@@ -9,7 +9,7 @@
 				<strong>Select date range</strong>
 			</div>
 			<div class="panel-body">
-			    {{ Form::open(['route' => 'report/sellProducts', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
+			    {{ Form::open(['route' => 'report/productSales', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
 			      <div class="form-group">
 			        {{ Field::date('from') }}
 			      </div>
@@ -30,20 +30,21 @@
 
 		<center>
 		<div style="width:80%">
-			<div class="panel panel-default">
-			<div class="panel-body">
-			@foreach($data_list as $data)
-				<span class="label" style="padding:5px; margin:4px; color:#000; background-color:rgba({{ $data['color']}}, 1)">{{$data['product']}}</span>
-			@endforeach
-			</div>
-			</div>
 			<div>
 				<canvas id="canvas" height="350" width="600"></canvas>
 			</div>
 		</div>
 		</center>
 
-
+		<div class="container" style="width:80%">
+		@foreach($data_list as $data)
+			
+			<p style="padding:15px; background-color:rgba({{ $data['color']}}, 1)">
+			<strong>{{ $data['product'] }}</strong>
+			</p>
+		
+		@endforeach
+		</div>
 	
 	<script>
 
@@ -71,11 +72,7 @@
 
 	window.onload = function(){
 		var ctx = document.getElementById("canvas").getContext("2d");
-<<<<<<< HEAD
-		window.myLine = new Chart(ctx).Bar(lineChartData, {
-=======
 		window.myLine = new Chart(ctx).{{$chart}}(lineChartData, {
->>>>>>> chart
 			responsive: true
 		});
 	}

@@ -9,7 +9,7 @@
 				<strong>Select date range</strong>
 			</div>
 			<div class="panel-body">
-			    {{ Form::open(['route' => 'report/sellProducts', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
+			    {{ Form::open(['route' => 'report/productSales', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
 			      <div class="form-group">
 			        {{ Field::date('from') }}
 			      </div>
@@ -18,32 +18,24 @@
 			      </div>
 
 			      <div class="form-group">
-					{{ Field::select('chart', $type) }}
+					{{ Field::select('product', $products) }}
 			      </div>
 			      <button type="submit" class="btn btn-primary">Generate chart</button>
 			    {{ Form::close() }}
 			</div>
 		</div>
 
-@if(isset($data_list))
-
-
+@if(isset($labels))
 		<center>
 		<div style="width:80%">
-			<div class="panel panel-default">
-			<div class="panel-body">
-			@foreach($data_list as $data)
-				<span class="label" style="padding:5px; margin:4px; color:#000; background-color:rgba({{ $data['color']}}, 1)">{{$data['product']}}</span>
-			@endforeach
-			</div>
-			</div>
+			<strong>{{ $data['product'] }}</strong>
 			<div>
-				<canvas id="canvas" height="350" width="600"></canvas>
+				<canvas id="canvas" height="250" width="600"></canvas>
 			</div>
 		</div>
 		</center>
 
-
+	
 	
 	<script>
 
@@ -51,31 +43,24 @@
 		var lineChartData = {
 			labels : [{{ $labels }}],
 			datasets : [
-				@foreach($data_list as $data)
+				
 				{
-					label: "{{ $data['product'] }}",
-					fillColor : "rgba({{ $data['color'] }},0.4)",
-					strokeColor : "rgba({{ $data['color'] }},1)",
+					label: "Sales",
+					fillColor : "rgba(151,187,205,0.2)",
+					strokeColor : "rgba(151,187,205,1)",
 					pointColor : "rgba(151,187,205,1)",
 					pointStrokeColor : "#fff",
 					pointHighlightFill : "#fff",
 					pointHighlightStroke : "rgba(151,187,205,1)",
 					data : [{{ $data['data'] }}]
-				},
-				@endforeach
-				
-				{}
+				}
 			]
 
 		}
 
 	window.onload = function(){
 		var ctx = document.getElementById("canvas").getContext("2d");
-<<<<<<< HEAD
-		window.myLine = new Chart(ctx).Bar(lineChartData, {
-=======
-		window.myLine = new Chart(ctx).{{$chart}}(lineChartData, {
->>>>>>> chart
+		window.myLine = new Chart(ctx).Line(lineChartData, {
 			responsive: true
 		});
 	}
