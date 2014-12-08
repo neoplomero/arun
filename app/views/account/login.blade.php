@@ -4,7 +4,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3 ">
+		<div class="col-md-6 col-md-offset-3 login-container">
 
 			<div class="panel panel-default">
 			<div class="panel-body">
@@ -12,13 +12,13 @@
 
 					{{ Form::open(['route' => 'login', 'method' => 'POST', 'role' => 'form'])}}
 		            @if(Session::has('login_error'))
-		              <span class="label label-danger">Credenciales no validas</span>
+		              <span class="label label-danger">Please check your credentials, thanks.</span>
 		            @endif
 
 					<legend> Login  </legend>
 
 					<fieldset>
-					
+
 					{{ Field::email('email') }}
 
 					{{ Field::password('password') }}

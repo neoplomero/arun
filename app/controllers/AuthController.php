@@ -1,7 +1,7 @@
 <?php
 
 /**
-* 
+*
 */
 
 
@@ -14,7 +14,7 @@ class AuthController extends BaseController{
 
 		if(Auth::attempt($credentials, $data['remember']))
 		{
-			return Redirect::back();
+			return Redirect::route('home');
 		}
 		return Redirect::back()->with('login_error', 1);
 
@@ -23,7 +23,7 @@ class AuthController extends BaseController{
 	public function logout(){
 
 		Auth::logout();
-		return Redirect::route('home');  
+		return Redirect::route('home');
 
 	}
 

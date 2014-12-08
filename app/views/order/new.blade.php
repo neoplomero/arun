@@ -14,7 +14,7 @@
 				  {{ $bakery->address }}<br>
 				  <abbr title="Phone">P:</abbr> {{ $customer->phone_number }}<br>
 				  <a href="mailto:{{ $customer->email }}">{{ $customer->email }}</a><br>
-				  <abbr title="Register">Register Number:</abbr> {{ $customer->register_number }}				  
+				  <abbr title="Register">Register Number:</abbr> {{ $customer->register_number }}
 				</address>
 			  </div>
 			</div>
@@ -59,12 +59,12 @@
 				<fieldset>
 
 				{{ form::hidden('id', $customer->id) }}
-				
+
 				{{ Field::date('delivery_date') }}
 
 				{{ Field::textarea('delivery_address',$customer->delivery_address) }}
 
-				
+
 
 				</fieldset>
 
@@ -75,7 +75,7 @@
 				</div>
 
 				{{ Form::close() }}
-			
+
 			  </div>
 			</div>
 </div>
