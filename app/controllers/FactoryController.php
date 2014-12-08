@@ -2,17 +2,21 @@
 
 use Bakery\Repositories\OrderRepo;
 use Bakery\Repositories\StatusRepo;
+use Bakery\Repositories\BakeryRepo;
 
 class FactoryController extends \BaseController {
 
 	public $orderRepo;
 	public $statusRepo;
+	public $bakeryRepo;
 
 	public function __construct(OrderRepo $orderRepo,
-								StatusRepo $statusRepo)
+								StatusRepo $statusRepo,
+								bakeryRepo $bakeryRepo)
 	{
 		$this->orderRepo = $orderRepo;
 		$this->statusRepo = $statusRepo;
+		$this->bakeryRepo = $bakeryRepo;
 	}
 
 
@@ -77,14 +81,13 @@ class FactoryController extends \BaseController {
 		$status->save();
 		return Redirect::back();
 	}	
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
+
+
+	public function view($id)
 	{
-		//
+		$bakery = $this->bakeryRepo->find(1);
+		$order = $this->orderRepo->find($id);
+		return View::make('factory/detail', compact('order', 'bakery'));
 	}
 
 

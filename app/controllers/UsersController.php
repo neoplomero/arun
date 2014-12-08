@@ -38,7 +38,7 @@ class UsersController extends BaseController{
 
 		$types = ['admin' => 'admin',
 					'delivery' => 'delivery',
-					'manufacturer' => 'manufacturer',
+					'baker' => 'baker',
 					'seller'  => 'seller'];
 
 		return View::make('users/register', compact('types'));
@@ -64,7 +64,7 @@ class UsersController extends BaseController{
 		$this->notFoundUnless($user);
 		$types = ['admin' => 'admin',
 					'delivery' => 'delivery',
-					'manufacturer' => 'manufacturer',
+					'baker' => 'baker',
 					'seller'  => 'seller'];
 
 		return View::make('users/update', compact('user', 'types'));

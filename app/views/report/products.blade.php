@@ -9,24 +9,27 @@
 				<strong>Select date range</strong>
 			</div>
 			<div class="panel-body">
-			    {{ Form::open(['route' => 'report/searchProductSales', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
+			    {{ Form::open(['route' => 'report/productSales', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
 			      <div class="form-group">
 			        {{ Field::date('from') }}
 			      </div>
 			      <div class="form-group">
 			        {{ Field::date('to') }}
 			      </div>
+
+			      <div class="form-group">
+					{{ Field::select('product', $products) }}
+			      </div>
 			      <button type="submit" class="btn btn-primary">Generate chart</button>
 			    {{ Form::close() }}
 			</div>
 		</div>
-@if(isset($chart_data))
-@foreach ($chart_data as $chart)
 
+@if(isset($data))
 		<center>
-		<div style="width:50%">
+		<div style="width:80%">
 			<div>
-				<canvas id="canvas{{ $chart['product'] }}" height="450" width="600"></canvas>
+				<canvas id="canvas" height="250" width="600"></canvas>
 			</div>
 		</div>
 		</center>
@@ -37,7 +40,7 @@
 
 		var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 		var lineChartData = {
-			labels : [{{ $chart['labels'] }}],
+			labels : [{{ $labels }}],
 			datasets : [
 				
 				{
@@ -48,20 +51,20 @@
 					pointStrokeColor : "#fff",
 					pointHighlightFill : "#fff",
 					pointHighlightStroke : "rgba(151,187,205,1)",
-					data : [{{ $chart['data']}}]
+					data : [{{ $data }}]
 				}
 			]
 
 		}
 
 	window.onload = function(){
-		var ctx = document.getElementById("canvas{{ $chart['product'] }}").getContext("2d");
+		var ctx = document.getElementById("canvas").getContext("2d");
 		window.myLine = new Chart(ctx).Line(lineChartData, {
 			responsive: true
 		});
 	}
 	</script>
-	@endforeach
+
 	@endif
 
 </div>

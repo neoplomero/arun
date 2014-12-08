@@ -32,9 +32,10 @@ Route::group(['before' => 'auth'], function () {
 		Route::get('deliveryBack/{id}', ['as' => 'deliveryBack', 'uses' => 'DeliveryController@back']);
 	});
 
-	//Manufacturer routes
-	Route::group(['before' => 'is_manufacturer'], function() {
+	//baker routes
+	Route::group(['before' => 'is_baker'], function() {
 		Route::get('factory/processing', ['as' => 'factoryOrders', 'uses' => 'FactoryController@processingOrders']);
+		Route::get('factory/view/{id}', ['as' => 'factory/view', 'uses' => 'FactoryController@view']);
 		Route::post('factory/received/search', ['as' => 'factorySearch', 'uses' => 'FactoryController@processingSearch']);
 		Route::get('factory/send/{id}', ['as' => 'factorySend', 'uses' => 'FactoryController@send']);
 		Route::get('factory/back/{id}', ['as' => 'factoryBack', 'uses' => 'FactoryController@back']);
@@ -97,6 +98,8 @@ Route::group(['before' => 'auth'], function () {
 	Route::get('report/sales', [ 'as' => 'report/sales', 'uses' => 'ReportController@sales']);
 	Route::post('report/sales', [ 'as' => 'report/searchSales', 'uses' => 'ReportController@searchSales']);
 
+	Route::get('report/products', [ 'as' => 'report/products', 'uses' => 'ReportController@products']);
+	Route::post('report/products', [ 'as' => 'report/productSales', 'uses' => 'ReportController@salesByProduct']);
 	});
 
 

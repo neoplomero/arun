@@ -34,7 +34,7 @@
         <td>{{ $order->status }}</td>
         <td width="140">
           <div class="btn-group" role="group">
-	          <a href="{{ route('orders/view', [$order->order_id])}}" class="btn btn-xs btn-primary">
+	          <a href="{{ route('factory/view', [$order->order_id])}}" class="btn btn-xs btn-primary">
 	          see
 	          </a>
 

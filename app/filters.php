@@ -102,10 +102,10 @@ Route::filter('is_delivery', function()
 	if ($usertype != 'delivery' AND $usertype != 'admin' ) return Redirect::to('/');
 });
 
-Route::filter('is_manufacturer', function()
+Route::filter('is_baker', function()
 {
 	$usertype = Auth::user()->user_type;
-	if ($usertype != 'manufacturer' AND $usertype != 'admin') return Redirect::to('/');
+	if ($usertype != 'baker' AND $usertype != 'admin') return Redirect::to('/');
 });
 
 Route::filter('is_seller', function()

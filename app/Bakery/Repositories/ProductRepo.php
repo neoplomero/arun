@@ -21,7 +21,7 @@ class ProductRepo extends BaseRepo {
 	}
 	public function getAll()
 	{
-		return Product::all();
+		return Product::get();
 		
 	}
 	public function newProduct()
