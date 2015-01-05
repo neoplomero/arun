@@ -10,7 +10,7 @@ class Convert {
     }
     public function date($var)
     {
-    	$date = date("Y-m-d", strtotime($var));
+    	$date = date("d-m-Y", strtotime($var));
     	return $date;
     }
 
