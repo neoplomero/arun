@@ -31,11 +31,11 @@
 	          see
 	          </a>
             @if( $order->status == 'out for delivery' )
-	          <a href="{{ route('deliverySend', [$order->order_id])}}" class="btn btn-xs btn-danger">
+	          <a href="{{ route('deliverySend', [$order->order_id])}}" class="btn btn-xs btn-success">
 	          delivered
 	          </a>
             @else
-            <a href="{{ route('deliveryBack', [$order->order_id])}}" class="btn btn-xs btn-success">
+            <a href="{{ route('deliveryBack', [$order->order_id])}}" class="btn btn-xs btn-danger">
             out for delivery
             </a>
             @endif

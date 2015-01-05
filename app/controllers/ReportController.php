@@ -15,7 +15,8 @@ class ReportController extends \BaseController {
 	public function __construct(OrderRepo $orderRepo, 
 								CustomerRepo $customerRepo,
 								BakeryRepo $bakeryRepo,
-								ProductRepo $productRepo  )	{
+								ProductRepo $productRepo,
+								ReportRepo $reportRepo  )	{
 		$this->orderRepo = $orderRepo;
 		$this->customerRepo = $customerRepo;
 		$this->bakeryRepo = $bakeryRepo;

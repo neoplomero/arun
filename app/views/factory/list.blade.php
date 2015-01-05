@@ -39,11 +39,11 @@
 	          </a>
 
 	          @if ($order->status == 'out for delivery')
-            <a href="{{ route('factoryBack', [$order->order_id])}}" class="btn btn-xs btn-success">
+            <a href="{{ route('factoryBack', [$order->order_id])}}" class="btn btn-xs btn-danger">
 	          processing
 	          </a>
             @elseif ($order->status == 'processing') 
-            <a href="{{ route('factorySend', [$order->order_id])}}" class="btn btn-xs btn-danger">
+            <a href="{{ route('factorySend', [$order->order_id])}}" class="btn btn-xs btn-success">
             send
             </a>
             @endif
