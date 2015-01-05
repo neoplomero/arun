@@ -51,8 +51,12 @@
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ route('report/sales') }}">Sales</a></li>
                 <li><a href="{{ route('orders/print') }}">Print orders</a></li>
+
                 <li><a href="{{ route('report/products') }}">Sales by product</a></li>
                 <li><a href="{{ route('report/products/compare') }}">Products compare</a></li>
+
+                <li><a href="{{ route('report/generate') }}">Generate sales report</a></li>
+
               </ul>
             </li>
             <li><a href="{{ route('users') }}">Users</a></li>

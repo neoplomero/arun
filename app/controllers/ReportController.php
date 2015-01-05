@@ -4,6 +4,7 @@ use Bakery\Repositories\OrderRepo;
 use Bakery\Repositories\CustomerRepo;
 use Bakery\Repositories\BakeryRepo;
 use Bakery\Repositories\ProductRepo;
+use Bakery\Repositories\ReportRepo;
 
 class ReportController extends \BaseController {
 
@@ -14,12 +15,12 @@ class ReportController extends \BaseController {
 	public function __construct(OrderRepo $orderRepo, 
 								CustomerRepo $customerRepo,
 								BakeryRepo $bakeryRepo,
-								ProductRepo $productRepo  )
-	{
+								ProductRepo $productRepo  )	{
 		$this->orderRepo = $orderRepo;
 		$this->customerRepo = $customerRepo;
 		$this->bakeryRepo = $bakeryRepo;
 		$this->productRepo = $productRepo;
+		$this->reportRepo = $reportRepo;
 	}
 
 	public function ordersByCustomer($id)
@@ -63,8 +64,34 @@ class ReportController extends \BaseController {
 		
 	}
 
+	public function generate()
+	{
+		$list = $this->reportRepo->getList();
+		return View::make('report/generate',compact('list'));
+	}
 
-
+	public function save()
+	{
+		$from = Input::get('from');
+		$to = Input::get('to');
+		$report = $this->reportRepo->newReport();
+		$report->from = $from;
+		$report->to = $to;
+		$report->save();
+		return Redirect::back();
+	}
+	public function printOrders($from, $to, $report_id)
+	{
+		$bakery = $this->bakeryRepo->find(1);
+		$orders = $this->orderRepo->byDateRange($from,$to);
+		$total = 0;
+		foreach($orders as $order){
+			$total = $total + $order->amount;
+		}
+		$view =  View::make('pdf/sales_list', 
+				compact('orders','bakery','from','to','total','report_id'))->render();
+		$response = PDF::load($view, 'A4', 'portrait')->show();		
+	}
 
 	public function sales()
 	{

@@ -98,11 +98,19 @@ Route::group(['before' => 'auth'], function () {
 	Route::get('report/sales', [ 'as' => 'report/sales', 'uses' => 'ReportController@sales']);
 	Route::post('report/sales', [ 'as' => 'report/searchSales', 'uses' => 'ReportController@searchSales']);
 
+
 	Route::get('report/products', [ 'as' => 'report/products', 'uses' => 'ReportController@single_product']);
 	Route::post('report/products', [ 'as' => 'report/productSales', 'uses' => 'ReportController@salesByProduct']);
 
 	Route::get('report/products/compare', [ 'as' => 'report/products/compare', 'uses' => 'ReportController@products']);
 	Route::post('report/products/compare', [ 'as' => 'report/sellProducts', 'uses' => 'ReportController@sellProducts']);
+
+	Route::get('report/generate', [ 'as' => 'report/generate', 'uses' => 'ReportController@generate']);
+	Route::post('report/generate/save', [ 'as' => 'report/generate/save', 'uses' => 'ReportController@Save']);
+	Route::get('report/generate/print/{from}&{to}&{id}', [ 'as' => 'report/generate/print', 'uses' => 'ReportController@printOrders']);
+
+
+
 
 	});
 

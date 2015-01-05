@@ -45,7 +45,7 @@
         {{ Field::date('to') }}
       </div>
       <div class="form-group">
-        {{ Field::select('type', ['as pdf', 'plain view']) }}
+        {{ Field::select('type', ['as pdf' => 'as pdf', 'plain view' => 'plain view']) }}
       </div>
       <button type="submit" class="btn btn-primary">Search</button>
     {{ Form::close() }}
