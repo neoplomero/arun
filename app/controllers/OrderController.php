@@ -212,6 +212,7 @@ class OrderController extends BaseController
 		$bakery = $this->bakeryRepo->find(1);
 		$orders = $this->orderRepo->getPdfByFilter('delivery_date', '=', Input::get('delivery_date'));
 		$view =  View::make('pdf/multiple_invoice', compact('orders','bakery'))->render();
+		$headers = array('Content-Type' => 'application/pdf');
 		$response = PDF::load($view, 'A4', 'portrait')->show();			
 
 	}
@@ -232,7 +233,6 @@ class OrderController extends BaseController
 		$bakery = $this->bakeryRepo->find(1);
 		$view = View::make('pdf/single_invoice', compact('data','bakery'))->render();
 		$response = PDF::load($view, 'A4', 'portrait')->show();
-
 		$headers = array('Content-Type' => 'application/pdf');
 
 		return Response::make(PDF::load($view, 'A4', 'portrait')->show('invoice'), 200, $headers);
