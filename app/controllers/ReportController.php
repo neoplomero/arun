@@ -91,13 +91,27 @@ class ReportController extends \BaseController {
 		}
 		$view =  View::make('pdf/sales_list', 
 				compact('orders','bakery','from','to','total','report_id'))->render();
-		$response = PDF::load($view, 'A4', 'portrait')->show();		
+		$headers = array('Content-Type' => 'application/pdf');
+		return Response::make(PDF::load($view, 'A4', 'portrait')->show('invoice'), 200, $headers);
+
 	}
 
 	public function sales()
 	{
 		return View::make('report/sales');	
 	}
+
+	public function delete($id)
+	{
+		$report = $this->reportRepo->find($id);
+		$report->delete();
+		return Redirect::to('report/generate');
+	}
+	public function confirm($id)
+	{
+		return View::make('report/confirm', compact('id'));	
+	}
+
 	public function searchSales()
 	{
 		$from = Input::get('from');

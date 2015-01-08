@@ -77,10 +77,10 @@
 
         <td width="130">
           <div class="btn-group" role="group">
-	          <a href="{{ route('orders/view', [$order->order_id])}}" class="btn btn-xs btn-primary">
+	          <a href="{{ route('orders/view', [$order->id])}}" class="btn btn-xs btn-primary">
 	          see
 	          </a>
-            <a href="{{ route('invoice', [$order->order_id])}}" class="btn btn-xs btn-info">
+            <a href="{{ route('invoice', [$order->id])}}" class="btn btn-xs btn-info">
             print
             </a>
           </div>

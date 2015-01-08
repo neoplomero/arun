@@ -115,19 +115,7 @@ class OrderController extends BaseController
 		$productId = Input::get('product');
 		$orderId = Input::get('order_id');
 		$quantity = Input::get('quantity');
-
-		$productPrice = $this->productRepo->find($productId)->price;
-		$total_price = $productPrice * $quantity;
-
-		$data = array();
-		$data['quantity'] = $quantity;
-		$data['single_price'] = $productPrice;
-		$data['total_price'] = $productPrice * $quantity;
-		$data['order_id'] = $orderId;
-		$data['product_id'] = $productId;
-
-		$detail = $this->detailRepo->newDetail();
-		$detailManager = new DetailManager($detail,$data);
+eager($detail,$data);
 		$detailManager->save();
 
 		$order = $this->orderRepo->find($orderId);
@@ -213,7 +201,7 @@ class OrderController extends BaseController
 		$orders = $this->orderRepo->getPdfByFilter('delivery_date', '=', Input::get('delivery_date'));
 		$view =  View::make('pdf/multiple_invoice', compact('orders','bakery'))->render();
 		$headers = array('Content-Type' => 'application/pdf');
-		$response = PDF::load($view, 'A4', 'portrait')->show();			
+		return Response::make(PDF::load($view, 'A4', 'portrait')->show('invoice'), 200, $headers);
 
 	}
 
@@ -232,9 +220,7 @@ class OrderController extends BaseController
 		$data = $this->orderRepo->find($id);
 		$bakery = $this->bakeryRepo->find(1);
 		$view = View::make('pdf/single_invoice', compact('data','bakery'))->render();
-		$response = PDF::load($view, 'A4', 'portrait')->show();
 		$headers = array('Content-Type' => 'application/pdf');
-
 		return Response::make(PDF::load($view, 'A4', 'portrait')->show('invoice'), 200, $headers);
 
 	}

@@ -102,6 +102,12 @@ Route::filter('is_delivery', function()
 	if ($usertype != 'delivery' AND $usertype != 'admin' ) return Redirect::to('/');
 });
 
+Route::filter('is_enabled', function()
+{
+	$usertype = Auth::user()->user_type;
+	if ($usertype == 'disabled') return Redirect::to('logout');
+});
+
 Route::filter('is_baker', function()
 {
 	$usertype = Auth::user()->user_type;
@@ -113,3 +119,4 @@ Route::filter('is_seller', function()
 	$usertype = Auth::user()->user_type;
 	if ($usertype != 'seller' AND $usertype != 'admin') return Redirect::to('/');
 });
+

@@ -26,7 +26,9 @@ class CustomersController extends BaseController{
 	}
 	public function register(){
 
-		$period = array('30 days' => '30 days', '60 days' => '60 days');
+		$period = array('30 days' => '30 days', 
+						'cash on delivery' => 'cash on delivery',
+						'weekly' => 'weekly');
 		return View::make('customers/register', compact('period'));
 	}
 
@@ -45,7 +47,9 @@ class CustomersController extends BaseController{
 	{
 		$customer = $this->customerRepo->find($id);
 		$this->notFoundUnless($customer);
-		$period = array('30 days' => '30 days', '60 days' => '60 days');
+		$period = array('30 days' => '30 days', 
+						'cash on delivery' => 'cash on delivery',
+						'weekly' => 'weekly');
 		return View::make('customers/update', compact('customer', 'period'));
 	}
 	public function update()

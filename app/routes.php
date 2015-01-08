@@ -19,7 +19,7 @@ Route::post('login', ['as' => 'login', 'uses' => 'AuthController@login']);
 
 
 Route::group(['before' => 'auth'], function () {
-
+Route::group(['before' => 'is_enabled'], function() {
 	//Account Routes
 	Route::get('account', ['as' => 'profile', 'uses' => 'AccountController@profile']);
 	Route::get('update-account', ['as' => 'edit', 'uses' => 'AccountController@account']);
@@ -109,6 +109,9 @@ Route::group(['before' => 'auth'], function () {
 	Route::post('report/generate/save', [ 'as' => 'report/generate/save', 'uses' => 'ReportController@Save']);
 	Route::get('report/generate/print/{from}&{to}&{id}', [ 'as' => 'report/generate/print', 'uses' => 'ReportController@printOrders']);
 
+	Route::get('report/generate/confirm/{id}', ['as' => 'report/generate/confirm', 'uses' => 'ReportController@confirm']);
+	Route::get('report/generate/delete/{id}', ['as' => 'report/generate/delete', 'uses' => 'ReportController@delete']);
+
 
 
 
@@ -116,6 +119,6 @@ Route::group(['before' => 'auth'], function () {
 
 
 });
-
+});
 Route::get('pdf', ['as' => 'pdf', 'uses' => 'AdminController@pdf']);
 

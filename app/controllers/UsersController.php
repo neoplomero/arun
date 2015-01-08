@@ -39,7 +39,8 @@ class UsersController extends BaseController{
 		$types = ['admin' => 'admin',
 					'delivery' => 'delivery',
 					'baker' => 'baker',
-					'seller'  => 'seller'];
+					'seller'  => 'seller',
+					'disabled'  => 'disabled'];
 
 		return View::make('users/register', compact('types'));
 	}
@@ -65,7 +66,8 @@ class UsersController extends BaseController{
 		$types = ['admin' => 'admin',
 					'delivery' => 'delivery',
 					'baker' => 'baker',
-					'seller'  => 'seller'];
+					'seller'  => 'seller',
+					'disabled'  => 'disabled'];
 
 		return View::make('users/update', compact('user', 'types'));
 	}

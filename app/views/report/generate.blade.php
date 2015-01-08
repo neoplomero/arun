@@ -41,7 +41,7 @@
         <td>{{ Format::date($report->to) }}</td>
         <td>
           <div class="btn-group" role="group">
-            <a href="{{ route('report/generate/print', [$report->from, $report->to, $report->id]) }}" class="btn btn-xs btn-danger">
+            <a href="{{ route('report/generate/confirm', [$report->id]) }}" class="btn btn-xs btn-danger">
             delete
             </a>
             <a href="{{ route('report/generate/print', [$report->from, $report->to, $report->id]) }}" class="btn btn-xs btn-info">
