@@ -7,7 +7,7 @@ use Bakery\Managers\ProductManager;
 
 
 class ProductsController extends BaseController{
-	
+
 	protected $productRepo;
 
 	public function __construct(ProductRepo $productRepo){
@@ -31,7 +31,7 @@ class ProductsController extends BaseController{
 		$product = $this->productRepo->newProduct();
 		$manager = new ProductManager($product, Input::all());
 		$manager->save();
-	
+
 		return Redirect::route('products');
 	}
 

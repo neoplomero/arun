@@ -52,10 +52,10 @@
                 <li><a href="{{ route('report/sales') }}">Sales</a></li>
                 <li><a href="{{ route('orders/print') }}">Print orders</a></li>
 
-                <li><a href="{{ route('report/products') }}">Sales by product</a></li>
-                <li><a href="{{ route('report/products/compare') }}">Products compare</a></li>
+                <li><a href="{{ route('report/products') }}">Graphic Product</a></li>
+                <li><a href="{{ route('report/products/compare') }}">Graphic Products</a></li>
 
-                <li><a href="{{ route('report/generate') }}">Generate sales report</a></li>
+                <li><a href="{{ route('report/generate') }}">Statement</a></li>
 
               </ul>
             </li>
@@ -75,8 +75,8 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Factory <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ route('factory/production') }}">Production orders</a></li>
-                <li><a href="{{ route('factoryOrders') }}">Processing orders</a></li>
+                <li><a href="{{ route('factory/production') }}">Production</a></li>
+                <li><a href="{{ route('factoryOrders') }}">Dispatch</a></li>
               </ul>
             </li>
             @endif
@@ -86,7 +86,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->full_name }} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ route('profile') }}">Profile</a></li>
-                <li><a href="{{ route('logout') }}">Salir</a></li>
+                <li><a href="{{ route('logout') }}">Logout</a></li>
               </ul>
             </li>
           </ul>

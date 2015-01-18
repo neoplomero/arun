@@ -15,7 +15,7 @@ class AccountManager extends BaseManager{
 			'register_number' 		=> 'required',
 			'bank_account' 			=> 'required'
 		];
-		
+
 		return $rules;
 	}
 
