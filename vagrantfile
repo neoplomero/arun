@@ -1,5 +1,5 @@
 #Get hostname
-hostname = `etc/vagrant/scripts/hostname.sh`
+hostname = 'www.arun.dev'
 
 Vagrant.configure("2") do |config|
 
