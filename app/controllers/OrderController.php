@@ -115,7 +115,19 @@ class OrderController extends BaseController
 		$productId = Input::get('product');
 		$orderId = Input::get('order_id');
 		$quantity = Input::get('quantity');
-eager($detail,$data);
+
+		$productPrice = $this->productRepo->find($productId)->price;
+		$total_price = $productPrice * $quantity;
+
+		$data = array();
+		$data['quantity'] = $quantity;
+		$data['single_price'] = $productPrice;
+		$data['total_price'] = $productPrice * $quantity;
+		$data['order_id'] = $orderId;
+		$data['product_id'] = $productId;
+
+		$detail = $this->detailRepo->newDetail();
+		$detailManager = new DetailManager($detail,$data);
 		$detailManager->save();
 
 		$order = $this->orderRepo->find($orderId);
@@ -123,7 +135,6 @@ eager($detail,$data);
 		$order->save();
 
 		return Redirect::back();
-
 	}
 
 	public function removeDetail($id)

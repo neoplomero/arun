@@ -11,22 +11,22 @@ class UserTableSeeder extends Seeder {
 	{
 		$faker = Faker::create();
 
-		foreach(range(1, 80) as $index)
-		{
+		//foreach(range(1, 80) as $index)
+		//{
 			$fullName = $faker->name;
 
 				$user = User::create([
-					'full_name'    => $fullName,
-					'email' 	   => $faker->email,
-					'password'     => '123456',
-					'user_type'    => $faker->randomElement(['admin','delivery','manufacturer','saler']),
+					'full_name'    => 'jeffer ochoa',
+					'email' 	   => 'jeffer.8a@gmail.com',
+					'password'     => '12345',
+					'user_type'    => 'admin',
 					'address'      => $faker->address,
 					'phone_number' => $faker->phoneNumber
 
 					]);
 
 			
-		}
+		//}
 	}
 
 }

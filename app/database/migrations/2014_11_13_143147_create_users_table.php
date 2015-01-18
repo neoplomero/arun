@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration {
 			$table->string('full_name');
 			$table->string('email');
 			$table->string('password');
-			$table->enum('user_type',['admin','delivery','manufacturer','seller']);
+			$table->enum('user_type',['admin','delivery','baker','seller']);
 			$table->string('address');
 			$table->string('phone_number');
 			$table->string('register_number');

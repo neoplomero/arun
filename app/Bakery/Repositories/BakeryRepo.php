@@ -9,6 +9,12 @@ class BakeryRepo extends BaseRepo {
 		return new Bakery;
 	}
 
+	public function newBakery()
+	{
+		$bakery = new Bakery();
+		
+		return $bakery;
+	}
 }
 
 ?>

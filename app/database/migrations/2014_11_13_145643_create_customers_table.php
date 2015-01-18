@@ -21,7 +21,7 @@ class CreateCustomersTable extends Migration {
 			$table->string('register_number');
 			$table->string('phone_number');
 			$table->string('email');
-
+			$table->enum('payment_period',['30 days','60 days']);
 			$table->timestamps();
 		});
 	}
