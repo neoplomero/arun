@@ -24,6 +24,7 @@ class OrderController extends BaseController
 	public $orderRepo;
 	public $productRepo;
 	public $detailRepo;
+	public $email;
 
 	public function __construct(CustomerRepo $customerRepo, 
 								BakeryRepo $bakeryRepo, 
@@ -187,7 +188,6 @@ class OrderController extends BaseController
 
 	public function orderList()
 	{
-
 		$list = $this->orderRepo->getList();
 		return View::make('order/list', compact('list'));
 	}
@@ -252,6 +252,11 @@ class OrderController extends BaseController
 		$order->save();
 		return Redirect::back();
 	}	
+
+	public function sendByEmail($id, $customerEmail){
+		$this->email->invoiceEmail($id, $customerEmail);
+		return Redirect::back();
+	}
 }
 
 ?>

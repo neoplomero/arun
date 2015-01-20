@@ -12,9 +12,9 @@
 				<address>
 				  <strong>{{ $bakery->name }}</strong><br>
 				  {{ $bakery->address }}<br>
-				  <abbr title="Phone">P:</abbr> {{ $customer->phone_number }}<br>
-				  <a href="mailto:{{ $customer->email }}">{{ $customer->email }}</a><br>
-				  <abbr title="Register">Register Number:</abbr> {{ $customer->register_number }}
+				  <abbr title="Phone">P:</abbr> {{ $bakery->phone_number }}<br>
+				  <a href="mailto:{{ $bakery->email }}">{{ $bakery->email }}</a><br>
+				  <abbr title="Register">Register Number:</abbr> {{ $bakery->register_number }}
 				</address>
 			  </div>
 			</div>

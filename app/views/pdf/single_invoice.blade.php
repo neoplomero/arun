@@ -86,12 +86,7 @@
           </td>
         </tr>
 
-        <tr >
-          <td colspan="2" style="text-align:left;">
-          	Status : <strong>{{ $data->status->last()->status }}</strong>
-          </td>
-          <td colspan="2" style="text-align:right;"></td>
-        </tr>                                
+                               
         <tr>
         	<td colspan="2" style="text-align:left;">
 				Delivery date: {{ $data->delivery_date }}

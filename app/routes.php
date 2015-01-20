@@ -16,7 +16,7 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('logout', ['as' =>  'logout', 'uses' => 'AuthController@logout']);
 Route::get('login', ['as' => 'access', 'uses' => 'AccountController@access']);
 Route::post('login', ['as' => 'login', 'uses' => 'AuthController@login']);
-
+Route::get('view/invoice/{id}', ['as' => 'view/invoice', 'uses' => 'GuestController@invoice']);
 
 Route::group(['before' => 'auth'], function () {
 Route::group(['before' => 'is_enabled'], function() {
@@ -71,6 +71,7 @@ Route::group(['before' => 'is_enabled'], function() {
 		Route::get('orders/view/{id}', [ 'as' => 'orders/view', 'uses' => 'OrderController@view']);
 		Route::get('invoice/{id}', [ 'as' => 'invoice', 'uses' => 'OrderController@pdf']);
 		Route::get('send/{id}', [ 'as' => 'send', 'uses' => 'OrderController@send']);
+		Route::get('sendInvoice/{id}&{customerEmail}', [ 'as' => 'sendInvoice', 'uses' => 'OrderController@sendByEmail']);
 
 	});
 

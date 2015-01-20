@@ -2,6 +2,7 @@
 namespace Bakery\Emails;
 use Bakery\Repositories\OrderRepo;
 use Bakery\Repositories\BakeryRepo;
+use Hashids;
 use Mail;
 
 class Email {
@@ -9,13 +10,13 @@ class Email {
 
 
 
-	public function invoiceEmail(){
+	public function invoiceEmail($id, $customerEmail){
 
-		$data = ['hola'];
-		//Mail::send('emails.template', $data, function ($message) use ($user){
-		Mail::send('emails/invoices/invoice', $data, function ($message){
-		    $message->subject('Aqui va el mensaje del asunto del email ');
-		    $message->to('jeffer.8a@gmail.com');
+		$id = Hashids::encode($id);
+		$data = array('id' => $id);
+		Mail::send('emails/invoices/invoice', $data, function ($message) use ($id, $customerEmail){
+		    $message->subject('Invoice');
+		    $message->to($customerEmail);
 		});
 	}
 

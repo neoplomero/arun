@@ -54,7 +54,7 @@
 
         </td>
 
-        <td width="130">
+        <td width="160">
           <div class="btn-group" role="group">
 	          <a href="{{ route('orders/view', [$order->order_id])}}" class="btn btn-xs btn-primary">
 	          see
@@ -64,6 +64,9 @@
 	          </a>
             <a href="{{ route('invoice', [$order->order_id])}}" class="btn btn-xs btn-info">
             print
+            </a>
+            <a href="{{ route('sendInvoice', [$order->order_id, $order->customer->email])}}" class="btn btn-xs btn-success">
+            email
             </a>
           </div>
         </td>
