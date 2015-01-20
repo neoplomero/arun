@@ -129,7 +129,10 @@ return array(
 		'Bakery\Components\FormatServiceProvider',
 
 		//pdf
-		'Thujohn\Pdf\PdfServiceProvider'
+		'Thujohn\Pdf\PdfServiceProvider',
+
+		//hash
+		'Mitch\Hashids\HashidsServiceProvider'
 
 	),
 
@@ -203,7 +206,10 @@ return array(
 		'Format' => 'Bakery\Components\Format',
 
 		//pdf
-		'PDF' => 'Thujohn\Pdf\PdfFacade'
+		'PDF' => 'Thujohn\Pdf\PdfFacade',
+
+		//hash
+		'Hashids' => 'Mitch\Hashids\Hashids'
 
 	),
 

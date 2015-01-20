@@ -44,11 +44,11 @@
 
           @if($order->payment == 'pending payment')
           <a href="{{ route('order/paid', [$order->order_id])}}" class="btn btn-xs btn-success">
-            set as paid
+            unpaid
           </a>
           @else
           <a href="{{ route('order/restore', [$order->order_id])}}" class="btn btn-xs btn-danger">
-            return payment
+            set as paid
           </a>
           @endif
 

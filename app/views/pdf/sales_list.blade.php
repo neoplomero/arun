@@ -90,7 +90,7 @@
     		</td>
     		<td style="width:20%;">
     			<center>
-    				<strong>Status</strong>
+    				<strong>Customer</strong>
     			</center>
     		</td>
     		<td style="text-align:right; width:25%;">

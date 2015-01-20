@@ -15,6 +15,7 @@ use Bakery\Repositories\DetailRepo;
 use Bakery\Managers\OrderManager;
 use Bakery\Managers\StatusManager;
 use Bakery\Managers\DetailManager;
+use Bakery\Emails\Email;
 
 class OrderController extends BaseController
 {
@@ -29,7 +30,8 @@ class OrderController extends BaseController
 								OrderRepo $orderRepo,
 								StatusRepo $statusRepo,
 								ProductRepo $productRepo,
-								DetailRepo $detailRepo )
+								DetailRepo $detailRepo,
+								Email $email )
 	{
 		$this->customerRepo = $customerRepo;
 		$this->bakeryRepo = $bakeryRepo;
@@ -37,6 +39,7 @@ class OrderController extends BaseController
 		$this->statusRepo = $statusRepo;
 		$this->productRepo = $productRepo;
 		$this->detailRepo = $detailRepo;
+		$this->email = $email;
 	}
 
 	public function generate($id)
@@ -184,6 +187,7 @@ class OrderController extends BaseController
 
 	public function orderList()
 	{
+
 		$list = $this->orderRepo->getList();
 		return View::make('order/list', compact('list'));
 	}

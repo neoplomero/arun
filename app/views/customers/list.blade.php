@@ -34,9 +34,12 @@
         <td>{{ $customer->full_name }}</td>
         <td>{{ $customer->email }}</td>
         <td>{{ $customer->phone_number }}</td>
-        <td width="50">
+        <td width="120">
           <a href="{{ route('customers/view', [$customer->id])}}" class="btn btn-xs btn-primary">
           see
+          </a>
+          <a href="{{ route('generate', [$customer->id])}}" class="btn btn-xs btn-success">
+          new order
           </a>
         </td>
       </tr>

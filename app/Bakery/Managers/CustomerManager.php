@@ -5,7 +5,8 @@ class CustomerManager extends BaseManager{
 	{
 		$rules = [
 			'full_name' 		=> 'required',
-			'email'				=> 	'required|email|unique:customers,email,'.$this->entity->id,
+			//'email'				=> 	'required|email|unique:customers,email,'.$this->entity->id,
+			'email'				=> 	'required',
 			//'password' => 'required|confirmed',
 			//'password_confirmation' => 'required',
 			'invoice_address' 	=> 'required',
