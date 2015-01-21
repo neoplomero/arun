@@ -202,6 +202,10 @@ class OrderController extends BaseController
 		{
 			$list = $this->orderRepo->getListByFilter('full_name', 'LIKE', '%'.Input::get('customer').'%');
 		}	
+		if(Input::get('payment'))
+		{
+			$list = $this->orderRepo->getListByFilter('payment', '=', Input::get('payment'));
+		}	
 		return View::make('order/list', compact('list'));
 	}	
 

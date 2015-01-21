@@ -116,20 +116,29 @@ class ReportController extends \BaseController {
 	{
 		$from = Input::get('from');
 		$to = Input::get('to');
-		dd(Input::get(''));
-		$orders = $this->orderRepo->ordersByRangeDate($from, $to);
-		$labels = array();
-		$data = array();
-		foreach($orders as $order){
-			$amount = $order->amount;
-			$date = date("M. d", strtotime($order->created_at));
-			array_push($labels, '"'.$date.'"');
-			array_push($data, '"'.$amount.'"');
-		}
-		$data = implode(',', $data);
-		$labels = implode(',', $labels);
+		$type = Input::get('type');
 
-		return View::make('report/sales', compact('labels', 'data'));
+		$orders = $this->orderRepo->ordersByRangeDate($from, $to);
+		
+		if($type == 'chart'){
+			$labels = array();
+			$data = array();
+			foreach($orders as $order){
+				$amount = $order->amount;
+				$date = date("M. d", strtotime($order->created_at));
+				array_push($labels, '"'.$date.'"');
+				array_push($data, '"'.$amount.'"');
+			}
+			$data = implode(',', $data);
+			$labels = implode(',', $labels);	
+			return View::make('report/sales', compact('labels', 'data'));
+		}
+		if($type == 'list'){
+			return View::make('report/sales', compact('labels', 'orders'));
+		}
+		
+
+		
 	}
 
 	public function products()

@@ -24,6 +24,7 @@
 			</div>
 		</div>
 
+		@if(isset($data))
 		<center>
 		<div style="width:50%">
 			<div>
@@ -31,38 +32,64 @@
 			</div>
 		</div>
 		</center>
-	</div>
-	
-	@if(isset($data))
-	<script>
+			<script>
 
-		var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
-		var lineChartData = {
-			labels : [{{ $labels }}],
-			datasets : [
-				
-				{
-					label: "Sales",
-					fillColor : "rgba(151,187,205,0.2)",
-					strokeColor : "rgba(151,187,205,1)",
-					pointColor : "rgba(151,187,205,1)",
-					pointStrokeColor : "#fff",
-					pointHighlightFill : "#fff",
-					pointHighlightStroke : "rgba(151,187,205,1)",
-					data : [{{ $data }}]
+				var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+				var lineChartData = {
+					labels : [{{ $labels }}],
+					datasets : [
+						
+						{
+							label: "Sales",
+							fillColor : "rgba(151,187,205,0.2)",
+							strokeColor : "rgba(151,187,205,1)",
+							pointColor : "rgba(151,187,205,1)",
+							pointStrokeColor : "#fff",
+							pointHighlightFill : "#fff",
+							pointHighlightStroke : "rgba(151,187,205,1)",
+							data : [{{ $data }}]
+						}
+					]
+
 				}
-			]
 
-		}
+			window.onload = function(){
+				var ctx = document.getElementById("canvas").getContext("2d");
+				window.myLine = new Chart(ctx).Line(lineChartData, {
+					responsive: true
+				});
+			}
+			</script>
+		@endif
+	
+	
+	
 
-	window.onload = function(){
-		var ctx = document.getElementById("canvas").getContext("2d");
-		window.myLine = new Chart(ctx).Line(lineChartData, {
-			responsive: true
-		});
-	}
-	</script>
+	@if(isset($orders))
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Order</th>
+						<th>Created at</th>
+						<th>Customer</th>
+						<th>Payment</th>
+						<th>Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($orders as $order)
+						<tr>
+							<td>{{ Format::code($order->id) }}</td>
+							<td>{{ Format::date($order->created_at) }}</td>
+							<td>{{ $order->customer->full_name}}</td>
+							<td>{{ $order->payment }}</td>
+							<td style="text-align:right;">{{ $order->amount }}</td>
+						</tr>
+					@endforeach
+				</tbody>
+			</table>
 	@endif
 
+	</div>
 
 @stop
