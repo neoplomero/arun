@@ -121,7 +121,7 @@ class OrderRepo extends BaseRepo {
 		->where(function($query)  use ($statusA, $statusB){
 				$query->where('status.status', '=' , $statusA)
 				->orWhere('status.status', '=' , $statusB);
-			})
+			})->orderBy('orders.delivery_date', 'ASC')
 		->paginate(12);
 		return $orders;
 	}	
