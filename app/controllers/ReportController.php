@@ -116,6 +116,7 @@ class ReportController extends \BaseController {
 	{
 		$from = Input::get('from');
 		$to = Input::get('to');
+		dd(Input::get(''));
 		$orders = $this->orderRepo->ordersByRangeDate($from, $to);
 		$labels = array();
 		$data = array();

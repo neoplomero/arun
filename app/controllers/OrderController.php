@@ -103,8 +103,8 @@ class OrderController extends BaseController
 		$statusReg = $this->statusRepo->getLastByUserId($id);
 		if( isset($statusReg) )
 		{
-		$status = $statusReg->status;
-		$order_id = $statusReg->order_id;
+			$status = $statusReg->status;
+			$order_id = $statusReg->order_id;
 		}
 		if(isset($status) && $status == 'open'){
 			return Redirect::route('detail', array('id' => $order_id));

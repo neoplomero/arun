@@ -16,7 +16,10 @@
 			      <div class="form-group">
 			        {{ Field::date('to') }}
 			      </div>
-			      <button type="submit" class="btn btn-primary">Generate chart</button>
+			      <div class="form-group">
+					{{ Field::select('type', ['chart' => 'chart', 'list' => 'list']) }}
+			      </div>
+			      <button type="submit" class="btn btn-primary">Generate report</button>
 			    {{ Form::close() }}
 			</div>
 		</div>
