@@ -119,6 +119,8 @@ class OrderController extends BaseController
 		$productId = Input::get('product');
 		$orderId = Input::get('order_id');
 		$quantity = Input::get('quantity');
+		$type = Input::get('type');
+
 
 		$productPrice = $this->productRepo->find($productId)->price;
 		$total_price = $productPrice * $quantity;
@@ -129,13 +131,19 @@ class OrderController extends BaseController
 		$data['total_price'] = $productPrice * $quantity;
 		$data['order_id'] = $orderId;
 		$data['product_id'] = $productId;
+		$data['type'] = $type;
 
 		$detail = $this->detailRepo->newDetail();
 		$detailManager = new DetailManager($detail,$data);
 		$detailManager->save();
 
 		$order = $this->orderRepo->find($orderId);
-		$order->amount = $order->amount + $total_price;
+		if($type == 'sale'){
+			$order->amount = $order->amount + $total_price;	
+		}
+		if($type == 'devolution'){
+			$order->amount = $order->amount - $total_price;	
+		}
 		$order->save();
 
 		return Redirect::back();
@@ -145,8 +153,15 @@ class OrderController extends BaseController
 	{
 
 		$detail = $this->detailRepo->find($id);
-		$order = $this->orderRepo->find($detail->order->id);		
-		$order->amount = $order->amount - $detail->total_price;
+		$order = $this->orderRepo->find($detail->order->id);	
+		$type = $detail->type;
+		if($type == 'sale'){
+			$order->amount = $order->amount - $detail->total_price;
+		}
+		if($type == 'devolution'){
+			$order->amount = $order->amount + $detail->total_price;
+		}	
+		
 		$order->save();
 		$detail->delete();
 		return Redirect::back();

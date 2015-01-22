@@ -77,8 +77,15 @@
                                 </tr>
                             </thead>
                             <tbody>
+								@section('')
+								{{ $sales=0 }}
+								@endsection
+								@foreach ($order->detail as $detail)  
+								@if($detail->type =='sale') 
+								@section('')
+								{{ $sales = $sales + $detail->total_price }}
+								@endsection
 
-								@foreach ($order->detail as $detail)   
                                 <tr>
                                 	<td>
 	                                	<div class="btn-group ">
@@ -92,14 +99,14 @@
                                     <td class="text-right">{{ $detail->total_price }}</td>
                                 </tr>
 
-
+								@endif
                                 @endforeach
                                 <tr>
                                 	<td></td>
                                     <td class="emptyrow"></td>
                                     <td class="emptyrow"></td>
-                                    <td class="emptyrow text-center"><strong>Total</strong></td>
-                                    <td class="emptyrow text-right">{{ $order->amount }}</td>
+                                    <td class="emptyrow text-center"><strong>sub-Total</strong></td>
+                                    <td class="emptyrow text-right">{{ $sales }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -109,7 +116,93 @@
         </div>
 	</div>
 
+	<div class="row">
+		<div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="text-center"><strong>Returned products</strong></h4>
+                    <div class="btn-group pull-right invoice-actions">
+                    	<div class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Add</div>
+                    	<a href="{{ route('send', [$order->id]) }}" class="btn btn-success btn-xs">send</a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                	<td></td>
+                                    <td><strong>Item Name</strong></td>
+                                    <td class="text-center"><strong>Item Price</strong></td>
+                                    <td class="text-center"><strong>Item Quantity</strong></td>
+                                    <td class="text-right"><strong>Total</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	@section('')
+								{{ $return = 0 }}
+								@endsection
+								@foreach ($order->detail as $detail)  
+								@if($detail->type =='devolution') 
+								@section('')
+								{{ $return = $return + $detail->total_price }}
+								@endsection
+                                <tr>
+                                	<td>
+	                                	<div class="btn-group ">
+					                    	<a href="{{ route('removeDetail', [$detail->id] ) }}" class="btn btn-danger btn-xs">Delete</a>
+					                    	<div class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal{{ $detail->id }}">Update</div>
+					                    </div>
+				                    </td>
+                                    <td>{{ $detail->product->name }}</td>
+                                    <td class="text-center">{{ $detail->single_price}}</td>
+                                    <td class="text-center">{{ $detail->quantity }}</td>
+                                    <td class="text-right">-{{ $detail->total_price }}</td>
+                                </tr>
 
+								@endif
+                                @endforeach
+                                <tr>
+                                	<td></td>
+                                    <td class="emptyrow"></td>
+                                    <td class="emptyrow"></td>
+                                    <td class="emptyrow text-center"><strong>sub-Total</strong></td>
+                                    <td class="emptyrow text-right">-{{ $return }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body" style="text-align:right;">
+                    <div class="col-md-3 col-md-offset-6 col-lg-3 col-lg-offset-6">
+                    	<strong>Sale</strong>
+                    </div>
+                    <div class="col-md-3 col-lg-3 " style="text-align:right;">
+                    	{{$sales}}
+                    </div>
+                    <div class="col-md-3 col-md-offset-6 col-lg-3 col-lg-offset-6">
+                    	<strong>Returned</strong>
+                    </div>
+                    <div class="col-md-3 col-lg-3 " style="text-align:right;">
+                    	-{{$return}}
+                    </div>
+                    <div class="col-md-3 col-md-offset-6 col-lg-3 col-lg-offset-6">
+                    	<strong>Total</strong>
+                    </div>
+                    <div class="col-md-3 col-lg-3 " style="text-align:right;">
+                    	{{$sales - $return}}
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
 	  <div class="modal-dialog">
@@ -130,6 +223,8 @@
 				{{ Field::select('product' , $products ) }}
 
 				{{ Field::number('quantity') }}
+
+				{{ Field::select('type', ['sale'=>'sale','devolution'=>'devolution']) }}
 
 				</fieldset>
 				<br>
@@ -173,6 +268,8 @@
 				{{ Field::text('single_price' , $detail->single_price ) }}
 
 				{{ Field::number('quantity') }}
+
+				{{ Field::select('type', ['sale'=>'sale','devolution'=>'devolution']) }}
 
 				</fieldset>
 				<br>

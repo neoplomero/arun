@@ -6,7 +6,7 @@ class Detail extends \Eloquent {
 
 	protected $hidden = array('id');
 
-	protected $fillable = array('quantity', 'single_price', 'total_price','order_id', 'product_id');
+	protected $fillable = array('quantity', 'single_price', 'total_price','order_id', 'product_id','type');
 
 	public function product(){
 		return $this->belongsTo('Bakery\Entities\Product');

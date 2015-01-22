@@ -10,7 +10,8 @@ class DetailManager extends BaseManager{
 			'single_price'	=> 'required',
 			'total_price' 	=> 'required',
 			'order_id' 		=> 'required',
-			'product_id' 	=> 'required'
+			'product_id' 	=> 'required',
+			'type' 			=> 'required'
 		];
 		
 		return $rules;
