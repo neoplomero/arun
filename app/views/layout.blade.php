@@ -109,7 +109,7 @@
 <div class="container">
       <footer>
         <p class="pull-left">&copy; Arun Bakery 2014</p>
-        <p class="pull-right">Developed by <a href="telescopica.com.ve">Telesc&oacute;pica</a>
+        <p class="pull-right">Developed by <a href="http://telescopica.com.ve">Telesc&oacute;pica</a>
       </footer>
 
 </div> <!-- /container -->
