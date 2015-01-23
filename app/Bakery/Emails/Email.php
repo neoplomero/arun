@@ -12,7 +12,7 @@ class Email {
 
 	public function invoiceEmail($id, $customerEmail){
 
-		$id = Hashids::encode($id);
+		//$id = Hashids::encode($id);
 		$data = array('id' => $id);
 		Mail::send('emails/invoices/invoice', $data, function ($message) use ($id, $customerEmail){
 		    $message->subject('Invoice');
