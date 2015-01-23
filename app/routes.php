@@ -113,7 +113,8 @@ Route::group(['before' => 'is_enabled'], function() {
 	Route::get('report/generate/confirm/{id}', ['as' => 'report/generate/confirm', 'uses' => 'ReportController@confirm']);
 	Route::get('report/generate/delete/{id}', ['as' => 'report/generate/delete', 'uses' => 'ReportController@delete']);
 
-
+	Route::get('report/devolutions', ['as' => 'report/devolutions', 'uses' => 'ReportController@devolutions']);
+	Route::post('report/devolutions', ['as' => 'report/devolutionsByDate', 'uses' => 'ReportController@devolutionsByDate']);
 
 
 	});

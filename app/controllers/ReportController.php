@@ -5,6 +5,7 @@ use Bakery\Repositories\CustomerRepo;
 use Bakery\Repositories\BakeryRepo;
 use Bakery\Repositories\ProductRepo;
 use Bakery\Repositories\ReportRepo;
+use Bakery\Repositories\DetailRepo;
 
 class ReportController extends \BaseController {
 
@@ -12,16 +13,19 @@ class ReportController extends \BaseController {
 	public $customerRepo;
 	public $bakeryRepo;
 	public $productRepo;
+	public $detailRepo;
 	public function __construct(OrderRepo $orderRepo, 
 								CustomerRepo $customerRepo,
 								BakeryRepo $bakeryRepo,
 								ProductRepo $productRepo,
-								ReportRepo $reportRepo  )	{
+								ReportRepo $reportRepo,
+								DetailRepo $detailRepo  )	{
 		$this->orderRepo = $orderRepo;
 		$this->customerRepo = $customerRepo;
 		$this->bakeryRepo = $bakeryRepo;
 		$this->productRepo = $productRepo;
 		$this->reportRepo = $reportRepo;
+		$this->detailRepo = $detailRepo;
 	}
 
 	public function ordersByCustomer($id)
@@ -229,5 +233,19 @@ class ReportController extends \BaseController {
 		$labels = implode(',', $labels);
 		return $labels;
 	}
+
+	public function devolutions()
+	{
+		return View::make('report/devolutions');
+	}
+
+	public function devolutionsByDate(){
+		$from = Input::get('from');
+		$to = Input::get('to');
+		$list = $this->detailRepo->getDevolutionsBetweenDates($from, $to);
+		return View::make('report/devolutions', compact('list'));
+	}
+
+
 
 }
