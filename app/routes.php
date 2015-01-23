@@ -116,6 +116,7 @@ Route::group(['before' => 'is_enabled'], function() {
 	Route::get('report/devolutions', ['as' => 'report/devolutions', 'uses' => 'ReportController@devolutions']);
 	Route::post('report/devolutions', ['as' => 'report/devolutionsByDate', 'uses' => 'ReportController@devolutionsByDate']);
 
+	Route::get('devolutions/{id}', [ 'as' => 'devolutions', 'uses' => 'ReportController@customerDevolutions']);
 
 	});
 

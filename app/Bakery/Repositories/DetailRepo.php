@@ -2,6 +2,7 @@
 
 use Bakery\Entities\Detail;
 use Bakery\Entities\Product;
+use Bakery\Entities\Customer;
 
 
 class DetailRepo extends BaseRepo {
@@ -33,6 +34,17 @@ class DetailRepo extends BaseRepo {
 				->get();
 	}
 
+	public function devolutionsByCustomer($id){
+
+		$data = Detail::with('product')
+				->join('orders','details.order_id', '=' ,'orders.id')
+				->where('orders.customer_id', '=', $id)
+				->where('details.type', '=', 'devolution')
+				->orderBy('orders.created_at', 'DESC')	
+				->paginate(12);
+		return $data;
+
+	}
 	public function newDetail()
 	{
 		$detail = new Detail();

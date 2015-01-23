@@ -246,6 +246,14 @@ class ReportController extends \BaseController {
 		return View::make('report/devolutions', compact('list'));
 	}
 
+	public function customerDevolutions($id){
+
+		$customer = $this->customerRepo->find($id);
+		$list = $this->detailRepo->devolutionsByCustomer($id);
+		//echo $list;
+		return View::make('report/client_devolutions', compact('list', 'customer'));
+	}
+
 
 
 }

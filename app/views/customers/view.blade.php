@@ -38,7 +38,9 @@
 
 			<a href="{{ route('order', [$customer->id] ) }}" class="btn btn-success"> Generate order</a>
 
-			<a href="{{ route('report/orders', [$customer->id] ) }}" class="btn btn-success"> History</a>
+			<a href="{{ route('report/orders', [$customer->id] ) }}" class="btn btn-success">History</a>
+
+			<a href="{{ route('devolutions', [$customer->id] ) }}" class="btn btn-success">Devolutions</a>
 		</div>
 
 	  </div>
