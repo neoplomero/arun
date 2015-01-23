@@ -10,7 +10,7 @@
           	<h2>Invoice </h2>
           </td>
           <td colspan="2" style="text-align:right;">
-          	<h2>Order # {{ Format::code($data->id) }}</h2>
+          	<h2># {{ Format::code($data->id) }}</h2>
           </td>
         </tr>
         <tr >
