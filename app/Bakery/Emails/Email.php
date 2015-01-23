@@ -16,7 +16,7 @@ class Email {
 		$data = array('id' => $id);
 		Mail::send('emails/invoices/invoice', $data, function ($message) use ($id, $customerEmail){
 		    $message->subject('Invoice');
-		    $message->to($customerEmail);
+		    $message->to([$customerEmail, 'bakeryarunfinance@gmail.com']);
 		});
 	}
 
