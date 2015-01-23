@@ -26,6 +26,7 @@
 				<thead>
 					<tr>
 						<th>Order</th>
+						<th>Customer</th>
 						<th>Created at</th>
 						<th>Product</th>
 						<th>Quantity</th>
@@ -40,6 +41,7 @@
 									#{{ Format::code($detail->order->id) }}
 								</strong>
 							</td>
+							<td>{{ $detail->order->customer->full_name }}</td>
 							<td>{{ Format::date($detail->created_at) }}</td>
 							<td>{{ $detail->product->name }}</td>
 							<td>{{ $detail->quantity }}</td>
