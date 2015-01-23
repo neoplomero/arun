@@ -68,22 +68,57 @@
                                 </tr>
     						</thead>
     						<tbody>
+                                @section('')
+                                {{$sales =0 }}
+                                @endsection
                                 @foreach($order->detail as $detail)
+                                @if($detail->type == 'sale' )
+                                @section('')
+                                {{$sales = $sales + $detail->total_price}}
+                                @endsection
     							<tr>
     								<td>{{ $detail->product->name }}</td>
     								<td class="text-center">{{ $detail->single_price }}</td>
     								<td class="text-center">{{ $detail->quantity }}</td>
     								<td class="text-right">{{ $detail->total_price }}</td>
     							</tr>
+                                @endif
                                 @endforeach
-
 
     							<tr>
     								<td class="no-line"></td>
     								<td class="no-line"></td>
-    								<td class="no-line text-center"><strong>Total</strong></td>
-    								<td class="no-line text-right"> {{ $order->amount }}</td>
+    								<td class="no-line text-center"><strong>sub-Total</strong></td>
+    								<td class="no-line text-right"> {{ $sales }}</td>
     							</tr>
+                                @section('')
+                                {{ $return = 0 }}
+                                @endsection
+                                @foreach($order->detail as $detail)
+                                @if($detail->type == 'devolution' )
+                                @section('')
+                                {{$return = $return + $detail->total_price}}
+                                @endsection
+                                <tr style="color:#FC4C4C;">
+                                    <td>{{ $detail->product->name }}</td>
+                                    <td class="text-center">{{ $detail->single_price }}</td>
+                                    <td class="text-center">{{ $detail->quantity }}</td>
+                                    <td class="text-right">-{{ $detail->total_price }}</td>
+                                </tr>
+                                @endif
+                                @endforeach        
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Returned</strong></td>
+                                    <td class="no-line text-right"> {{ $return }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Total</strong></td>
+                                    <td class="no-line text-right"> {{ $order->amount }}</td>
+                                </tr>                        
     						</tbody>
     					</table>
     				</div>

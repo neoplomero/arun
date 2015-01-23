@@ -273,8 +273,10 @@ class OrderController extends BaseController
 	}	
 
 	public function sendByEmail($id, $customerEmail){
+		$list = $this->orderRepo->getList();
 		$this->email->invoiceEmail($id, $customerEmail);
-		return Redirect::back();
+		$response = 'The invoice has been sent by email.';				
+		return View::make('order/list', compact('list','response'));
 	}
 }
 

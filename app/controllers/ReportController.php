@@ -132,9 +132,10 @@ class ReportController extends \BaseController {
 			$data = implode(',', $data);
 			$labels = implode(',', $labels);	
 			return View::make('report/sales', compact('labels', 'data'));
-		}
-		if($type == 'list'){
+		}elseif($type == 'list'){
 			return View::make('report/sales', compact('labels', 'orders'));
+		}else{
+			return Redirect::back();
 		}
 		
 

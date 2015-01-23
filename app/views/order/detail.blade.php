@@ -224,7 +224,7 @@
 
 				{{ Field::number('quantity') }}
 
-				{{ Field::select('type', ['sale'=>'sale','devolution'=>'devolution']) }}
+				{{ Field::select('type', ['sale'=>'sale','devolution'=>'devolution'],'sale') }}
 
 				</fieldset>
 				<br>

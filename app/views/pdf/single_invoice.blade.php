@@ -122,31 +122,81 @@
     	</tr>
 		<tr><td colspan="4" class="bb"></td></tr>
 
-
+  @section('')
+    {{ $sales = 0 }}
+  @endsection
 	@foreach($data->detail as $detail)
-    	<tr>
-    		<td style="text-align:left; width:35%; ">
-    			{{ $detail->product->name }}
-    		</td>
-    		<td style="width:20%;">
-    				<center> {{ $detail->single_price }} </center>
-    		</td>
-    		<td style="width:20%;">
-    				<center>{{ $detail->quantity }}</center>
-    		</td>
-    		<td style="text-align:right; width:25%;">
-    			{{ $detail->total_price }}
-    		</td>
-    	</tr>
-		<tr><td colspan="4" class="bb"></td></tr>
-	@endforeach
+  @if($detail->type == 'sale')
+    @section('')
+      {{$sales = $sales + $detail->total_price}}
+    @endsection
+      	<tr>
+      		<td style="text-align:left; width:35%; ">
+      			{{ $detail->product->name }}
+      		</td>
+      		<td style="width:20%;">
+      				<center> {{ $detail->single_price }} </center>
+      		</td>
+      		<td style="width:20%;">
+      				<center>{{ $detail->quantity }}</center>
+      		</td>
+      		<td style="text-align:right; width:25%;">
+      			{{ $detail->total_price }}
+      		</td>
+      	</tr>
+  		<tr><td colspan="4" class="bb"></td></tr>
+  @endif
+  @endforeach
+
 		<tr>
 			<td colspan="2"></td>
 			<td style="text-align:center;">
-				<strong>Total</strong>
+				<strong>sub-Total</strong>
 			</td>
-			<td style="text-align:right;">{{ $data->amount }}</td>
+			<td style="text-align:right;">{{ $sales }}</td>
 		</tr>
+
+    @section('')
+      {{ $return = 0 }}
+    @endsection
+    @foreach($data->detail as $detail)
+    @if($detail->type == 'devolution')
+      @section('')
+        {{$return = $return + $detail->total_price}}
+      @endsection
+          <tr>
+            <td style="text-align:left; width:35%; ">
+              {{ $detail->product->name }}
+            </td>
+            <td style="width:20%;">
+                <center> {{ $detail->single_price }} </center>
+            </td>
+            <td style="width:20%;">
+                <center>{{ $detail->quantity }}</center>
+            </td>
+            <td style="text-align:right; width:25%;">
+              {{ $detail->total_price }}
+            </td>
+          </tr>
+        <tr><td colspan="4" class="bb"></td></tr>
+    @endif
+    @endforeach
+
+    <tr>
+      <td colspan="2"></td>
+      <td style="text-align:center;">
+        <strong>Returned</strong>
+      </td>
+      <td style="text-align:right;">{{ $return }}</td>
+    </tr>
+
+    <tr>
+      <td colspan="2"></td>
+      <td style="text-align:center;">
+        <strong>Total</strong>
+      </td>
+      <td style="text-align:right;">{{ $data->amount }}</td>
+    </tr>
 
     </table>
 
