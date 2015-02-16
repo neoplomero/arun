@@ -46,7 +46,8 @@
 				  <strong>Delivery address.</strong><br>
 				  {{ $order->delivery_address }}<br>
 				  {{ $status->status }}<br>
-				  Total invoice : {{ $order->amount; }}
+				  Total invoice : {{ $order->amount; }}</br>
+				  Number : {{ $order->number; }}
 				</address>
 			  </div>
 			</div>

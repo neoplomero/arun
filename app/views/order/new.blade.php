@@ -62,6 +62,8 @@
 
 				{{ Field::date('delivery_date') }}
 
+				{{ Field::text('number') }}
+
 				{{ Field::textarea('delivery_address',$customer->delivery_address) }}
 
 

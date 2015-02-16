@@ -44,6 +44,7 @@
     				<address>
     					<strong>Order Date:</strong><br>
     					{{ $order->created_at }}<br><br>
+                        Number : {{ $order->number; }}
     				</address>
     			</div>
     		</div>

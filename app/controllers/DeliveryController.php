@@ -36,7 +36,7 @@ class DeliveryController extends \BaseController {
 		$status->status = 'delivered';
 		$status->user_id = Auth::user()->id;
 		$status->save();
-		$this->email->invoiceEmail($id, $customerEmail);
+		//$this->email->invoiceEmail($id, $customerEmail);
 		return Redirect::back();
 	}
 
