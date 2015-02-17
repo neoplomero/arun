@@ -286,6 +286,12 @@ class OrderController extends BaseController
 		$list = $this->orderRepo->getList();
 		return View::make('order/list', compact('list','response'));
 	}
+	public function addNumber(){
+		$order = $this->orderRepo->find(Input::get('id'));
+		$order->number = Input::get('number');
+		$order->save();
+		return Redirect::back();
+	}
 }
 
 ?>

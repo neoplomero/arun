@@ -47,7 +47,15 @@
 				  {{ $order->delivery_address }}<br>
 				  {{ $status->status }}<br>
 				  Total invoice : {{ $order->amount; }}</br>
-				  Number : {{ $order->number; }}
+				  {{ Form::model($order, ['route' => 'addNumber', 'method' => 'PUT'])}}
+				  			{{ Form::hidden('id', $order->id ) }}
+					      <div class="input-group">
+							  {{ Form::text('number', null, array('class' => 'form-control')) }}
+							  <div class="input-group-btn">
+							    <button type="submit" class="btn btn-warning">edit number</button>
+							  </div>
+							</div>
+				   {{ Form::close() }}
 				</address>
 			  </div>
 			</div>
