@@ -24,6 +24,12 @@ class DeliveryController extends \BaseController {
 		$list = $this->orderRepo->orStatus('out for delivery','delivered');
 		return View::make('delivery/list', compact('list'));
 	}
+	public function search()
+	{
+		$date = Input::get('delivery_date');
+		$list = $this->orderRepo->orStatusDate('out for delivery','delivered',$date);
+		return View::make('delivery/list', compact('list'));
+	}
 
 	public function send($id)
 	{

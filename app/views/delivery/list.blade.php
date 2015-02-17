@@ -8,6 +8,17 @@
   <h2>Delivery orders list</h2>
   <p>
 
+    
+    {{ Form::open(['route' => 'deliverySearch', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
+      <div class="form-group">
+        {{ Field::date('delivery_date','',array('placeholder' => 'date')) }}
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+      <a href="{{ route('delivery') }}" class="btn btn-success">View all</a>
+    {{ Form::close() }}
+
+  </p>
+
   <table class="table table-striped table-bordered">
     <thead>
     <tr>

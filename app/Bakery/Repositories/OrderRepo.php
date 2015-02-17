@@ -125,6 +125,21 @@ class OrderRepo extends BaseRepo {
 		->paginate(12);
 		return $orders;
 	}	
+	public function orStatusDate($statusA, $statusB,$date){
+		$orders = Order::with('status','customer')
+		->join('status','orders.id', '=' ,'status.order_id')
+		->where('status.id','=',
+			new raw('(select `id` from `status` 
+				where `order_id` = `orders`.`id` order by `id` desc limit 1)'))
+		->where(function($query)  use ($statusA, $statusB){
+				$query->where('status.status', '=' , $statusA)
+				->orWhere('status.status', '=' , $statusB);
+			})
+		->where('orders.delivery_date','=',$date)
+		->orderBy('orders.delivery_date', 'ASC')
+		->paginate(12);
+		return $orders;
+	}		
 	public function orStatusByFilter($statusA, $statusB, $field, $operator, $search){
 		$orders = Order::with('status','customer')
 		->join('status','orders.id', '=' ,'status.order_id')
