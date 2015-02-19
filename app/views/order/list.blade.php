@@ -9,11 +9,11 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     {{$response}}</div>
   @endif
-  
+
   <h2>Orders List</h2>
   <p>
 
-    
+
     {{ Form::open(['route' => 'orders/search', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
       <div class="form-group">
         {{ Field::text('customer','',array('placeholder' => 'name')) }}
