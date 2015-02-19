@@ -24,6 +24,12 @@ class DeliveryController extends \BaseController {
 		$list = $this->orderRepo->orStatus('out for delivery','delivered');
 		return View::make('delivery/list', compact('list'));
 	}
+	public function search()
+	{
+		$date = Input::get('delivery_date');
+		$list = $this->orderRepo->orStatusDate('out for delivery','delivered',$date);
+		return View::make('delivery/list', compact('list'));
+	}
 
 	public function send($id)
 	{
@@ -36,7 +42,7 @@ class DeliveryController extends \BaseController {
 		$status->status = 'delivered';
 		$status->user_id = Auth::user()->id;
 		$status->save();
-		$this->email->invoiceEmail($id, $customerEmail);
+		//$this->email->invoiceEmail($id, $customerEmail);
 		return Redirect::back();
 	}
 

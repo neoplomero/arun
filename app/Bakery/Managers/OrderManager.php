@@ -8,7 +8,7 @@ class OrderManager extends BaseManager{
 		$rules = [
 			'delivery_date' 	=> 'required',
 			'delivery_address'	=> 	'required',
-            'customer_id' 		=> 'required',
+            'customer_id' 		=> 'required'
 		];
 		
 		return $rules;

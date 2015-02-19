@@ -35,6 +35,7 @@
       <th>Delivery date</th>
       <th>Status</th>
       <th>Payment</th>
+      <th>Email</th>
       <th>Actions</th>
     </tr>
     </thead>
@@ -59,6 +60,7 @@
           @endif
 
         </td>
+        <td>{{ $order->email }}</td>
 
         <td width="160">
           <div class="btn-group" role="group">

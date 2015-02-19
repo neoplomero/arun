@@ -1,4 +1,6 @@
-<?php    namespace Bakery\Managers;
+<?php    
+
+namespace Bakery\Managers;
 
 abstract class BaseManager {
 	protected $entity;

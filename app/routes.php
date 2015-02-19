@@ -30,6 +30,8 @@ Route::group(['before' => 'is_enabled'], function() {
 		Route::get('delivery', ['as' => 'delivery', 'uses' => 'DeliveryController@orders']);
 		Route::get('deliverySend/{id}', ['as' => 'deliverySend', 'uses' => 'DeliveryController@send']);
 		Route::get('deliveryBack/{id}', ['as' => 'deliveryBack', 'uses' => 'DeliveryController@back']);
+		Route::post('delivery', ['as' => 'deliverySearch', 'uses' => 'DeliveryController@search']);
+
 	});
 
 	//baker routes
@@ -72,6 +74,7 @@ Route::group(['before' => 'is_enabled'], function() {
 		Route::get('invoice/{id}', [ 'as' => 'invoice', 'uses' => 'OrderController@pdf']);
 		Route::get('send/{id}', [ 'as' => 'send', 'uses' => 'OrderController@send']);
 		Route::get('sendInvoice/{id}&{customerEmail}', [ 'as' => 'sendInvoice', 'uses' => 'OrderController@sendByEmail']);
+		Route::put('orders/addNumber', [ 'as' => 'addNumber', 'uses' => 'OrderController@addNumber']);
 
 	});
 

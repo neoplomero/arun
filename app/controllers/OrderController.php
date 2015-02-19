@@ -58,12 +58,17 @@ class OrderController extends BaseController
 		$delivery_address = Input::get('delivery_address');
 		$delivery_date = Input::get('delivery_date');
 		$order = $this->orderRepo->newOrder();
+		//dd($order);
 		$orderData = array();
+		$number = Input::get('number');
+		//dd($number);
 
 		$orderData['customer_id'] = $customer_id;
 		$orderData['note'] = $note;
 		$orderData['delivery_address'] = $delivery_address;
 		$orderData['delivery_date'] = $delivery_date;
+		$order['number'] = $number;
+		//dd($orderData);
 
 		$orderManager = new OrderManager($order,$orderData);
 		$orderManager->save();
@@ -273,10 +278,19 @@ class OrderController extends BaseController
 	}	
 
 	public function sendByEmail($id, $customerEmail){
-		$list = $this->orderRepo->getList();
+		$order = $this->orderRepo->find($id);
+		$order->email = 'sent';
+		$order->save();
 		$this->email->invoiceEmail($id, $customerEmail);
 		$response = 'The invoice has been sent by email.';				
+		$list = $this->orderRepo->getList();
 		return View::make('order/list', compact('list','response'));
+	}
+	public function addNumber(){
+		$order = $this->orderRepo->find(Input::get('id'));
+		$order->number = Input::get('number');
+		$order->save();
+		return Redirect::back();
 	}
 }
 
