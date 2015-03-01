@@ -11,7 +11,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"thujohn/pdf": "dev-master",
-		"mitch/hashids": "1.x"
+		"mitch/hashids": "1.x",
+		"nesbot/carbon": "~1.14"
 	},
 	"autoload": {
 		"psr-4": {

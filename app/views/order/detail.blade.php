@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div class="container">
 
 	<div class="alert alert-warning alert-dismissible fade in" role="alert">
@@ -47,20 +48,43 @@
 				  {{ $order->delivery_address }}<br>
 				  {{ $status->status }}<br>
 				  Total invoice : {{ $order->amount; }}</br>
-				  {{ Form::model($order, ['route' => 'addNumber', 'method' => 'PUT'])}}
-				  			{{ Form::hidden('id', $order->id ) }}
-					      <div class="input-group">
-							  {{ Form::text('number', null, array('class' => 'form-control')) }}
-							  <div class="input-group-btn">
-							    <button type="submit" class="btn btn-warning">edit number</button>
-							  </div>
-							</div>
-				   {{ Form::close() }}
 				</address>
 			  </div>
 			</div>
 		</div>
 
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+            <div class="panel panel-default">
+			  <div class="panel-heading"><h4>Order information</h4></div>
+			  <div class="panel-body">
+
+				{{ Form::model($order,['route' => 'updateOrder', 'method' => 'PUT', 'role' => 'form']) }}
+
+				<fieldset>
+
+				{{ form::hidden('id', $order->id) }}
+
+				{{ Field::date('delivery_date') }}
+
+				{{ Field::text('number') }}
+
+				{{ Field::textarea('delivery_address',$order->delivery_address) }}
+
+
+
+				</fieldset>
+
+				<div class="">
+					<input type="submit" value="Update" class="btn btn-warning">
+				</div>
+
+				{{ Form::close() }}
+
+			  </div>
+			</div>
+        </div>
 	</div>
 
 	<div class="row">

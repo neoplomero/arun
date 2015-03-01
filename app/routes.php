@@ -18,6 +18,7 @@ Route::get('login', ['as' => 'access', 'uses' => 'AccountController@access']);
 Route::post('login', ['as' => 'login', 'uses' => 'AuthController@login']);
 Route::get('view/invoice/{id}', ['as' => 'view/invoice', 'uses' => 'GuestController@invoice']);
 
+
 Route::group(['before' => 'auth'], function () {
 Route::group(['before' => 'is_enabled'], function() {
 	//Account Routes
@@ -75,7 +76,11 @@ Route::group(['before' => 'is_enabled'], function() {
 		Route::get('send/{id}', [ 'as' => 'send', 'uses' => 'OrderController@send']);
 		Route::get('sendInvoice/{id}&{customerEmail}', [ 'as' => 'sendInvoice', 'uses' => 'OrderController@sendByEmail']);
 		Route::put('orders/addNumber', [ 'as' => 'addNumber', 'uses' => 'OrderController@addNumber']);
+		Route::put('updateOrder', [ 'as' => 'updateOrder', 'uses' => 'OrderController@update']);
 
+
+		Route::post('cron/set', [ 'as' => 'cron/set', 'uses' => 'CronOrdersController@set']);
+		Route::get('cron/list', [ 'as' => 'cron/list', 'uses' => 'CronOrdersController@cronList']);
 	});
 
 	Route::group(['before' => 'is_admin'], function() {

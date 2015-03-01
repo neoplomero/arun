@@ -210,6 +210,7 @@ return array(
 
 		//hash
 		//'Hashids' => 'Mitch\Hashids\Hashids'
+		'Carbon' => 'Carbon\Carbon',
 
 	),
 

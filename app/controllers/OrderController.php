@@ -292,6 +292,15 @@ class OrderController extends BaseController
 		$order->save();
 		return Redirect::back();
 	}
+	public function update(){
+		$order = $this->orderRepo->find(Input::get('id'));
+		//dd($order);
+		$order->number = Input::get('number');
+		$order->delivery_date = Input::get('delivery_date');
+		$order->delivery_address = Input::get('delivery_address');
+		$order->save();
+		return Redirect::back();	
+	}
 }
 
 ?>

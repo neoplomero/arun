@@ -20,7 +20,7 @@ class CreateDetailsTable extends Migration {
 			$table->float('total_price');
 			$table->integer('order_id')->unsigned;
 			$table->integer('product_id')->unsigned;
-
+			$table->enum('type',['sale','devolution']);
 			//$table->foreign('order_id')->references('id')->on('orders');
 			//$table->foreign('product_id')->references('id')->on('products');
 

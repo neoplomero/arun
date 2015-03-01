@@ -21,6 +21,8 @@ class CreateOrdersTable extends Migration {
 			$table->integer('customer_id')->unsigned;
 			$table->integer('order_id')->unsigned;
 			$table->enum('payment',['pending payment','paid']);
+			$table->string('number');
+			$table->enum('email',['sent','pending']);
 			//$table->foreign('customer_id')->references('id')->on('customers');
 			//$table->foreign('order_id')->references('id')->on('orders');
 

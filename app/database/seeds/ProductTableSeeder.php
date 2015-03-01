@@ -13,7 +13,7 @@ class ProductTableSeeder extends Seeder {
 		foreach(range(1, 10) as $index)
 		{
 			Product::create([
-				'name'        => '',
+				'name'        => $faker->name,
 				'description' => $faker->text,
 				'price'       => $faker->randomFloat()
 
