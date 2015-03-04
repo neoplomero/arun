@@ -10,6 +10,31 @@
       <strong>Atention !</strong> You have an open order waiting for sending.
     </div>
 
+	<!-- Modal -->
+	<div class="modal fade" id="order_detail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	    	<div class="modal-body">
+				{{ Form::model($order,['route' => 'updateOrder', 'method' => 'PUT', 'role' => 'form']) }}
+
+				<fieldset>
+
+				{{ form::hidden('id', $order->id) }}
+
+				{{ Field::date('delivery_date') }}
+
+				{{ Field::text('number') }}
+
+				{{ Field::textarea('delivery_address',$order->delivery_address) }}
+				</fieldset>
+				<div class="">
+					<input type="submit" value="Update" class="btn btn-warning">
+				</div>
+				{{ Form::close() }}
+			</div>
+	    </div>
+	  </div>
+	</div>
 	<div class="row">
 		<div class="col-md-4">
 			<div class="panel panel-default">
@@ -49,43 +74,16 @@
 				  {{ $status->status }}<br>
 				  Total invoice : {{ $order->amount; }}</br>
 				</address>
+				<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#order_detail">
+				  Edit this
+				</button>
+				<a href="{{ route('standing/createModel',[$order->id]) }}" class="btn btn-primary btn-xs">Copy as a model</a>
 			  </div>
 			</div>
 		</div>
 
 	</div>
-	<div class="row">
-		<div class="col-md-12">
-            <div class="panel panel-default">
-			  <div class="panel-heading"><h4>Order information</h4></div>
-			  <div class="panel-body">
 
-				{{ Form::model($order,['route' => 'updateOrder', 'method' => 'PUT', 'role' => 'form']) }}
-
-				<fieldset>
-
-				{{ form::hidden('id', $order->id) }}
-
-				{{ Field::date('delivery_date') }}
-
-				{{ Field::text('number') }}
-
-				{{ Field::textarea('delivery_address',$order->delivery_address) }}
-
-
-
-				</fieldset>
-
-				<div class="">
-					<input type="submit" value="Update" class="btn btn-warning">
-				</div>
-
-				{{ Form::close() }}
-
-			  </div>
-			</div>
-        </div>
-	</div>
 
 	<div class="row">
 		<div class="col-md-12">

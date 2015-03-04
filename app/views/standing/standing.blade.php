@@ -9,21 +9,7 @@
     {{Session::get('response')}}</div>
   @endif
   
-  
-  <h2>Orders List</h2>
-  <p>
-
-    {{ Form::open(['route' => 'orders/search', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
-      <div class="form-group">
-        {{ Field::text('customer','',array('placeholder' => 'name')) }}
-        {{ Field::date('delivery_date','',array('placeholder' => 'date')) }}
-        {{ Field::select('payment', ['pending payment' => 'unpaid', 'paid' => 'paid']) }}
-      </div>
-      <button type="submit" class="btn btn-primary">Search</button>
-      <a href="{{ route('orders/list') }}" class="btn btn-success">View all</a>
-    {{ Form::close() }}
-
-  </p>
+  <h2>Standing orders List</h2>
 
   <table class="table table-striped table-bordered">
     <thead>
@@ -33,8 +19,6 @@
       <th>Updated by</th>
       <th>Delivery date</th>
       <th>Status</th>
-      <th>Payment</th>
-      <th>Email</th>
       <th>Actions</th>
     </tr>
     </thead>
@@ -46,21 +30,6 @@
         <td>{{ $order->user->full_name }}</td>
         <td>{{ $order->delivery_date }}</td>
         <td>{{ $order->status }}</td>
-        <td>
-
-          @if($order->payment == 'pending payment')
-          <a href="{{ route('order/paid', [$order->order_id])}}" class="btn btn-xs btn-success">
-            unpaid
-          </a>
-          @else
-          <a href="{{ route('order/restore', [$order->order_id])}}" class="btn btn-xs btn-danger">
-            set as paid
-          </a>
-          @endif
-
-        </td>
-        <td>{{ $order->email }}</td>
-
         <td width="160">
           <div class="btn-group" role="group">
 	          <a href="{{ route('orders/view', [$order->order_id])}}" class="btn btn-xs btn-primary">
@@ -69,12 +38,7 @@
 	          <a href="{{ route('detail', [$order->order_id])}}" class="btn btn-xs btn-warning">
 	          edit
 	          </a>
-            <a href="{{ route('invoice', [$order->order_id])}}" class="btn btn-xs btn-info">
-            print
-            </a>
-            <a href="{{ route('sendInvoice', [$order->order_id, $order->customer->email])}}" class="btn btn-xs btn-success">
-            email
-            </a>
+            <a href="{{ route('send', [$order->order_id]) }}" class="btn btn-success btn-xs">send</a>
           </div>
         </td>
       </tr>

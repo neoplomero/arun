@@ -79,8 +79,12 @@ Route::group(['before' => 'is_enabled'], function() {
 		Route::put('updateOrder', [ 'as' => 'updateOrder', 'uses' => 'OrderController@update']);
 
 
-		Route::post('cron/set', [ 'as' => 'cron/set', 'uses' => 'CronOrdersController@set']);
-		Route::get('cron/list', [ 'as' => 'cron/list', 'uses' => 'CronOrdersController@cronList']);
+		//Model orders routes
+		Route::get('standing/createModel/{id}', [ 'as' => 'standing/createModel', 'uses' => 'StandingOrdersController@createModel']);
+		Route::get('models', [ 'as' => 'models', 'uses' => 'StandingOrdersController@models']);
+		Route::post('standing/create', [ 'as' => 'standing/create', 'uses' => 'StandingOrdersController@createStanding']);
+		Route::get('standing/list', [ 'as' => 'standing/list', 'uses' => 'StandingOrdersController@standingList']);
+
 	});
 
 	Route::group(['before' => 'is_admin'], function() {

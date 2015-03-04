@@ -36,6 +36,7 @@ class OrderRepo extends BaseRepo {
 		->where('status.id','=',
 			new raw('(select `id` from `status` 
 				where `order_id` = `orders`.`id` order by `id` desc limit 1)'))
+		->where('status.status', '<>', 'standing')
 		->paginate(12);
 	}
 	public function getListByFilter($field, $operator, $value)
@@ -73,6 +74,12 @@ class OrderRepo extends BaseRepo {
 		$orders = Order::where($field, $operator, $search)
 		->with('customer','user','detail')
 		->get();
+		return $orders;
+	}
+	public function ordersByFilter($field, $operator, $search){
+		$orders = Order::where($field, $operator, $search)
+		->with('customer','user','detail')
+		->paginate(12);
 		return $orders;
 	}
 	public function lastMonthOrders($id){
