@@ -3,10 +3,10 @@
 @section('content')
     <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="container">
-  @if(Session::get('response'))
+  @if(Session::get('ok-response'))
     <div class="alert alert-success" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    {{Session::get('response')}}</div>
+    {{Session::get('ok-response')}}</div>
   @endif
   
   <h2>Standing orders List</h2>
@@ -25,7 +25,7 @@
     <tbody>
   @foreach ($list as $order)
       <tr>
-        <td>{{ Format::code($order->order_id) }}</td>
+        <td>{{ $order->model }}</td>
         <td>{{ $order->customer->full_name }}</td>
         <td>{{ $order->user->full_name }}</td>
         <td>{{ $order->delivery_date }}</td>

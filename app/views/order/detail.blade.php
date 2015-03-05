@@ -35,6 +35,32 @@
 	    </div>
 	  </div>
 	</div>
+
+	<div class="modal fade" id="new_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	    	<div class="modal-header">
+				Create new model
+		  	</div>
+	    	<div class="modal-body">
+				{{ Form::open(['route' => 'standing/createModel', 'method' => 'POST', 'role' => 'form']) }}
+
+				<fieldset>
+
+				{{ form::hidden('id', $order->id) }}
+
+				{{ Field::text('model_name','') }}
+
+				</fieldset>
+				<div class="">
+					<input type="submit" value="Save this model" class="btn btn-success">
+				</div>
+				{{ Form::close() }}
+			</div>
+	    </div>
+	  </div>
+	</div>
+
 	<div class="row">
 		<div class="col-md-4">
 			<div class="panel panel-default">
@@ -77,7 +103,9 @@
 				<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#order_detail">
 				  Edit this
 				</button>
-				<a href="{{ route('standing/createModel',[$order->id]) }}" class="btn btn-primary btn-xs">Copy as a model</a>
+				<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#new_model">
+				  Copy as model
+				</button>
 			  </div>
 			</div>
 		</div>

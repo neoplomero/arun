@@ -184,6 +184,13 @@ class OrderRepo extends BaseRepo {
 		$orders = $orders->paginate(12);
 		return $orders;
 	}
+
+	public function checkStading($date,$model){
+		$orders = Order::where('delivery_date', '=', $date)
+					->where('model', '=', $model)
+					->first();
+		return $orders;
+	}
 }
 
 ?>

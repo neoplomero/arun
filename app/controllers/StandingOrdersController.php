@@ -36,12 +36,16 @@ class StandingOrdersController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function createModel($id)
+	public function createModel()
 	{
+		$id = Input::get('id');
+		$model_name = Input::get('model_name');
 		$base_order = $this->orderRepo->find($id);
 		$new_order = $this->cloneOrder($base_order, 'model');
+		$new_order->model = $model_name;
+		$new_order->save();
 
-		return Redirect::to('models')->with('response', 'The model order has been created');;
+		return Redirect::to('models')->with('ok-response', 'The model order has been created');;
 	}
 
 	/**
@@ -51,15 +55,21 @@ class StandingOrdersController extends \BaseController {
 	*/
 	public function createStanding()
 	{
+
 		$id = Input::get('order_id');
 		$delivery_date = Input::get('delivery_date');
 		$order = $this->orderRepo->find($id);
+		
+		$check = $this->orderRepo->checkStading($delivery_date,$order->model);
+		if(!is_null($check)){
+			return Redirect::back()->with('bad-response','This order has been allready sent to standing for the selected date');
+		}
 		$standing_order = $this->cloneOrder($order, 'order');
 		$standing_order->delivery_date = $delivery_date;
 		$standing_order->save();
 		$status = $this->setStatus($standing_order->id, 'standing');
 
-		return Redirect::to('standing/list')->with('response','The standing order has been created');
+		return Redirect::to('standing/list')->with('ok-response','The standing order has been created');
 	}
 
 	/**
@@ -89,6 +99,7 @@ class StandingOrdersController extends \BaseController {
 		$new_order->customer_id			= $base_order->customer_id;
 		$new_order->type  				= $type;
 		$new_order->amount				= $base_order->amount;
+		$new_order->model 				= $base_order->model;
 		$new_order->save();
 
 		foreach($base_order->detail as $detail){
@@ -113,7 +124,9 @@ class StandingOrdersController extends \BaseController {
 	public function models()
 	{
 		$list = $this->orderRepo->ordersByFilter('type', '=', 'model');
-		return View::make('standing/orders',compact('list'));
+		$tomorrow = Carbon::now()->addDay();
+		$date = Carbon::parse($tomorrow)->format('Y-m-d');
+		return View::make('standing/orders',compact('list','date'));
 	}
 	/**
 	 * Store a newly created resource in storage.

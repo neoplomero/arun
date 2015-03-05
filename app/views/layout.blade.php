@@ -69,7 +69,19 @@
 
             @if(Auth::user()->user_type == 'seller' OR Auth::user()->user_type == 'admin' )
             <li><a href="{{ route('customers') }}">Customers</a></li>
-            <li><a href="{{ route('orders/list') }}">Orders</a></li>
+            
+
+            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Orders <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ route('orders/list') }}">All</a></li>
+                <li><a href="{{ route('standing/list') }}">Standing</a></li>
+                <li><a href="{{ route('models') }}">Models</a></li>
+              </ul>
+            </li>
+
+
             @endif
 
             @if(Auth::user()->user_type == 'manufacturer' OR Auth::user()->user_type == 'admin' )
