@@ -95,7 +95,8 @@ class OrderRepo extends BaseRepo {
 		->where('type','=','order')
 		->where('delivery_date','>',"$date")
 		->with('customer','user','detail')
-		->get();
+		->orderBy('delivery_date','ASC')
+		->take(1)->get();
 		//dd($orders);
 		return $orders;
 	}
