@@ -45,7 +45,7 @@ class StandingOrdersController extends \BaseController {
 		$new_order->model = $model_name;
 		$new_order->save();
 
-		return Redirect::to('models')->with('ok-response', 'The model order has been created');;
+		return Redirect::to('standing')->with('ok-response', 'The model order has been created');;
 	}
 
 
