@@ -76,8 +76,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Orders <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ route('orders/list') }}">All</a></li>
-                <li><a href="{{ route('standing/list') }}">Standing</a></li>
-                <li><a href="{{ route('models') }}">Models</a></li>
+                <li><a href="{{ route('models') }}">Standing</a></li>
               </ul>
             </li>
 

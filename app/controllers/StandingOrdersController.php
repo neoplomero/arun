@@ -48,6 +48,8 @@ class StandingOrdersController extends \BaseController {
 		return Redirect::to('models')->with('ok-response', 'The model order has been created');;
 	}
 
+
+
 	/**
 	* Show the form for creating a new resource.
 	*
@@ -67,9 +69,23 @@ class StandingOrdersController extends \BaseController {
 		$standing_order = $this->cloneOrder($order, 'order');
 		$standing_order->delivery_date = $delivery_date;
 		$standing_order->save();
-		$status = $this->setStatus($standing_order->id, 'standing');
+		$status = $this->setStatus($standing_order->id, 'processing');
 
-		return Redirect::to('standing/list')->with('ok-response','The standing order has been created');
+		return Redirect::to('orders/list')->with('response','The order has been sent to production');
+	}
+
+	/**
+	* Show the form for creating a new resource.
+	*
+	* @return Response
+	*/
+	public function search()
+	{
+		$name = Input::get('order_name');
+		$list = $this->orderRepo->standingByFilter($name);
+		$tomorrow = Carbon::now()->addDay();
+		$date = Carbon::parse($tomorrow)->format('Y-m-d');
+		return View::make('standing/orders',compact('list','date'));	
 	}
 
 	/**
@@ -126,7 +142,18 @@ class StandingOrdersController extends \BaseController {
 		$list = $this->orderRepo->ordersByFilter('type', '=', 'model');
 		$tomorrow = Carbon::now()->addDay();
 		$date = Carbon::parse($tomorrow)->format('Y-m-d');
+
+		$list = $this->getSentOrders($list);
 		return View::make('standing/orders',compact('list','date'));
+	}
+
+	public function getSentOrders($array){
+		$date = Carbon::now();
+		foreach ($array as $order) {
+			$order->sent = $this->orderRepo->standingByModelDate($order->model,$date);
+		}
+		return $array;
+		
 	}
 	/**
 	 * Store a newly created resource in storage.

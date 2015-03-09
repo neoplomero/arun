@@ -80,10 +80,12 @@ Route::group(['before' => 'is_enabled'], function() {
 
 
 		//Model orders routes
+		Route::get('standing', [ 'as' => 'models', 'uses' => 'StandingOrdersController@models']);
+		Route::post('standing', [ 'as' => 'standing/search', 'uses' => 'StandingOrdersController@search']);
 		Route::post('standing/createModel', [ 'as' => 'standing/createModel', 'uses' => 'StandingOrdersController@createModel']);
-		Route::get('models', [ 'as' => 'models', 'uses' => 'StandingOrdersController@models']);
 		Route::post('standing/create', [ 'as' => 'standing/create', 'uses' => 'StandingOrdersController@createStanding']);
 		Route::get('standing/list', [ 'as' => 'standing/list', 'uses' => 'StandingOrdersController@standingList']);
+		
 
 	});
 

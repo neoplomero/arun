@@ -15,13 +15,28 @@
     {{Session::get('bad-response')}}</div>
   @endif
   
-  <h2>Model Orders List</h2>
+
+
+  <h2>Standing Orders List</h2>
+
+    <p>
+
+    {{ Form::open(['route' => 'standing/search', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
+      <div class="form-group">
+        {{ Field::text('order_name','',array('placeholder' => 'name')) }}
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+      <a href="{{ route('models') }}" class="btn btn-success">Default view</a>
+    {{ Form::close() }}
+
+  </p>
+
   <table class="table table-striped table-bordered">
     <thead>
     <tr>
-      <th>Model name</th>
+      <th>Order name</th>
       <th>Customer</th>
-      <th>Ammount</th>
+      <th>To delivery in</th>
       <th>Delivery date</th>
       <th>Actions</th>
     </tr>
@@ -31,14 +46,20 @@
       <tr>
         <td>{{ $order->model }}</td>
         <td>{{ $order->customer->full_name }}</td>
-        <td>{{ $order->amount }}</td>
+        <td>
+          @foreach($order->sent as $order)
+            <a href="{{route('detail', [$order->id])}}"> 
+            {{ Format::date($order->delivery_date) }}<br>
+            </a>
+          @endforeach
+        </td>
         <td width="340">
         	{{ Form::open(['route' => 'standing/create', 'method' => 'POST', 'role' => 'search', 'class' => 'form-inline']) }}
 			  <div class="form-group">
 			  	{{ Form::hidden('order_id', $order->id )}}
 			  	{{ Form::input('date','delivery_date',$date, array('class' => 'form-control')) }}
 			  </div>
-			  <button type="submit" class="btn btn-default">Send to standing</button>
+			  <button type="submit" class="btn btn-default">Send to production</button>
 			   {{ Form::close() }}
         </td>
         <td width="160">

@@ -82,6 +82,24 @@ class OrderRepo extends BaseRepo {
 		->paginate(12);
 		return $orders;
 	}
+	public function standingByFilter($search){
+		$orders = Order::where('model', 'LIKE', "%$search%")
+		->where('type','=','model')
+		->with('customer','user','detail')
+		->paginate(10);
+		return $orders;
+	}
+	public function standingByModelDate($model,$date){
+		
+		$orders = Order::where('model', '=', "$model")
+		->where('type','=','order')
+		->where('delivery_date','>',"$date")
+		->with('customer','user','detail')
+		->get();
+		//dd($orders);
+		return $orders;
+	}
+
 	public function lastMonthOrders($id){
 		$orders = Order::where('customer_id', '=', $id)
 		->where((new raw('MONTH(created_at)')), '=', date('n'))

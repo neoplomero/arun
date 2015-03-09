@@ -20,7 +20,7 @@
         {{ Field::select('payment', ['pending payment' => 'unpaid', 'paid' => 'paid']) }}
       </div>
       <button type="submit" class="btn btn-primary">Search</button>
-      <a href="{{ route('orders/list') }}" class="btn btn-success">View all</a>
+      <a href="{{ route('orders/list') }}" class="btn btn-success">Default view</a>
     {{ Form::close() }}
 
   </p>
