@@ -14,7 +14,7 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     {{Session::get('bad-response')}}</div>
   @endif
-  
+
 
 
   <h2>Standing Orders List</h2>
@@ -48,7 +48,7 @@
         <td>{{ $order->customer->full_name }}</td>
         <td>
           @foreach($order->sent as $order)
-            <a href="{{route('detail', [$order->id])}}"> 
+            <a href="{{route('detail', [$order->id])}}">
             {{ Format::date($order->delivery_date) }}<br>
             </a>
           @endforeach

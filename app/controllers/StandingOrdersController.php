@@ -19,16 +19,6 @@ class StandingOrdersController extends \BaseController {
  		$this->detailRepo = $detailRepo;
  		$this->statusRepo = $statusRepo;
 	}
-	/**
-	 * Display a listing of the resource.
-	 * GET /standingorders
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -61,7 +51,7 @@ class StandingOrdersController extends \BaseController {
 		$id = Input::get('order_id');
 		$delivery_date = Input::get('delivery_date');
 		$order = $this->orderRepo->find($id);
-		
+
 		$check = $this->orderRepo->checkStading($delivery_date,$order->model);
 		if(!is_null($check)){
 			return Redirect::back()->with('bad-response','This order has been allready sent to standing for the selected date');
@@ -86,7 +76,7 @@ class StandingOrdersController extends \BaseController {
 		$list = $this->getSentOrders($list);
 		$tomorrow = Carbon::now()->addDay();
 		$date = Carbon::parse($tomorrow)->format('Y-m-d');
-		return View::make('standing/orders',compact('list','date'));	
+		return View::make('standing/orders',compact('list','date'));
 	}
 
 	/**
@@ -155,7 +145,7 @@ class StandingOrdersController extends \BaseController {
 			$order->sent = $this->orderRepo->standingByModelDate($order->model,$date);
 		}
 		return $array;
-		
+
 	}
 	/**
 	 * Store a newly created resource in storage.
