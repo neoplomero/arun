@@ -23,7 +23,7 @@
 
     {{ Form::open(['route' => 'standing/search', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
       <div class="form-group">
-        {{ Field::text('order_name','',array('placeholder' => 'name')) }}
+        {{ Field::text('order/customer','',array('placeholder' => 'name')) }}
       </div>
       <button type="submit" class="btn btn-primary">Search</button>
       <a href="{{ route('models') }}" class="btn btn-success">Default view</a>

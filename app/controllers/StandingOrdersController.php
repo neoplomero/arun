@@ -71,7 +71,7 @@ class StandingOrdersController extends \BaseController {
 		$standing_order->save();
 		$status = $this->setStatus($standing_order->id, 'processing');
 
-		return Redirect::to('orders/list')->with('response','The order has been sent to production');
+		return Redirect::back()->with('ok-response','The order has been sent to production');
 	}
 
 	/**
@@ -81,8 +81,9 @@ class StandingOrdersController extends \BaseController {
 	*/
 	public function search()
 	{
-		$name = Input::get('order_name');
+		$name = Input::get('order/customer');
 		$list = $this->orderRepo->standingByFilter($name);
+		$list = $this->getSentOrders($list);
 		$tomorrow = Carbon::now()->addDay();
 		$date = Carbon::parse($tomorrow)->format('Y-m-d');
 		return View::make('standing/orders',compact('list','date'));	
@@ -139,10 +140,11 @@ class StandingOrdersController extends \BaseController {
 	*/
 	public function models()
 	{
-		$list = $this->orderRepo->ordersByFilter('type', '=', 'model');
+		//$list = $this->orderRepo->ordersByFilter('type', '=', 'model');
+		//$list=[];
+		$list = $this->orderRepo->standingOrders();
 		$tomorrow = Carbon::now()->addDay();
 		$date = Carbon::parse($tomorrow)->format('Y-m-d');
-
 		$list = $this->getSentOrders($list);
 		return View::make('standing/orders',compact('list','date'));
 	}

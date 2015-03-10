@@ -82,12 +82,23 @@ class OrderRepo extends BaseRepo {
 		->paginate(12);
 		return $orders;
 	}
-	public function standingByFilter($search){
-		$orders = Order::where('model', 'LIKE', "%$search%")
-		->where('type','=','model')
-		->with('customer','user','detail')
-		->paginate(10);
+	public function standingOrders(){
+		$orders = Order::join('customers','orders.customer_id', '=' ,'customers.id')
+				->where('orders.type','=','model')
+				->paginate(12);
 		return $orders;
+	}
+
+	public function standingByFilter($search){
+		$orders = Order::join('customers','orders.customer_id', '=' ,'customers.id')
+				->where('orders.type','=','model')
+				->where(function($q) use ($search){
+					$q->orWhere('orders.model', 'LIKE', "%$search%")
+					->orWhere('customers.full_name', 'LIKE', "%$search%");
+				})
+				->paginate(12);
+		return $orders;
+
 	}
 	public function standingByModelDate($model,$date){
 		
