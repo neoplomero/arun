@@ -52,6 +52,7 @@
 				<br>
 				<div class="">
 					<input type="submit" value="Delete order" class="btn btn-danger">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 				{{ Form::close() }}
 			</div>
