@@ -10,7 +10,7 @@
           	<h2>Summary </h2>
           </td>
           <td colspan="2" style="text-align:right;">
-          	<strong>From {{ $from }} to {{ $to }} </strong>
+          	<strong>From {{ Format::date($from) }} to {{ Format::date($to) }} </strong>
           </td>
         </tr>
         <tr >

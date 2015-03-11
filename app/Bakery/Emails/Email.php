@@ -8,12 +8,15 @@ use Mail;
 class Email {
 
 
-
+	public function __construct(OrderRepo $OrderRepo){
+		$this->OrderRepo = $OrderRepo;
+	}
 
 	public function invoiceEmail($id, $customerEmail){
 
 		//$id = Hashids::encode($id);
-		$data = array('id' => $id);
+		//$data = array('id' => $id);
+		$data = $this->OrderRepo->find($id);
 		Mail::send('emails/invoices/invoice', $data, function ($message) use ($id, $customerEmail){
 		    $message->subject('Invoice');
 		    $message->to([$customerEmail, 'bakeryarunfinance@gmail.com']);

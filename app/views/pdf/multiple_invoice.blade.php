@@ -96,7 +96,7 @@
         </tr>                                
         <tr>
         	<td colspan="2" style="text-align:left;">
-				Delivery date: {{ $data->delivery_date }}
+				Delivery date: {{ Format::date($data->delivery_date) }}
         	</td>
         	<td colspan="2" style="text-align:right;">
            @if($data->number)

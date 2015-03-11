@@ -34,7 +34,7 @@
       <tr>
         <td>{{ Format::code($order->order_id) }}</td>
         <td>{{ $order->customer->full_name }}</td>
-        <td>{{ $order->delivery_date }}</td>
+        <td>{{ Format::date($order->delivery_date) }}</td>
         <td>{{ $order->status }}</td>
         <td width="150">
           <div class="btn-group" role="group">
