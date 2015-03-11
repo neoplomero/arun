@@ -1,7 +1,7 @@
 <?php
 
 /**
-* 
+*
 */
 
 use Bakery\Repositories\CustomerRepo;
@@ -26,8 +26,8 @@ class OrderController extends BaseController
 	public $detailRepo;
 	public $email;
 
-	public function __construct(CustomerRepo $customerRepo, 
-								BakeryRepo $bakeryRepo, 
+	public function __construct(CustomerRepo $customerRepo,
+								BakeryRepo $bakeryRepo,
 								OrderRepo $orderRepo,
 								StatusRepo $statusRepo,
 								ProductRepo $productRepo,
@@ -87,7 +87,7 @@ class OrderController extends BaseController
 	}
 
 	public function orderDetail($id){
-		
+
 		$bakery = $this->bakeryRepo->find(1);
 		$user = Auth::user();
 		$status = $this->statusRepo->getLastByUserId($user->id);
@@ -96,8 +96,8 @@ class OrderController extends BaseController
 		$products = $this->productRepo->getAll();
 		$products = $products->lists('name', 'id');
 
-		return View::make('order/detail', compact('user', 'bakery', 'status', 'order', 'products', 'details'));		
-		
+		return View::make('order/detail', compact('user', 'bakery', 'status', 'order', 'products', 'details'));
+
 	}
 
 	public function check($customerId){
@@ -113,7 +113,7 @@ class OrderController extends BaseController
 		}else{
 			return   Redirect::action('OrderController@generate', array('id' => $customerId));
 		}
-		
+
 	}
 
 	public function addDetail()
@@ -141,10 +141,10 @@ class OrderController extends BaseController
 
 		$order = $this->orderRepo->find($orderId);
 		if($type == 'sale'){
-			$order->amount = $order->amount + $total_price;	
+			$order->amount = $order->amount + $total_price;
 		}
 		if($type == 'devolution'){
-			$order->amount = $order->amount - $total_price;	
+			$order->amount = $order->amount - $total_price;
 		}
 		$order->save();
 
@@ -155,15 +155,15 @@ class OrderController extends BaseController
 	{
 
 		$detail = $this->detailRepo->find($id);
-		$order = $this->orderRepo->find($detail->order->id);	
+		$order = $this->orderRepo->find($detail->order->id);
 		$type = $detail->type;
 		if($type == 'sale'){
 			$order->amount = $order->amount - $detail->total_price;
 		}
 		if($type == 'devolution'){
 			$order->amount = $order->amount + $detail->total_price;
-		}	
-		
+		}
+
 		$order->save();
 		$detail->delete();
 		return Redirect::back();
@@ -223,13 +223,13 @@ class OrderController extends BaseController
 		if(Input::get('customer'))
 		{
 			$list = $this->orderRepo->getListByFilter('full_name', 'LIKE', '%'.Input::get('customer').'%');
-		}	
+		}
 		if(Input::get('payment'))
 		{
 			$list = $this->orderRepo->getListByFilter('payment', '=', Input::get('payment'));
-		}	
+		}
 		return View::make('order/list', compact('list'));
-	}	
+	}
 
 
 	public function printSearch()
@@ -257,7 +257,7 @@ class OrderController extends BaseController
 
 	public function pdf($id)
 	{
-		
+
 		$data = $this->orderRepo->find($id);
 		$bakery = $this->bakeryRepo->find(1);
 		$view = View::make('pdf/single_invoice', compact('data','bakery'))->render();
@@ -271,20 +271,20 @@ class OrderController extends BaseController
 		$order->save();
 		return Redirect::back();
 	}
-	
+
 	public function restore($id){
 		$order = $this->orderRepo->find($id);
 		$order->payment = 'pending payment';
 		$order->save();
 		return Redirect::back();
-	}	
+	}
 
 	public function sendByEmail($id, $customerEmail){
 		$order = $this->orderRepo->find($id);
 		$order->email = 'sent';
 		$order->save();
 		$this->email->invoiceEmail($id, $customerEmail);
-		$response = 'The invoice has been sent by email.';				
+		$response = 'The invoice has been sent by email.';
 		$list = $this->orderRepo->getList();
 		return View::make('order/list', compact('list'))->with('response', $response);
 	}
@@ -300,7 +300,7 @@ class OrderController extends BaseController
 		$order->delivery_date = Input::get('delivery_date');
 		$order->delivery_address = Input::get('delivery_address');
 		$order->save();
-		return Redirect::back();	
+		return Redirect::back();
 	}
 	/**
 	* Show the form for creating a new resource.
