@@ -3,16 +3,14 @@
 @section('content')
     <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="container">
-
-  @if(isset($response))
+  @if(Session::get('response'))
     <div class="alert alert-success" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    {{$response}}</div>
+    {{Session::get('response')}}</div>
   @endif
 
   <h2>Orders List</h2>
   <p>
-
 
     {{ Form::open(['route' => 'orders/search', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
       <div class="form-group">
@@ -21,7 +19,7 @@
         {{ Field::select('payment', ['pending payment' => 'unpaid', 'paid' => 'paid']) }}
       </div>
       <button type="submit" class="btn btn-primary">Search</button>
-      <a href="{{ route('orders/list') }}" class="btn btn-success">View all</a>
+      <a href="{{ route('orders/list') }}" class="btn btn-success">Default view</a>
     {{ Form::close() }}
 
   </p>
@@ -84,10 +82,6 @@
   </table>
 
   {{ $list->links() }}
-
-
-
-
 
 </div>
 @stop

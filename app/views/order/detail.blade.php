@@ -2,12 +2,91 @@
 
 @section('content')
 
+
 <div class="container">
 
 	<div class="alert alert-warning alert-dismissible fade in" role="alert">
       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
       <strong>Atention !</strong> You have an open order waiting for sending.
     </div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="order_detail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	    	<div class="modal-body">
+				{{ Form::model($order,['route' => 'updateOrder', 'method' => 'PUT', 'role' => 'form']) }}
+
+				<fieldset>
+
+				{{ form::hidden('id', $order->id) }}
+
+				{{ Field::date('delivery_date') }}
+
+				{{ Field::text('number') }}
+
+				{{ Field::textarea('delivery_address',$order->delivery_address) }}
+				</fieldset>
+				<div class="">
+					<input type="submit" value="Update" class="btn btn-warning">
+					<button class="btn " data-dismiss="modal"> Cancel </button>
+				</div>
+				{{ Form::close() }}
+			</div>
+	    </div>
+	  </div>
+	</div>
+
+	<!--modal-->
+	<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	    	<div class="modal-header">
+				<h4>Delete order</h4>
+		  	</div>
+	    	<div class="modal-body">
+				{{ Form::open(['route' => 'order/delete', 'method' => 'POST', 'role' => 'form']) }}
+
+				{{ form::hidden('id', $order->id) }}
+				
+				<p>sure you want to delete this order ?</p>
+				<br>
+				<div class="">
+					<input type="submit" value="Delete order" class="btn btn-danger">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+				{{ Form::close() }}
+			</div>
+	    </div>
+	  </div>
+	</div>
+
+	<!--modal-->
+	<div class="modal fade" id="new_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	    	<div class="modal-header">
+				Create new model
+		  	</div>
+	    	<div class="modal-body">
+				{{ Form::open(['route' => 'standing/createModel', 'method' => 'POST', 'role' => 'form']) }}
+
+				<fieldset>
+
+				{{ form::hidden('id', $order->id) }}
+
+				{{ Field::text('model_name','') }}
+
+				</fieldset>
+				<div class="">
+					<input type="submit" value="Save this model" class="btn btn-success">
+					<button class="btn" data-dismiss="modal"> Cancel </button>
+				</div>
+				{{ Form::close() }}
+			</div>
+	    </div>
+	  </div>
+	</div>
 
 	<div class="row">
 		<div class="col-md-4">
@@ -47,21 +126,22 @@
 				  {{ $order->delivery_address }}<br>
 				  {{ $status->status }}<br>
 				  Total invoice : {{ $order->amount; }}</br>
-				  {{ Form::model($order, ['route' => 'addNumber', 'method' => 'PUT'])}}
-				  			{{ Form::hidden('id', $order->id ) }}
-					      <div class="input-group">
-							  {{ Form::text('number', null, array('class' => 'form-control')) }}
-							  <div class="input-group-btn">
-							    <button type="submit" class="btn btn-warning">edit number</button>
-							  </div>
-							</div>
-				   {{ Form::close() }}
 				</address>
+				<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#order_detail">
+				  Edit this
+				</button>
+				<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#new_model">
+				  Copy as model
+				</button>
+				<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete">
+				  Delete this order
+				</button>
 			  </div>
 			</div>
 		</div>
 
 	</div>
+
 
 	<div class="row">
 		<div class="col-md-12">
@@ -69,8 +149,12 @@
                 <div class="panel-heading">
                     <h4 class="text-center"><strong>Order summary</strong></h4>
                     <div class="btn-group pull-right invoice-actions">
-                    	<div class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Add</div>
+						
+                    	<div class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addProduct">Add</div>
+                    	
+                    	@if($order->type === "order")
                     	<a href="{{ route('send', [$order->id]) }}" class="btn btn-success btn-xs">send</a>
+                    	@endif
                     </div>
                 </div>
                 <div class="panel-body">
@@ -131,8 +215,12 @@
                 <div class="panel-heading">
                     <h4 class="text-center"><strong>Returned products</strong></h4>
                     <div class="btn-group pull-right invoice-actions">
-                    	<div class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Add</div>
+                    
+                    	<div class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addDevolution">Add</div>
+                    
+                    @if($order->type === "order")
                     	<a href="{{ route('send', [$order->id]) }}" class="btn btn-success btn-xs">send</a>
+                   	@endif
                     </div>
                 </div>
                 <div class="panel-body">
@@ -213,7 +301,7 @@
         </div>
 	</div>
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal fade" id="addProduct" tabindex="-1" role="dialog" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -233,14 +321,14 @@
 
 				{{ Field::number('quantity') }}
 
-				{{ Field::select('type', ['sale'=>'sale','devolution'=>'devolution'],'sale') }}
+				{{ Field::text('type', 'sale',['readonly'])}}
 
 				</fieldset>
 				<br>
 				<div class="">
 					<input type="submit" value="Register" class="btn btn-success">
 
-					<button class="btn btn-danger" data-dismiss="modal"> Cancel </button>
+					<button class="btn " data-dismiss="modal"> Cancel </button>
 				</div>
 
 				{{ Form::close() }}
@@ -251,6 +339,47 @@
 	    </div>
 	  </div>
 	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="addDevolution" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Add product for devolution</h4>
+	      </div>
+	      <div class="modal-body">
+
+
+				{{ Form::open(['route' => 'newDetail', 'method' => 'POST', 'role' => 'form']) }}
+
+				<fieldset>
+
+				{{ form::hidden('order_id', $order->id) }}
+				
+				{{ Field::select('product' , $products ) }}
+
+				{{ Field::number('quantity') }}
+
+				{{ Field::text('type', 'devolution',['readonly'])}}
+
+				</fieldset>
+				<br>
+				<div class="">
+					<input type="submit" value="Register" class="btn btn-success">
+
+					<button class="btn " data-dismiss="modal"> Cancel </button>
+				</div>
+
+				{{ Form::close() }}
+			
+
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+
 
 
 	<!-- Updates -->
@@ -285,7 +414,7 @@
 				<div class="">
 					<input type="submit" value="Update" class="btn btn-success">
 
-					<button class="btn btn-danger" data-dismiss="modal"> Cancel </button>
+					<button class="btn " data-dismiss="modal"> Cancel </button>
 				</div>
 
 				{{ Form::close() }}

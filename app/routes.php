@@ -18,6 +18,7 @@ Route::get('login', ['as' => 'access', 'uses' => 'AccountController@access']);
 Route::post('login', ['as' => 'login', 'uses' => 'AuthController@login']);
 Route::get('view/invoice/{id}', ['as' => 'view/invoice', 'uses' => 'GuestController@invoice']);
 
+
 Route::group(['before' => 'auth'], function () {
 Route::group(['before' => 'is_enabled'], function() {
 	//Account Routes
@@ -57,6 +58,7 @@ Route::group(['before' => 'is_enabled'], function() {
 		Route::put('customers/account', ['as' =>  'customers/update', 'uses' => 'CustomersController@update']);
 
 		//Orders Routes
+		Route::post('order/delete', [ 'as' => 'order/delete', 'uses' => 'OrderController@delete']);
 		Route::get('order/{id}', [ 'as' => 'order', 'uses' => 'OrderController@check']);
 		Route::post('order', [ 'as' => 'order/save', 'uses' => 'OrderController@save']);
 		Route::get('paid/{id}', [ 'as' => 'order/paid', 'uses' => 'OrderController@paid']);
@@ -75,6 +77,16 @@ Route::group(['before' => 'is_enabled'], function() {
 		Route::get('send/{id}', [ 'as' => 'send', 'uses' => 'OrderController@send']);
 		Route::get('sendInvoice/{id}&{customerEmail}', [ 'as' => 'sendInvoice', 'uses' => 'OrderController@sendByEmail']);
 		Route::put('orders/addNumber', [ 'as' => 'addNumber', 'uses' => 'OrderController@addNumber']);
+		Route::put('updateOrder', [ 'as' => 'updateOrder', 'uses' => 'OrderController@update']);
+
+
+		//Model orders routes
+		Route::get('standing', [ 'as' => 'models', 'uses' => 'StandingOrdersController@models']);
+		Route::post('standing', [ 'as' => 'standing/search', 'uses' => 'StandingOrdersController@search']);
+		Route::post('standing/createModel', [ 'as' => 'standing/createModel', 'uses' => 'StandingOrdersController@createModel']);
+		Route::post('standing/create', [ 'as' => 'standing/create', 'uses' => 'StandingOrdersController@createStanding']);
+		Route::get('standing/list', [ 'as' => 'standing/list', 'uses' => 'StandingOrdersController@standingList']);
+		
 
 	});
 

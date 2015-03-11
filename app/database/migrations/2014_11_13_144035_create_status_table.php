@@ -12,19 +12,7 @@ class CreateStatusTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('status', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->enum('status', ['received','processing','out for delivery','delivered','cancelled','open']);
-			$table->integer('order_id')->unsigned();
-			$table->integer('user_id')->unsigned();
-			$table->string('note');
 
-			//$table->foreign('order_id')->references('id')->on('orders');
-			//$table->foreign('user_id')->references('id')->on('users');
-
-			$table->timestamps();
-		});
 	}
 
 
@@ -35,7 +23,7 @@ class CreateStatusTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('status');
+		//Schema::drop('status');
 	}
 
 }

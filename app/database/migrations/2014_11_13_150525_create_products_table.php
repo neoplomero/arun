@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration {
 			$table->text('description');
 			$table->string('slug');
 			$table->float('price');
-			$table->enum('type',['devolution','sale'])
+			$table->enum('type',['devolution','sale']);
 			$table->timestamps();
 		});
 	}

@@ -36,6 +36,7 @@ class OrderRepo extends BaseRepo {
 		->where('status.id','=',
 			new raw('(select `id` from `status` 
 				where `order_id` = `orders`.`id` order by `id` desc limit 1)'))
+		->where('status.status', '<>', 'standing')
 		->paginate(12);
 	}
 	public function getListByFilter($field, $operator, $value)
@@ -75,6 +76,48 @@ class OrderRepo extends BaseRepo {
 		->get();
 		return $orders;
 	}
+	public function ordersByFilter($field, $operator, $search){
+		$orders = Order::where($field, $operator, $search)
+		->with('customer','user','detail')
+		->paginate(12);
+		return $orders;
+	}
+	public function standingOrders(){
+		$orders = Order::
+				select('orders.id as id', 'model','delivery_date','customers.full_name as full_name')->
+				join('customers','orders.customer_id', '=' ,'customers.id')
+				->where('type','=','model')
+				->paginate(12);
+		return $orders;
+	}
+
+	public function standingByFilter($search){
+		//$orders = Order::join('customers','orders.customer_id', '=' ,'customers.id')
+		$orders = Order::		
+				select('orders.id as id', 'model','delivery_date','customers.full_name as full_name')->
+				join('customers','orders.customer_id', '=' ,'customers.id')
+				->where('type','=','model')
+				//->where('model', 'LIKE', "%$search%")
+				->where(function($q) use ($search){
+					$q->orWhere('orders.model', 'LIKE', "%$search%")
+					->orWhere('customers.full_name', 'LIKE', "%$search%");
+				})
+				->paginate(12);
+		return $orders;
+
+	}
+	public function standingByModelDate($model,$date){
+		
+		$orders = Order::where('model', '=', "$model")
+		->where('type','=','order')
+		->where('delivery_date','>',"$date")
+		->with('customer','user','detail')
+		->orderBy('delivery_date','ASC')
+		->take(1)->get();
+		//dd($orders);
+		return $orders;
+	}
+
 	public function lastMonthOrders($id){
 		$orders = Order::where('customer_id', '=', $id)
 		->where((new raw('MONTH(created_at)')), '=', date('n'))
@@ -175,6 +218,13 @@ class OrderRepo extends BaseRepo {
 		}
 
 		$orders = $orders->paginate(12);
+		return $orders;
+	}
+
+	public function checkStading($date,$model){
+		$orders = Order::where('delivery_date', '=', $date)
+					->where('model', '=', $model)
+					->first();
 		return $orders;
 	}
 }

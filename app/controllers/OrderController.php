@@ -58,17 +58,14 @@ class OrderController extends BaseController
 		$delivery_address = Input::get('delivery_address');
 		$delivery_date = Input::get('delivery_date');
 		$order = $this->orderRepo->newOrder();
-		//dd($order);
 		$orderData = array();
 		$number = Input::get('number');
-		//dd($number);
 
 		$orderData['customer_id'] = $customer_id;
 		$orderData['note'] = $note;
 		$orderData['delivery_address'] = $delivery_address;
 		$orderData['delivery_date'] = $delivery_date;
 		$order['number'] = $number;
-		//dd($orderData);
 
 		$orderManager = new OrderManager($order,$orderData);
 		$orderManager->save();
@@ -203,17 +200,22 @@ class OrderController extends BaseController
 		$manager = new StatusManager($status, $statusData);
 		$manager->save();
 
-		return Redirect::route('orders/list');
+		//return Redirect::route('orders/list');
+		return Redirect::to('orders/list')->with('response','The selected order is in production now');
 	}
 
 	public function orderList()
 	{
-		$list = $this->orderRepo->getList();
+		//$list = $this->orderRepo->getList();
+		$tomorrow = Carbon::now()->addDay();
+		$tomorrow = Carbon::parse($tomorrow)->format('Y-m-d');
+		$list = $this->orderRepo->getListByFilter('delivery_date', '=', $tomorrow);
 		return View::make('order/list', compact('list'));
 	}
 
 	public function orderListFilter()
 	{
+		$list = $this->orderRepo->getList();
 		if(Input::get('delivery_date'))
 		{
 			$list = $this->orderRepo->getListByFilter('delivery_date', '=', Input::get('delivery_date'));
@@ -284,13 +286,33 @@ class OrderController extends BaseController
 		$this->email->invoiceEmail($id, $customerEmail);
 		$response = 'The invoice has been sent by email.';				
 		$list = $this->orderRepo->getList();
-		return View::make('order/list', compact('list','response'));
+		return View::make('order/list', compact('list'))->with('response', $response);
 	}
 	public function addNumber(){
 		$order = $this->orderRepo->find(Input::get('id'));
 		$order->number = Input::get('number');
 		$order->save();
 		return Redirect::back();
+	}
+	public function update(){
+		$order = $this->orderRepo->find(Input::get('id'));
+		$order->number = Input::get('number');
+		$order->delivery_date = Input::get('delivery_date');
+		$order->delivery_address = Input::get('delivery_address');
+		$order->save();
+		return Redirect::back();	
+	}
+	/**
+	* Show the form for creating a new resource.
+	*
+	* @return Response
+	*/
+	public function delete()
+	{
+		$id = Input::get('id');
+		$order = $this->orderRepo->find($id);
+		$order->delete();
+		return Redirect::to('orders/list')->with('response','the selected order has been deleted');
 	}
 }
 

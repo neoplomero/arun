@@ -3,6 +3,14 @@
 @section('content')
 
 <div class="container">
+
+	@if(Session::has('login_error'))
+		<div class="alert alert-danger" role="alert">
+			Please check your credentials, thanks.
+		</div>
+
+    @endif
+
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3 login-container">
 
@@ -11,10 +19,6 @@
 				<p>
 
 					{{ Form::open(['route' => 'login', 'method' => 'POST', 'role' => 'form'])}}
-		            @if(Session::has('login_error'))
-		              <span class="label label-danger">Please check your credentials, thanks.</span>
-		            @endif
-
 					<legend> Login  </legend>
 
 					<fieldset>
