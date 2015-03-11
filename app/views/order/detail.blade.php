@@ -29,6 +29,7 @@
 				</fieldset>
 				<div class="">
 					<input type="submit" value="Update" class="btn btn-warning">
+					<button class="btn " data-dismiss="modal"> Cancel </button>
 				</div>
 				{{ Form::close() }}
 			</div>
@@ -37,7 +38,7 @@
 	</div>
 
 	<!--modal-->
-	<div class="modal fade" id="new_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	    	<div class="modal-header">
@@ -79,6 +80,7 @@
 				</fieldset>
 				<div class="">
 					<input type="submit" value="Save this model" class="btn btn-success">
+					<button class="btn" data-dismiss="modal"> Cancel </button>
 				</div>
 				{{ Form::close() }}
 			</div>
@@ -131,7 +133,7 @@
 				<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#new_model">
 				  Copy as model
 				</button>
-				<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#new_model">
+				<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete">
 				  Delete this order
 				</button>
 			  </div>
@@ -326,7 +328,7 @@
 				<div class="">
 					<input type="submit" value="Register" class="btn btn-success">
 
-					<button class="btn btn-danger" data-dismiss="modal"> Cancel </button>
+					<button class="btn " data-dismiss="modal"> Cancel </button>
 				</div>
 
 				{{ Form::close() }}
@@ -366,7 +368,7 @@
 				<div class="">
 					<input type="submit" value="Register" class="btn btn-success">
 
-					<button class="btn btn-danger" data-dismiss="modal"> Cancel </button>
+					<button class="btn " data-dismiss="modal"> Cancel </button>
 				</div>
 
 				{{ Form::close() }}
@@ -412,7 +414,7 @@
 				<div class="">
 					<input type="submit" value="Update" class="btn btn-success">
 
-					<button class="btn btn-danger" data-dismiss="modal"> Cancel </button>
+					<button class="btn " data-dismiss="modal"> Cancel </button>
 				</div>
 
 				{{ Form::close() }}
