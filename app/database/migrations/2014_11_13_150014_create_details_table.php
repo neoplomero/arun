@@ -12,20 +12,7 @@ class CreateDetailsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('details', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->integer('quantity')->unsigned;
-			$table->float('single_price');
-			$table->float('total_price');
-			$table->integer('order_id')->unsigned;
-			$table->integer('product_id')->unsigned;
-			$table->enum('type',['sale','devolution']);
-			//$table->foreign('order_id')->references('id')->on('orders');
-			//$table->foreign('product_id')->references('id')->on('products');
-
-			$table->timestamps();
-		});
+		
 	}
 
 
@@ -36,7 +23,7 @@ class CreateDetailsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('details');
+		//Schema::drop('details');
 	}
 
 }

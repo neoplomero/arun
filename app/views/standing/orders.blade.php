@@ -45,11 +45,11 @@
   @foreach ($list as $order)
       <tr>
         <td>{{ $order->model }}</td>
-        <td>{{ $order->customer->full_name }}</td>
+        <td>{{ $order->full_name }}</td>
         <td>
-          @foreach($order->sent as $order)
+          @foreach($order->sent as $sent)
             <a href="{{route('detail', [$order->id])}}"> 
-            {{ Format::date($order->delivery_date) }}<br>
+            {{ Format::date($sent->delivery_date) }}<br>
             </a>
           @endforeach
         </td>

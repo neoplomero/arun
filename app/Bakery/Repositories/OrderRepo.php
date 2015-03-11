@@ -83,15 +83,21 @@ class OrderRepo extends BaseRepo {
 		return $orders;
 	}
 	public function standingOrders(){
-		$orders = Order::join('customers','orders.customer_id', '=' ,'customers.id')
-				->where('orders.type','=','model')
+		$orders = Order::
+				select('orders.id as id', 'model','delivery_date','customers.full_name as full_name')->
+				join('customers','orders.customer_id', '=' ,'customers.id')
+				->where('type','=','model')
 				->paginate(12);
 		return $orders;
 	}
 
 	public function standingByFilter($search){
-		$orders = Order::join('customers','orders.customer_id', '=' ,'customers.id')
-				->where('orders.type','=','model')
+		//$orders = Order::join('customers','orders.customer_id', '=' ,'customers.id')
+		$orders = Order::		
+				select('orders.id as id', 'model','delivery_date','customers.full_name as full_name')->
+				join('customers','orders.customer_id', '=' ,'customers.id')
+				->where('type','=','model')
+				//->where('model', 'LIKE', "%$search%")
 				->where(function($q) use ($search){
 					$q->orWhere('orders.model', 'LIKE', "%$search%")
 					->orWhere('customers.full_name', 'LIKE', "%$search%");

@@ -58,6 +58,7 @@ Route::group(['before' => 'is_enabled'], function() {
 		Route::put('customers/account', ['as' =>  'customers/update', 'uses' => 'CustomersController@update']);
 
 		//Orders Routes
+		Route::post('order/delete', [ 'as' => 'order/delete', 'uses' => 'OrderController@delete']);
 		Route::get('order/{id}', [ 'as' => 'order', 'uses' => 'OrderController@check']);
 		Route::post('order', [ 'as' => 'order/save', 'uses' => 'OrderController@save']);
 		Route::get('paid/{id}', [ 'as' => 'order/paid', 'uses' => 'OrderController@paid']);

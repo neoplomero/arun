@@ -302,6 +302,18 @@ class OrderController extends BaseController
 		$order->save();
 		return Redirect::back();	
 	}
+	/**
+	* Show the form for creating a new resource.
+	*
+	* @return Response
+	*/
+	public function delete()
+	{
+		$id = Input::get('id');
+		$order = $this->orderRepo->find($id);
+		$order->delete();
+		return Redirect::to('orders/list')->with('response','the selected order has been deleted');
+	}
 }
 
 ?>

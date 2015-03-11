@@ -36,6 +36,30 @@
 	  </div>
 	</div>
 
+	<!--modal-->
+	<div class="modal fade" id="new_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	    	<div class="modal-header">
+				<h4>Delete order</h4>
+		  	</div>
+	    	<div class="modal-body">
+				{{ Form::open(['route' => 'order/delete', 'method' => 'POST', 'role' => 'form']) }}
+
+				{{ form::hidden('id', $order->id) }}
+				
+				<p>sure you want to delete this order ?</p>
+				<br>
+				<div class="">
+					<input type="submit" value="Delete order" class="btn btn-danger">
+				</div>
+				{{ Form::close() }}
+			</div>
+	    </div>
+	  </div>
+	</div>
+
+	<!--modal-->
 	<div class="modal fade" id="new_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -106,6 +130,9 @@
 				<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#new_model">
 				  Copy as model
 				</button>
+				<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#new_model">
+				  Delete this order
+				</button>
 			  </div>
 			</div>
 		</div>
@@ -119,8 +146,12 @@
                 <div class="panel-heading">
                     <h4 class="text-center"><strong>Order summary</strong></h4>
                     <div class="btn-group pull-right invoice-actions">
-                    	<div class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Add</div>
+						
+                    	<div class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addProduct">Add</div>
+                    	
+                    	@if($order->type === "order")
                     	<a href="{{ route('send', [$order->id]) }}" class="btn btn-success btn-xs">send</a>
+                    	@endif
                     </div>
                 </div>
                 <div class="panel-body">
@@ -181,8 +212,12 @@
                 <div class="panel-heading">
                     <h4 class="text-center"><strong>Returned products</strong></h4>
                     <div class="btn-group pull-right invoice-actions">
-                    	<div class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Add</div>
+                    
+                    	<div class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addDevolution">Add</div>
+                    
+                    @if($order->type === "order")
                     	<a href="{{ route('send', [$order->id]) }}" class="btn btn-success btn-xs">send</a>
+                   	@endif
                     </div>
                 </div>
                 <div class="panel-body">
@@ -263,7 +298,7 @@
         </div>
 	</div>
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal fade" id="addProduct" tabindex="-1" role="dialog" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -283,7 +318,7 @@
 
 				{{ Field::number('quantity') }}
 
-				{{ Field::select('type', ['sale'=>'sale','devolution'=>'devolution'],'sale') }}
+				{{ Field::text('type', 'sale',['readonly'])}}
 
 				</fieldset>
 				<br>
@@ -301,6 +336,47 @@
 	    </div>
 	  </div>
 	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="addDevolution" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Add product for devolution</h4>
+	      </div>
+	      <div class="modal-body">
+
+
+				{{ Form::open(['route' => 'newDetail', 'method' => 'POST', 'role' => 'form']) }}
+
+				<fieldset>
+
+				{{ form::hidden('order_id', $order->id) }}
+				
+				{{ Field::select('product' , $products ) }}
+
+				{{ Field::number('quantity') }}
+
+				{{ Field::text('type', 'devolution',['readonly'])}}
+
+				</fieldset>
+				<br>
+				<div class="">
+					<input type="submit" value="Register" class="btn btn-success">
+
+					<button class="btn btn-danger" data-dismiss="modal"> Cancel </button>
+				</div>
+
+				{{ Form::close() }}
+			
+
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+
 
 
 	<!-- Updates -->
