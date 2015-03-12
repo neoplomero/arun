@@ -478,13 +478,13 @@
 
                             <h1>Hello {{ $customer }}!</h1>
 
-<h3>We hope you are very Well! We want to let you know that you can access to your Invoice with date: {{ $date }} folowing the next link:</h3>
+<h3>We hope you are very Well! We want to let you know that you can access to your Invoice with date: {{ $date }} following the next link:</h3>
 
 <h3 style="text-align: center;"><br>
 <br>
-<span style="color:#006400"><span style="font-size:13px; line-height:1.6em">&nbsp;</span></span><a class="mc-template-link" href="{{ route('view/invoice', [ $id ])}}" style="font-size: 13px; line-height: 1.6em;"><span style="color:#006400">---  Invoice  --</span></a></h3>
+<span style="color:#006400"><span style="font-size:13px; line-height:1.6em">&nbsp;</span></span><a class="mc-template-link" href="{{ route('view/invoice', [ $id ])}}" style="font-size: 13px; line-height: 1.6em;"><span style="color:#006400">---    INVOICE    --</span></a></h3>
 <br>
-You can access to your invoice at any time you want and if you need any change on it please contact us and after we make the changes you'll see them through the same link.
+You can access to your invoice at any time you want and if you need any changes on it please contact us and after we make the changes you'll see them through the same link.
                         </td>
                     </tr>
                 </tbody></table>
