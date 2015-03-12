@@ -13,13 +13,18 @@
 
 App::before(function($request)
 {
-	
+
 });
 
 
 App::after(function($request, $response)
 {
 	//
+});
+
+App::missing(function($exception)
+{
+    return View::make('404');
 });
 
 /*
@@ -47,7 +52,7 @@ Route::filter('auth', function()
 			return Redirect::guest('/');
 		}
 	}
-	//if(Auth::guest()) return Redirect::guest('/');	
+	//if(Auth::guest()) return Redirect::guest('/');
 });
 
 
