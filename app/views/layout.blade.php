@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="{{ URL::asset('assets/favicon.ico') }}">
 
     <title>Arun Bakery</title>
 
@@ -69,9 +69,9 @@
 
             @if(Auth::user()->user_type == 'seller' OR Auth::user()->user_type == 'admin' )
             <li><a href="{{ route('customers') }}">Customers</a></li>
-            
 
-            
+
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Orders <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
