@@ -37,7 +37,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Arun Bakery</a>
+          <a class="navbar-brand" href="{{ URL::route('home') }}">Arun Bakery</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 
