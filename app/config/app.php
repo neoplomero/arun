@@ -132,7 +132,7 @@ return array(
 		'Thujohn\Pdf\PdfServiceProvider',
 
 		//hash
-		//'Mitch\Hashids\HashidsServiceProvider'
+		'Mitch\Hashids\HashidsServiceProvider'
 
 	),
 
@@ -209,7 +209,7 @@ return array(
 		'PDF' => 'Thujohn\Pdf\PdfFacade',
 
 		//hash
-		//'Hashids' => 'Mitch\Hashids\Hashids'
+		'Hashids' => 'Mitch\Hashids\Hashids',
 		'Carbon' => 'Carbon\Carbon',
 
 	),

@@ -40,8 +40,8 @@ class GuestController extends BaseController
 
 	public function invoice($id)
 	{
-		//$id = Hashids::decode($id);
-		//$data = $this->orderRepo->find($id[0]);
+		$id = Hashids::decode($id);
+		$data = $this->orderRepo->find($id[0]);
 		$data = $this->orderRepo->find($id);
 		$bakery = $this->bakeryRepo->find(1);
 		$view = View::make('pdf/single_invoice', compact('data','bakery'))->render();

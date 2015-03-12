@@ -16,7 +16,8 @@ class Email {
 
 		$data = $this->OrderRepo->find($id);
 		$data->id = Hashids::encode($id);
-        $date = Format::date($order->delivery_date);
+        $date = \Format::date($data->delivery_date);
+        $data =  (array) $data;
 		Mail::send('emails/invoices/invoice', $data, function ($message) use ($id, $customerEmail, $date){
 		    $message->subject('Invoice: '. $date);
 		    $message->to([$customerEmail, 'bakeryarunfinance@gmail.com']);
