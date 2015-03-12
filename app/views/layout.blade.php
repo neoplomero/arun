@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="" content="">
-    <link rel="icon" href="{{ URL::asset('assets/favicon.ico') }}">
+    <link rel="icon" href="{{ URL::asset('favicon.ico') }}">
 
     <title>Arun Bakery</title>
 
