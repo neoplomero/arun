@@ -285,8 +285,9 @@ class OrderController extends BaseController
 		$order->save();
 		$this->email->invoiceEmail($id, $customerEmail);
 		$response = 'The invoice has been sent by email.';
-		$list = $this->orderRepo->getList();
-		return View::make('order/list', compact('list'))->with('response', $response);
+		//$list = $this->orderRepo->getList();
+		//return View::make('order/list', compact('list'))->with('response', $response);
+		return Redirect::back()->with('response', $response);
 	}
 	public function addNumber(){
 		$order = $this->orderRepo->find(Input::get('id'));
