@@ -3,16 +3,16 @@
 	"description": "The Laravel Framework.",
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
-	"require-dev": {
-    "way/generators": "2.*",
-    "fzaninotto/faker": "v1.3.0",
-    "barryvdh/laravel-debugbar": "1.*"
-	},
 	"require": {
 		"laravel/framework": "4.2.*",
 		"thujohn/pdf": "dev-master",
 		"mitch/hashids": "1.x",
 		"nesbot/carbon": "~1.14"
+	},
+	"require-dev": {
+    "way/generators": "2.*",
+    "fzaninotto/faker": "v1.3.0",
+    "barryvdh/laravel-debugbar": "1.*"
 	},
 	"autoload": {
 		"psr-4": {
@@ -21,7 +21,6 @@
 		"classmap": [
 			"app/commands",
 			"app/controllers",
-			
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
