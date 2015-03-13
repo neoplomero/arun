@@ -14,6 +14,7 @@ class HomeController extends BaseController {
 			$full_name = explode(' ', Auth::user()->full_name);
 			$name=$full_name[0];
 			View::share('name', $name);
+            return View::make('home');
 		}
 		//return View::make('home');
 		return View::make('index');
