@@ -15,7 +15,8 @@ class HomeController extends BaseController {
 			$name=$full_name[0];
 			View::share('name', $name);
 		}
-		return View::make('home');
+		//return View::make('home');
+		return View::make('index');
 	}
 
 }
