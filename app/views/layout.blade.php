@@ -4,9 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="" content="">
-    <link rel="icon" href="{{ URL::asset('favicon.ico') }}">
+    <meta name="description" content="The Real Sourdough.">
+
+    <link rel="icon" type="image/png" href="{{ URL::asset('img/android-chrome-192x192.png') }}" sizes="192x192">
+    <link rel="apple-touch-icon" href="{{ URL::asset('img/apple-touch-icon-76x76.png') }}">
+    <link rel="shortcut icon" href="{{ URL::asset('favicon.ico') }}">
+    <meta name="theme-color" content="#eeeeee">
 
     <title>Arun Bakery</title>
 
