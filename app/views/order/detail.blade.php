@@ -23,7 +23,8 @@
 
 				{{ Field::date('delivery_date') }}
 
-				{{ Field::text('number') }}
+				{{ Form::label('number', 'Purchase Order Number') }}
+				{{ Form::text('number', null, ['class' => 'form-control' ] ) }}
 
 				{{ Field::textarea('delivery_address',$order->delivery_address) }}
 				</fieldset>
@@ -126,6 +127,9 @@
 				  {{ $order->delivery_address }}<br>
 				  {{ $status->status }}<br>
 				  Total invoice : {{ $order->amount; }}</br>
+				  @if($order->number)
+				  <strong>Purchase order Number </strong>{{ $order->number }}<br>
+				  @endif
 				</address>
 				<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#order_detail">
 				  Edit this
@@ -213,7 +217,7 @@
 		<div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="text-center"><strong>Returned products</strong></h4>
+                    <h4 class="text-center"><strong>Returns</strong></h4>
                     <div class="btn-group pull-right invoice-actions">
                     
                     	<div class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addDevolution">Add</div>
@@ -285,7 +289,7 @@
                     	{{$sales}}
                     </div>
                     <div class="col-md-3 col-md-offset-6 col-lg-3 col-lg-offset-6">
-                    	<strong>Returned</strong>
+                    	<strong>Returns</strong>
                     </div>
                     <div class="col-md-3 col-lg-3 " style="text-align:right;">
                     	-{{$return}}

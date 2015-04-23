@@ -9,7 +9,7 @@
 
       	<tr >
           <td colspan="2" style="text-align:left;">
-          	<h2>Invoice </h2>
+          	<h2>Delivery/Invoice Docket </h2>
           </td>
           <td colspan="2" style="text-align:right;">
           	<h2># {{ Format::code($data->id) }}</h2>
@@ -100,7 +100,7 @@
         	</td>
         	<td colspan="2" style="text-align:right;">
            @if($data->number)
-           Number : {{ $data->number  }} 
+           Purchase Order Number : {{ $data->number  }} 
            @endif 
           </td>
         </tr>
@@ -196,9 +196,33 @@
     <tr>
       <td colspan="2"></td>
       <td style="text-align:center;">
+        <strong>sub-Total</strong>
+      </td>
+      <td style="text-align:right;">{{ $sales + $return }}</td>
+    </tr>
+
+    <tr>
+      <td colspan="2"></td>
+      <td style="text-align:center;">
         <strong>Returned</strong>
       </td>
-      <td style="text-align:right;">{{ $return }}</td>
+      <td style="text-align:right;">-{{ $return }}</td>
+    </tr>
+
+    <tr>
+      <td colspan="2"></td>
+      <td style="text-align:center;">
+        <strong>sub-Total</strong>
+      </td>
+      <td style="text-align:right;">{{ $sales - $return }}</td>
+    </tr>
+
+    <tr>
+      <td colspan="2"></td>
+      <td style="text-align:center;">
+        <strong>Vat @</strong>
+      </td>
+      <td style="text-align:right;"> 0 %</td>
     </tr>
 
     <tr>
@@ -206,7 +230,7 @@
       <td style="text-align:center;">
         <strong>Total</strong>
       </td>
-      <td style="text-align:right;">{{ $data->amount }}</td>
+      <td style="text-align:right;">{{ $data->amount }} </td>
     </tr>
 
     </table>

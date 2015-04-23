@@ -54,7 +54,7 @@
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ route('report/sales') }}">Sales</a></li>
                 <li><a href="{{ route('orders/print') }}">Print orders</a></li>
-                <li><a href="{{ route('report/devolutions') }}">Product devolutions</a></li>
+                <li><a href="{{ route('report/devolutions') }}">Returns</a></li>
 
                 <li><a href="{{ route('report/products') }}">Graphic Product</a></li>
                 <li><a href="{{ route('report/products/compare') }}">Graphic Products</a></li>
