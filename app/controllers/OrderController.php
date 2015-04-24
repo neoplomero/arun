@@ -116,6 +116,34 @@ class OrderController extends BaseController
 
 	}
 
+	public function addCredit()
+	{
+
+
+		$order = Input::get('order_id');
+		$type = 'credit';
+		$ammount = Input::get('ammount');
+		
+		$credit = $this->detailRepo->getCredit($order);
+		if(!is_null($credit)){
+			$credit->delete();
+		}
+
+		$data = array();
+		$data['total_price'] = $ammount;
+		$data['single_price'] = $ammount;
+		$data['quantity'] = "1";
+		$data['product_id'] = "0";
+		$data['order_id'] = $order;
+		$data['type'] = 'credit';
+
+		$detail = $this->detailRepo->newDetail();
+		$detailManager = new DetailManager($detail,$data);
+		$detailManager->save();
+
+		return Redirect::back();
+
+	}
 	public function addDetail()
 	{
 		$productId = Input::get('product');

@@ -128,6 +128,7 @@
 
   @section('')
     {{ $sales = 0 }}
+    {{ $credit = 0 }}
   @endsection
 	@foreach($data->detail as $detail)
   @if($detail->type == 'sale')
@@ -155,11 +156,20 @@
     @section('')
       {{ $return = 0 }}
     @endsection
+
     @foreach($data->detail as $detail)
+    
+    @if($detail->type == 'credit')
+      @section('')
+        {{ $credit = $detail->total_price }}
+      @endsection
+    @endif
+    
     @if($detail->type == 'devolution')
       @section('')
         {{$return = $return + $detail->total_price}}
       @endsection
+
           <tr style="color:red;">
             <td style="text-align:left; width:35%; ">
               {{ $detail->product->name }}
@@ -183,7 +193,7 @@
       <td style="text-align:center;">
         <strong>sub-Total</strong>
       </td>
-      <td style="text-align:right;">{{ $sales + $return }}</td>
+      <td style="text-align:right;">{{ $sales  }}</td>
     </tr>
 
     <tr>
@@ -193,13 +203,23 @@
       </td>
       <td style="text-align:right;">-{{ $return }}</td>
     </tr>
+    
+    @if(isset($credit))
+      <tr>
+        <td colspan="2"></td>
+        <td style="text-align:center;">
+          <strong>Credit</strong>
+        </td>
+        <td style="text-align:right;">-{{ $credit }}</td>
+      </tr>
+    @endif
 
     <tr>
       <td colspan="2"></td>
       <td style="text-align:center;">
         <strong>sub-Total</strong>
       </td>
-      <td style="text-align:right;">{{ $sales - $return }}</td>
+      <td style="text-align:right;">{{ $sales - $credit - $return }}</td>
     </tr>
 
     <tr>
@@ -215,7 +235,7 @@
       <td style="text-align:center;">
         <strong>Total</strong>
       </td>
-      <td style="text-align:right;">{{ $data->amount }} </td>
+      <td style="text-align:right;">{{ $sales - $credit - $return }} </td>
     </tr>
 
     </table>

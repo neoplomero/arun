@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-xs-12">
     		<div class="invoice-title">
-    			<h2>Invoice</h2><h3 class="pull-right">Order # {{ Format::code($order->id) }}</h3>
+    			<h2>Purchase Order Number</h2><h3 class="pull-right"> # {{ Format::code($order->id) }}</h3>
     		</div>
     		<hr>
     		<div class="row">
@@ -44,7 +44,7 @@
     				<address>
     					<strong>Order Date:</strong><br>
     					{{ $order->created_at }}<br><br>
-                        Number : {{ $order->number; }}
+                        Delivery/Invoice Docket : {{ $order->number; }}
     				</address>
     			</div>
     		</div>
@@ -73,6 +73,13 @@
                                 {{$sales =0 }}
                                 @endsection
                                 @foreach($order->detail as $detail)
+
+                                @if($detail->type == 'credit')
+                                    @section('')
+                                    {{ $credit = $detail->total_price }}
+                                    @endsection
+                                @endif
+
                                 @if($detail->type == 'sale' )
                                 @section('')
                                 {{$sales = $sales + $detail->total_price}}
@@ -117,8 +124,14 @@
                                 <tr>
                                     <td class="no-line"></td>
                                     <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Credit</strong></td>
+                                    <td class="no-line text-right"> {{ $credit }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
                                     <td class="no-line text-center"><strong>Total</strong></td>
-                                    <td class="no-line text-right"> {{ $order->amount }}</td>
+                                    <td class="no-line text-right"> {{ $order->amount - $credit }}</td>
                                 </tr>                        
     						</tbody>
     					</table>

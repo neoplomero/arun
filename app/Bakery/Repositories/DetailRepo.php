@@ -26,6 +26,13 @@ class DetailRepo extends BaseRepo {
 		
 	}
 
+	public function getCredit($order_id)
+	{
+		return Detail::where('order_id', '=', $order_id)
+					   ->where('type', '=','credit')
+					   ->first();
+	}
+
 	public function getDevolutionsBetweenDates($from, $to){
 		return Detail::whereBetween('created_at', array($from, $to))
 				->where('type', '=' , 'devolution')

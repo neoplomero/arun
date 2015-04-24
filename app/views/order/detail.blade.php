@@ -140,6 +140,9 @@
 				<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete">
 				  Delete this order
 				</button>
+				<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#credit">
+				  add credit
+				</button>
 			  </div>
 			</div>
 		</div>
@@ -242,6 +245,7 @@
                             <tbody>
                             	@section('')
 								{{ $return = 0 }}
+								{{ $credit = 0 }}
 								@endsection
 								@foreach ($order->detail as $detail)  
 								@if($detail->type =='devolution') 
@@ -278,6 +282,8 @@
         </div>
 	</div>
 
+
+
 	<div class="row">
 		<div class="col-md-12">
             <div class="panel panel-default">
@@ -294,11 +300,24 @@
                     <div class="col-md-3 col-lg-3 " style="text-align:right;">
                     	-{{$return}}
                     </div>
+					<?php $credit = 0 ?>
+                    @foreach ($order->detail as $det)  
+						@if($det->type =='credit') 
+	                    <div class="col-md-3 col-md-offset-6 col-lg-3 col-lg-offset-6">
+	                    	<strong>Credit</strong>
+	                    </div>
+	                    <div class="col-md-3 col-lg-3 " style="text-align:right;">
+	                    	-{{ $credit =  $det->total_price }}
+	                    </div>
+						
+						@endif
+						
+					@endforeach
                     <div class="col-md-3 col-md-offset-6 col-lg-3 col-lg-offset-6">
                     	<strong>Total</strong>
                     </div>
                     <div class="col-md-3 col-lg-3 " style="text-align:right;">
-                    	{{$sales - $return}}
+                    	{{$sales - $return - $credit }}
                     </div>
                 </div>
             </div>
@@ -389,6 +408,7 @@
 	<!-- Updates -->
 
 	@foreach($order->detail as $detail)
+	@if($detail->type != 'credit')
 	<div class="modal fade" id="myModal{{ $detail->id }}" tabindex="-1" role="dialog"  aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -429,8 +449,45 @@
 	    </div>
 	  </div>
 	</div>
+	@endif
 	@endforeach
 
+
+	<!-- Modal -->
+	<div class="modal fade" id="credit" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Add credit</h4>
+	      </div>
+	      <div class="modal-body">
+
+
+				{{ Form::open(['route' => 'newCredit', 'method' => 'POST', 'role' => 'form']) }}
+
+				<fieldset>
+
+				{{ form::hidden('order_id', $order->id) }}
+				
+				{{ Field::text('ammount'  ) }}
+
+				</fieldset>
+				<br>
+				<div class="">
+					<input type="submit" value="Register" class="btn btn-success">
+
+					<button class="btn " data-dismiss="modal"> Cancel </button>
+				</div>
+
+				{{ Form::close() }}
+			
+
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
 			
 </div>
 @endsection

@@ -66,6 +66,7 @@ Route::group(['before' => 'is_enabled'], function() {
 		Route::get('generate/{id}', [ 'as' => 'generate', 'uses' => 'OrderController@generate']);
 		Route::get('detail/{id}', [ 'as' => 'detail', 'uses' => 'OrderController@orderDetail']);
 		Route::post('detail', [ 'as' => 'newDetail', 'uses' => 'OrderController@addDetail']);
+		Route::post('credit', [ 'as' => 'newCredit', 'uses' => 'OrderController@addCredit']);
 		Route::get('removeDetail/{id}', [ 'as' => 'removeDetail', 'uses' => 'OrderController@removeDetail']);
 		Route::put('updateDetail', [ 'as' => 'updateDetail', 'uses' => 'OrderController@updateDetail']);
 		Route::get('orders/list', [ 'as' => 'orders/list', 'uses' => 'OrderController@orderList']);
