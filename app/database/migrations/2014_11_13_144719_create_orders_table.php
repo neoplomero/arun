@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration {
 			$table->increments('id');
 			$table->string('delivery_address');
 			$table->date('delivery_date');
+			$table->date('billing date');
 			$table->float('amount');
 			$table->integer('customer_id')->unsigned();
 			$table->integer('order_id')->unsigned();

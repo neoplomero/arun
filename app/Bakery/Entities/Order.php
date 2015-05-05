@@ -7,7 +7,7 @@ class Order extends \Eloquent {
 
 	protected $hidden = array('id');
 
-	protected $fillable = array('delivery_address', 'delivery_date', 'customer_id', 'note','ammount', 'order_id','number');
+	protected $fillable = array('delivery_address', 'delivery_date', 'customer_id', 'note','ammount', 'order_id','number', 'billing_address');
 	
 
 	public function status()

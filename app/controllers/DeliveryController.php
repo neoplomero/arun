@@ -37,6 +37,8 @@ class DeliveryController extends \BaseController {
 		$status = $this->statusRepo->newStatus();
 		$status->order_id = $id;
 		$order = $this->orderRepo->find($id);
+		$order->billing_date = date("Y-m-d"); 
+		$order->save();
 		$customerEmail = $order->customer->email;
 
 		$status->status = 'delivered';

@@ -42,8 +42,10 @@
     			</div>
     			<div class="col-xs-6 text-right">
     				<address>
-    					<strong>Order Date:</strong><br>
-    					{{ $order->created_at }}<br><br>
+    					<strong>Order Date:</strong>
+    					{{ Format::date($order->created_at) }}<br><br>
+                        <strong>Billing Date:</strong>
+                        {{ Format::date($order->billing_date) }}<br><br>
                         Purchase Order Number : {{ $order->number; }}
     				</address>
     			</div>
@@ -71,6 +73,7 @@
     						<tbody>
                                 @section('')
                                 {{$sales =0 }}
+                                {{ $credit = 0 }}
                                 @endsection
                                 @foreach($order->detail as $detail)
 

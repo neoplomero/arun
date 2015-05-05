@@ -23,7 +23,10 @@
 
 				{{ Field::date('delivery_date') }}
 
+				{{ Field::date('billing_date') }}
+
 				{{ Form::label('number', 'Purchase Order Number') }}
+
 				{{ Form::text('number', null, ['class' => 'form-control' ] ) }}
 
 				{{ Field::textarea('delivery_address',$order->delivery_address) }}
@@ -126,10 +129,14 @@
 				  <strong>Delivery address.</strong><br>
 				  {{ $order->delivery_address }}<br>
 				  {{ $status->status }}<br>
-				  Total invoice : {{ $order->amount; }}</br>
 				  @if($order->number)
 				  <strong>Purchase order Number </strong>{{ $order->number }}<br>
 				  @endif
+				  <strong>Delivery date : </strong>{{ $order->delivery_date }}<br>
+				  @if($order->billing_date)
+				  <strong>Billing date : </strong>{{ $order->billing_date }}<br>
+				  @endif
+				  <strong>Total invoice : </strong> {{ $order->amount; }}</br>
 				</address>
 				<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#order_detail">
 				  Edit this

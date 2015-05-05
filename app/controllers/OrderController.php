@@ -57,6 +57,7 @@ class OrderController extends BaseController
 		$note = Input::get('note');
 		$delivery_address = Input::get('delivery_address');
 		$delivery_date = Input::get('delivery_date');
+		$billing_date = Input::get('billing_date');
 		$order = $this->orderRepo->newOrder();
 		$orderData = array();
 		$number = Input::get('number');
@@ -66,6 +67,7 @@ class OrderController extends BaseController
 		$orderData['delivery_address'] = $delivery_address;
 		$orderData['delivery_date'] = $delivery_date;
 		$order['number'] = $number;
+		$order['billing_date'] = $billing_date;
 
 		$orderManager = new OrderManager($order,$orderData);
 		$orderManager->save();
@@ -328,6 +330,7 @@ class OrderController extends BaseController
 		$order->number = Input::get('number');
 		$order->delivery_date = Input::get('delivery_date');
 		$order->delivery_address = Input::get('delivery_address');
+		$order->billing_date = Input::get('billing_date');
 		$order->save();
 		return Redirect::back();
 	}

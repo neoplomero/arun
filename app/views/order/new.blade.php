@@ -62,7 +62,10 @@
 
 				{{ Field::date('delivery_date') }}
 
+				{{ Field::date('billing_date') }}
+
 				{{ Form::label('number', 'Purchase Order Number') }}
+				
 				{{ Form::text('number', null, ['class' => 'form-control' ] ) }}
 
 				{{ Field::textarea('delivery_address',$customer->delivery_address) }}

@@ -74,7 +74,7 @@
           	<strong>Shipped to:</strong>
           </td>
           <td colspan="2" style="text-align:right;">
-          	<strong>Order date:</strong>
+          	<strong>Order date:</strong> {{ Format::date($data->created_at)}}
           </td>
         </tr>
         <tr >
@@ -82,19 +82,20 @@
           	{{ $data->delivery_address }}
           </td>
           <td colspan="2" style="text-align:right;">
-          	{{ $data->created_at }}
+            <strong>Billing date:</strong> {{ Format::date($data->billing_date)}}
           </td>
         </tr>
 
                                
         <tr>
+        	
         	<td colspan="2" style="text-align:left;">
-				Delivery date: {{ Format::date($data->delivery_date) }}
-        	</td>
-        	<td colspan="2" style="text-align:right;">
           @if($data->number)
            Purchase Order Number : {{ $data->number  }} 
            @endif
+          </td>
+          <td colspan="2" style="text-align:right;">
+        <strong>Delivery date: </strong> {{ Format::date($data->delivery_date) }}
           </td>
         </tr>
       </tbody>
