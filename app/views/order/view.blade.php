@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-xs-12">
     		<div class="invoice-title">
-    			<h2>Purchase Order Number</h2><h3 class="pull-right"> # {{ Format::code($order->id) }}</h3>
+    			<h2>Delivery/Invoice Docket</h2><h3 class="pull-right"> # {{ Format::code($order->id) }}</h3>
     		</div>
     		<hr>
     		<div class="row">
@@ -44,7 +44,7 @@
     				<address>
     					<strong>Order Date:</strong><br>
     					{{ $order->created_at }}<br><br>
-                        Delivery/Invoice Docket : {{ $order->number; }}
+                        Purchase Order Number : {{ $order->number; }}
     				</address>
     			</div>
     		</div>

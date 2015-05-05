@@ -7,7 +7,7 @@
 
       	<tr >
           <td colspan="2" style="text-align:left;">
-          	<h2>Purchase Order Number </h2>
+          	<h2>Delivery/Invoice Docket </h2>
           </td>
           <td colspan="2" style="text-align:right;">
           	<h2># {{ Format::code($data->id) }}</h2>
@@ -93,7 +93,7 @@
         	</td>
         	<td colspan="2" style="text-align:right;">
           @if($data->number)
-           Delivery/Invoice Docket : {{ $data->number  }} 
+           Purchase Order Number : {{ $data->number  }} 
            @endif
           </td>
         </tr>
