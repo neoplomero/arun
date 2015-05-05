@@ -16,10 +16,11 @@
       <div class="form-group">
         {{ Field::text('customer','',array('placeholder' => 'name')) }}
         {{ Field::date('delivery_date','',array('placeholder' => 'date')) }}
+        {{ Field::date('billing_date','',array('placeholder' => 'date')) }}
         {{ Field::select('payment', ['pending payment' => 'unpaid', 'paid' => 'paid']) }}
       </div>
-      <button type="submit" class="btn btn-primary">Search</button>
-      <a href="{{ route('orders/list') }}" class="btn btn-success">Default view</a>
+      <button type="submit" class="btn btn-sm btn-primary">Search</button>
+      <a href="{{ route('orders/list') }}" class="btn btn-sm btn-success">Default</a>
     {{ Form::close() }}
 
   </p>

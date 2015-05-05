@@ -258,6 +258,10 @@ class OrderController extends BaseController
 		{
 			$list = $this->orderRepo->getListByFilter('payment', '=', Input::get('payment'));
 		}
+		if(Input::get('billing_date'))
+		{
+			$list = $this->orderRepo->getListByFilter('billing_date', '=', Input::get('billing_date'));
+		}
 		return View::make('order/list', compact('list'));
 	}
 
