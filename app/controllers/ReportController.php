@@ -210,10 +210,13 @@ class ReportController extends \BaseController {
 		{
 			foreach ($order->detail as $detail) {
 				$cant = 0;
-				if($detail->product->name == $product )
-				{
-					$cant = $cant + $detail->quantity;
+				if($detail->product){
+					if($detail->product->name == $product )
+					{
+						$cant = $cant + $detail->quantity;
+					}	
 				}
+				
 			}
 			array_push($data, "'".$cant."'");
 		}
