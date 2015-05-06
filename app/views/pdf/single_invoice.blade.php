@@ -82,7 +82,9 @@
           	{{ $data->delivery_address }}
           </td>
           <td colspan="2" style="text-align:right;">
+            @if($data->billing_date)
             <strong>Billing date:</strong> {{ Format::date($data->billing_date)}}
+            @endif
           </td>
         </tr>
 

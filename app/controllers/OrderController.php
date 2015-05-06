@@ -236,7 +236,6 @@ class OrderController extends BaseController
 
 	public function orderList()
 	{
-		//$list = $this->orderRepo->getList();
 		$tomorrow = Carbon::now()->addDay();
 		$tomorrow = Carbon::parse($tomorrow)->format('Y-m-d');
 		$list = $this->orderRepo->getListByFilter('delivery_date', '=', $tomorrow);
@@ -246,9 +245,9 @@ class OrderController extends BaseController
 	public function orderListFilter()
 	{
 		$list = $this->orderRepo->getList();
-		if(Input::get('delivery_date'))
+		if(Input::get('date'))
 		{
-			$list = $this->orderRepo->getListByFilter('delivery_date', '=', Input::get('delivery_date'));
+			$list = $this->orderRepo->getListByFilter(Input::get('date'), '=', Input::get('date_value'));
 		}
 		if(Input::get('customer'))
 		{

@@ -15,8 +15,11 @@
     {{ Form::open(['route' => 'orders/search', 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form navbar-left']) }}
       <div class="form-group">
         {{ Field::text('customer','',array('placeholder' => 'name')) }}
-        {{ Field::date('delivery_date','',array('placeholder' => 'date')) }}
-        {{ Field::date('billing_date','',array('placeholder' => 'date')) }}
+
+        {{ Form::select('date', [''=>'-select-','billing_date'=>'Billing date', 'delivery_date' => 'Delivery date'],null, ['class' => 'form-control']) }}
+
+        {{ Form::input('date' ,'date_value',null,['class'=>'form-control']) }}
+
         {{ Field::select('payment', ['pending payment' => 'unpaid', 'paid' => 'paid']) }}
       </div>
       <button type="submit" class="btn btn-sm btn-primary">Search</button>
