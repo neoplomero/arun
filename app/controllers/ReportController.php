@@ -79,16 +79,18 @@ class ReportController extends \BaseController {
 	{
 		$from = Input::get('from');
 		$to = Input::get('to');
+		$payment = Input::get('payment');
 		$report = $this->reportRepo->newReport();
 		$report->from = $from;
 		$report->to = $to;
+		$report->payment = $payment;
 		$report->save();
 		return Redirect::back();
 	}
-	public function printOrders($from, $to, $report_id)
+	public function printOrders($from, $to, $report_id,$payment)
 	{
 		$bakery = $this->bakeryRepo->find(1);
-		$orders = $this->orderRepo->byDateRange($from,$to);
+		$orders = $this->orderRepo->statement($from,$to,$payment);
 		$total = 0;
 		foreach($orders as $order){
 			$total = $total + $order->amount;

@@ -124,7 +124,7 @@ Route::group(['before' => 'is_enabled'], function() {
 
 	Route::get('report/generate', [ 'as' => 'report/generate', 'uses' => 'ReportController@generate']);
 	Route::post('report/generate/save', [ 'as' => 'report/generate/save', 'uses' => 'ReportController@Save']);
-	Route::get('report/generate/print/{from}&{to}&{id}', [ 'as' => 'report/generate/print', 'uses' => 'ReportController@printOrders']);
+	Route::get('report/generate/print/{from}&{to}&{id}&{payment}', [ 'as' => 'report/generate/print', 'uses' => 'ReportController@printOrders']);
 
 	Route::get('report/generate/confirm/{id}', ['as' => 'report/generate/confirm', 'uses' => 'ReportController@confirm']);
 	Route::get('report/generate/delete/{id}', ['as' => 'report/generate/delete', 'uses' => 'ReportController@delete']);

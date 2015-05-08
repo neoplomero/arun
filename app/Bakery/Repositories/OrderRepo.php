@@ -141,6 +141,16 @@ class OrderRepo extends BaseRepo {
 		->get();
 		return $orders;
 	}
+	public function statement($from, $to, $payment)
+	{
+		$orders = Order::whereBetween('created_at', array($from, $to) );
+		if($payment != 'all'){
+
+			$orders->where('payment','=',$payment);
+		}
+		$orders  = $orders->get();
+		return $orders;
+	}
 
 	public function customer(){
 		return $this->belongsTo('Bakery\Entities\Customer');
