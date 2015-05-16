@@ -16,6 +16,7 @@
 
 
     <!-- Custom CSS -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/css/grayscale.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -87,7 +88,7 @@
     <section id="contact" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                <img src="{{ asset('img/logo.jpg') }}" />
+                <img src="{{ asset('img/logo.jpg') }}" class="logo-content" alt="Arun Logo" />
                 <p>Feel free to contact us to provide some feedback on our service, give us suggestions , or to just say hello!</p>
                 <ul class="list-inline banner-social-buttons">
                     <li>
@@ -121,7 +122,7 @@
 
     <!-- Plugin JavaScript -->
     <script src="{{ asset('bootstrap/js/jquery.easing.min.js') }}"></script>
-    
+
 
 
     <!-- Custom Theme JavaScript -->

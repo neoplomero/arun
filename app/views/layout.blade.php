@@ -14,13 +14,13 @@
     <title>Arun Bakery</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="{{ asset('bootstrap/css/style.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('bootstrap/css/style.css') }}" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="{{ asset('bootstrap/js/Chart.min.js') }}"></script>
+    <script src="{{ URL::asset('bootstrap/js/Chart.min.js') }}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
