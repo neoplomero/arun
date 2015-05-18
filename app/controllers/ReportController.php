@@ -60,8 +60,6 @@ class ReportController extends \BaseController {
 			return View::make('report/orders', compact('orders', 'total', 'customer'));	
 		}else{
 			$view = View::make('pdf/invoice_list', compact('orders', 'total', 'customer','bakery','from','to'))->render();		
-			//$response = PDF::load($view, 'A4', 'portrait')->show();
-
 			$headers = array('Content-Type' => 'application/pdf');
 			return Response::make(PDF::load($view, 'A4', 'portrait')->show('invoice'), 200, $headers);
 		}
@@ -259,6 +257,37 @@ class ReportController extends \BaseController {
 		return View::make('report/client_devolutions', compact('list', 'customer'));
 	}
 
+	/**
+	* Show the form for creating a new resource.
+	*
+	* @return Response
+	*/
+	public function summary()
+	{
+		return View::make('report.summary');
+	}
 
+	public function summarySearch()
+	{
+		$bakery = $this->bakeryRepo->find(1);
+		$from = Input::get('from');
+		$to = Input::get('to');
+		$payment = Input::get('payment');
+		if(Input::get('type') == 'plain'){
+			$orders = $this->orderRepo->statementPag($from,$to,$payment);
+			return View::make('report.summary', compact('orders'));
+		}
+		if(Input::get('type') == 'pdf'){
+			$orders = $this->orderRepo->statement($from,$to,$payment);	
+			$total = 0;
+			foreach($orders as $item){
+				$total = $total + $item->amount;
+			}
+			$view = View::make('pdf/sales_list', compact('orders','total','bakery','from','to'))->render();		
+			$headers = array('Content-Type' => 'application/pdf');
+			return Response::make(PDF::load($view, 'A4', 'portrait')->show('invoice'), 200, $headers);
+		}
+		
+	}
 
 }

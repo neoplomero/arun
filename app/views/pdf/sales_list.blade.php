@@ -21,7 +21,10 @@
         </tr>
         <tr >
           <td colspan="2" style="text-align:left;">
+          
+          @if(!isset($report_id))
           	<strong># {{ Format::code($report_id) }}</strong>
+          @endif
           </td>
           <td colspan="2" style="text-align:right;">
           	<strong>{{ $bakery->name }}</strong>

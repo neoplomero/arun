@@ -60,6 +60,7 @@
                 <li><a href="{{ route('report/products/compare') }}">Graphic Products</a></li>
 
                 <li><a href="{{ route('report/generate') }}">Statement</a></li>
+                <li><a href="{{ route('summary') }}">Sales summary</a></li>
 
               </ul>
             </li>
