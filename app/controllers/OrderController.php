@@ -58,17 +58,17 @@ class OrderController extends BaseController
 		$delivery_address = Input::get('delivery_address');
 		$delivery_date = Input::get('delivery_date');
 		$billing_date = Input::get('billing_date');
+		$number = Input::get('number');
 		$order = $this->orderRepo->newOrder();
 		$orderData = array();
-		$number = Input::get('number');
+		
 
 		$orderData['customer_id'] = $customer_id;
-		$orderData['note'] = $note;
 		$orderData['delivery_address'] = $delivery_address;
 		$orderData['delivery_date'] = $delivery_date;
 		$order['number'] = $number;
 		$order['billing_date'] = $billing_date;
-
+		$order['note'] = $note;
 		$orderManager = new OrderManager($order,$orderData);
 		$orderManager->save();
 
@@ -78,7 +78,6 @@ class OrderController extends BaseController
 		$statusData = array();
 
 		$user_id = Auth::user()->id;
-		$statusData['note'] = $note;
 		$statusData['user_id'] = $user_id;
 		$statusData['status'] = 'open';
 		$statusData['order_id'] = $orderId;
@@ -334,6 +333,7 @@ class OrderController extends BaseController
 		$order->delivery_date = Input::get('delivery_date');
 		$order->delivery_address = Input::get('delivery_address');
 		$order->billing_date = Input::get('billing_date');
+		$order->note = Input::get('note');
 		$order->save();
 		return Redirect::back();
 	}
@@ -349,6 +349,8 @@ class OrderController extends BaseController
 		$order->delete();
 		return Redirect::to('orders/list')->with('response','the selected order has been deleted');
 	}
+
+
 }
 
 ?>

@@ -30,6 +30,9 @@
 				{{ Form::text('number', null, ['class' => 'form-control' ] ) }}
 
 				{{ Field::textarea('delivery_address',$order->delivery_address) }}
+
+				{{ Field::textarea('note',$order->note) }}
+
 				</fieldset>
 				<div class="">
 					<input type="submit" value="Update" class="btn btn-warning">

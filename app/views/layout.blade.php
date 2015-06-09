@@ -87,7 +87,7 @@
 
             @endif
 
-            @if(Auth::user()->user_type == 'manufacturer' OR Auth::user()->user_type == 'admin' )
+            @if(Auth::user()->user_type == 'baker' OR Auth::user()->user_type == 'admin' )
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Factory <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">

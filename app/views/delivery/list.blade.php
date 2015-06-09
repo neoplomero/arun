@@ -14,7 +14,8 @@
         {{ Field::date('delivery_date','',array('placeholder' => 'date')) }}
       </div>
       <button type="submit" class="btn btn-primary">Search</button>
-      <a href="{{ route('delivery') }}" class="btn btn-success">View all</a>
+      <a href="{{ route('delivery/all') }}" class="btn btn-success">View all</a>
+      <a href="{{ route('delivery') }}" class="btn btn-success">Default view</a>
     {{ Form::close() }}
 
   </p>

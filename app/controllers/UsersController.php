@@ -54,7 +54,7 @@ class UsersController extends BaseController{
 		//verifica si las reglas fueron validadas
 		$manager->save();
 	
-		return Redirect::route('users/register');
+		return Redirect::route('users');
 		
 	}
 

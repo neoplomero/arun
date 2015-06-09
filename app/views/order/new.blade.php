@@ -70,6 +70,8 @@
 
 				{{ Field::textarea('delivery_address',$customer->delivery_address) }}
 
+				{{ Field::textarea('note') }}
+
 
 
 				</fieldset>

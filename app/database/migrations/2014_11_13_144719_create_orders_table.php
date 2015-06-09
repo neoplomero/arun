@@ -26,6 +26,7 @@ class CreateOrdersTable extends Migration {
 			$table->enum('email',['sent','pending'])->default('pending');
 			$table->enum('type',['order','model'])->default('order');
 			$table->string('model');
+			$table->text('note');
 			//$table->foreign('customer_id')->references('id')->on('customers');
 			//$table->foreign('order_id')->references('id')->on('orders');
 

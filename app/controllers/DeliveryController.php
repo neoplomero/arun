@@ -60,4 +60,10 @@ class DeliveryController extends \BaseController {
 		return Redirect::back();
 	}
 
+	public function viewAll()
+	{
+		$list = $this->orderRepo->getList();
+		return View::make('delivery/list', compact('list'));
+
+	}
 }
