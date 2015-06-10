@@ -31,6 +31,10 @@
 
 				{{ Field::text('bank_account') }}
 
+				{{ Field::password('password') }}
+
+				{{ Field::password('password_confirmation') }}
+
 				</fieldset>
 
 				<div class="">
