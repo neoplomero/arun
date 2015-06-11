@@ -28,7 +28,7 @@
 		  {{ $customer->delivery_address }}<br>
 		</address>
 
-		
+
 	  </div>
 	  <div class="panel-footer">
 
@@ -40,7 +40,7 @@
 
 			<a href="{{ route('report/orders', [$customer->id] ) }}" class="btn btn-success">History</a>
 
-			<a href="{{ route('devolutions', [$customer->id] ) }}" class="btn btn-success">Devolutions</a>
+			<a href="{{ route('devolutions', [$customer->id] ) }}" class="btn btn-success">Returns</a>
 		</div>
 
 	  </div>
